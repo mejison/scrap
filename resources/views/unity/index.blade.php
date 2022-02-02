@@ -7,11 +7,12 @@
 @section('content')
     <!-- row -->
     <div class="container-fluid">
-        <!-- row -->
-        <div class="row">
-            <div class="col-lg-12">
-                Unity Search
+        <div class="form-head d-flex mb-0 mb-lg-4 align-items-start">
+            <div class="mr-auto d-none d-lg-block">
+                <h2 class="text-black font-w600">Unity Search</h2>
+                <p class="mb-0">Current unity list</p>
             </div>
-        </div>
+        </div>	
+        <router-view></router-view>
     </div>
-@endsection
+@endsection			

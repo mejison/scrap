@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class UnityController extends Controller
 {
     public function get() {
-        $page_title = 'Unity Search';
+        $page_title = 'Compaign';
         $page_description = 'Some description for the page';
         $logo = "images/logo.png";
         $logoText = "images/logo-text.png";
 		
-        $action = __FUNCTION__;
+        $action = 'unity-search';
 
         return view('unity.index', compact('page_title', 'page_description','action','logo','logoText'));
     }
