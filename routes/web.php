@@ -83,5 +83,5 @@ Route::get('/ui-typography', 'App\Http\Controllers\EclanadminController@ui_typog
 Route::get('/widget-basic', 'App\Http\Controllers\EclanadminController@widget_basic');
 
 
-Route::get('/unity-search', 'App\Http\Controllers\UnityController@get');
-Route::get('/viz-search', 'App\Http\Controllers\VizController@get');
+Route::get('/unity', 'App\Http\Controllers\UnityController@get');
+Route::get('/viz', 'App\Http\Controllers\VizController@get');

@@ -7,13 +7,13 @@
                 </a>
             </li>
             <li>
-                <a class="has-arrow ai-icon" href="{!! url('/unity-search') !!}" aria-expanded="false">
+                <a class="has-arrow ai-icon" href="{!! url('/unity#/search') !!}" aria-expanded="false">
                     <i class="flaticon-381-search"></i>
                     <span class="nav-text">Unity Search</span>
                 </a>
             </li>
             <li>
-                <a class="has-arrow ai-icon" href="{!! url('/viz-search') !!}" aria-expanded="false">
+                <a class="has-arrow ai-icon" href="{!! url('/viz#/search') !!}" aria-expanded="false">
                     <i class="flaticon-381-search"></i>
                     <span class="nav-text">Viz Search</span>
                 </a>

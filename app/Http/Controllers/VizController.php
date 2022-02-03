@@ -12,7 +12,7 @@ class VizController extends Controller
         $logo = "images/logo.png";
         $logoText = "images/logo-text.png";
 		
-        $action = 'unity-search';
+        $action = 'unity';
 
         return view('viz.index', compact('page_title', 'page_description','action','logo','logoText'));
     }

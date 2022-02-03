@@ -4,15 +4,15 @@ import Discovery from './pages/discovery'
 import Profile from './pages/profile'
 
 export default new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {
-            path: '/unity-search',
+            path: '/search',
             name: 'Discovery',
             component: Discovery
         },
         {
-            path: `/profile/:id`,
+            path: `/search/profile/:id`,
             name: 'Profile',
             component: Profile
         },

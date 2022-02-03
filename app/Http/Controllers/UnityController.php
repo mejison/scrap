@@ -12,7 +12,7 @@ class UnityController extends Controller
         $logo = "images/logo.png";
         $logoText = "images/logo-text.png";
 		
-        $action = 'unity-search';
+        $action = 'unity';
 
         return view('unity.index', compact('page_title', 'page_description','action','logo','logoText'));
     }

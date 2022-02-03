@@ -109,7 +109,7 @@ export default {
     methods: {
         onClickView(item) {
             const id = item.Link.split('/').reverse().shift()
-            this.$router.push(`/profile/${id}`);
+            this.$router.push(`/search/profile/${id}`);
         },
         getImages(item) {
             return item.Images ? item.Images.split(',') : [];

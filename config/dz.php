@@ -42,12 +42,12 @@ return [
 							'vendor/chartist/css/chartist.min.css',
 							'https://cdn.lineicons.com/2.0/LineIcons.css',
 				],
-				'unity-search' => [
+				'unity' => [
 					'vendor/jqvmap/css/jqvmap.min.css',
 					'vendor/chartist/css/chartist.min.css',
 					'https://cdn.lineicons.com/2.0/LineIcons.css',
 				],
-				'viz-search' => [
+				'viz' => [
 					'vendor/jqvmap/css/jqvmap.min.css',
 					'vendor/chartist/css/chartist.min.css',
 					'https://cdn.lineicons.com/2.0/LineIcons.css',
@@ -241,7 +241,7 @@ return [
 					'js/custom.min.js',
 					'js/deznav-init.js',
 				],
-				'viz-search' => [
+				'viz' => [
 					'vendor/chart.js/Chart.bundle.min.js',
 					'vendor/apexchart/apexchart.js',
 					'vendor/peity/jquery.peity.min.js',
@@ -250,7 +250,7 @@ return [
 					'js/deznav-init.js',
 					'js/app.js',
 				],
-				'unity-search' => [
+				'unity' => [
 					'vendor/chart.js/Chart.bundle.min.js',
 					'vendor/apexchart/apexchart.js',
 					'vendor/peity/jquery.peity.min.js',

@@ -1,16 +1,24 @@
 <template>
-    <div class="row">
-        <filter-unity-search
-            v-model="filter" 
-            :location-options="locationOptions"
-            :connections-options="connectionsOptions"
-            :network-options="networkOptions"
-            :communities-options="communitiesOptions"
-            :age-options="ageOptions"
-            @clear="onClearFilter"
-            ></filter-unity-search>
-        <div class="col-12">
-            <component :items="itemsFiltered" :is="currentView" @selected-community="onSelectedCommunity"></component>
+    <div>
+        <div class="form-head d-flex mb-0 mb-lg-4 align-items-start">
+            <div class="mr-auto d-none d-lg-block">
+                <h2 class="text-black font-w600">Unity Search</h2>
+                <p class="mb-0">Current unity list</p>
+            </div>
+        </div>	
+        <div class="row">
+            <filter-unity-search
+                v-model="filter" 
+                :location-options="locationOptions"
+                :connections-options="connectionsOptions"
+                :network-options="networkOptions"
+                :communities-options="communitiesOptions"
+                :age-options="ageOptions"
+                @clear="onClearFilter"
+                ></filter-unity-search>
+            <div class="col-12">
+                <component :items="itemsFiltered" :is="currentView" @selected-community="onSelectedCommunity"></component>
+            </div>
         </div>
     </div>
 </template>
