@@ -5102,23 +5102,126 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return {};
       }
-    }
+    },
+    'location-options': {},
+    'connections-options': {},
+    'network-options': {},
+    'communities-options': {},
+    'age-options': {}
   },
   data: function data() {
     return {
-      payload: this.value,
+      payload: this.value
+    };
+  },
+  watch: {
+    value: function value() {
+      this.payload = this.value;
+      this.setQueryParams();
+    }
+  },
+  methods: {
+    onClickClear: function onClickClear() {
+      this.$emit('clear');
+    },
+    onChange: function onChange() {
+      this.$emit('input', this.payload);
+      this.setQueryParams();
+    },
+    setQueryParams: function setQueryParams() {
+      this.$router.push({
+        query: {
+          filter: JSON.stringify(this.payload)
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/discovery.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/discovery.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_filters_unity_search_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/filters/unity-search.vue */ "./resources/js/components/filters/unity-search.vue");
+/* harmony import */ var _discovery_communities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./discovery/communities */ "./resources/js/pages/discovery/communities.vue");
+/* harmony import */ var _discovery_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./discovery/search */ "./resources/js/pages/discovery/search.vue");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'discovery',
+  components: {
+    FilterUnitySearch: _components_filters_unity_search_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Communities: _discovery_communities__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Search: _discovery_search__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    return {
+      filter: {
+        location: null,
+        connections: null,
+        communities: null,
+        age: null
+      },
+      items: [],
       locationOptions: [{
         label: 'Any',
         value: null
-      }, {
-        label: 'Los Angeles, CA, US',
-        value: 'los-angeles-ca-us'
-      }, {
-        label: 'New York City, NY, US',
-        value: 'new-your-city-ny-us'
-      }, {
-        label: 'Seattle, WA, US',
-        value: 'seattle-wa-us'
       }],
       connectionsOptions: [{
         label: 'Any',
@@ -5315,85 +5418,30 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  watch: {
-    value: function value() {
-      this.payload = this.value;
-    }
+  created: function created() {
+    this.fetchData();
+    this.readQueryParams();
   },
   methods: {
-    onClickClear: function onClickClear() {
-      this.$emit('clear');
-    },
-    onChange: function onChange() {
-      this.$emit('input', this.payload);
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/discovery.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/discovery.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_filters_unity_search_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/filters/unity-search.vue */ "./resources/js/components/filters/unity-search.vue");
-/* harmony import */ var _discovery_communities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./discovery/communities */ "./resources/js/pages/discovery/communities.vue");
-/* harmony import */ var _discovery_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./discovery/search */ "./resources/js/pages/discovery/search.vue");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'discovery',
-  components: {
-    FilterUnitySearch: _components_filters_unity_search_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Communities: _discovery_communities__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Search: _discovery_search__WEBPACK_IMPORTED_MODULE_3__["default"]
-  },
-  data: function data() {
-    return {
-      filter: {
+    onClearFilter: function onClearFilter() {
+      this.filter = {
         location: null,
         connections: null,
         communities: null,
         age: null
-      },
-      items: []
-    };
-  },
-  created: function created() {
-    this.fetchData();
-  },
-  methods: {
+      };
+      this.router.push({
+        query: {}
+      });
+    },
+    readQueryParams: function readQueryParams() {
+      var params = this.$route.query;
+
+      if (params.filter) {
+        var filter = JSON.parse(params.filter);
+        this.filter = filter;
+      }
+    },
     fetchData: function fetchData() {
       var _this = this;
 
@@ -5412,13 +5460,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data = _context.sent;
                 _this.items = data;
 
-              case 4:
+                _this.getLocationOptions();
+
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    getLocationOptions: function getLocationOptions() {
+      var _this2 = this;
+
+      var options = {};
+      this.items.forEach(function (item) {
+        options[item.Location] = true;
+      });
+
+      lodash__WEBPACK_IMPORTED_MODULE_4___default().keys(options).forEach(function (item) {
+        _this2.locationOptions = [].concat(_toConsumableArray(_this2.locationOptions), [{
+          label: item,
+          value: item.replaceAll(/\s+/g, '-').toLowerCase()
+        }]);
+      });
     },
     onSelectedCommunity: function onSelectedCommunity(community) {
       this.filter = _objectSpread(_objectSpread({}, this.filter), {}, {
@@ -5427,12 +5492,67 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           value: community.name.toLowerCase()
         }
       });
+    },
+    getValueRow: function getValueRow(item, name) {
+      var separator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ',';
+      item = item[name];
+      return item ? item.split(separator) : [];
     }
   },
   computed: {
     itemsFiltered: function itemsFiltered() {
+      var _this3 = this;
+
       return this.items.filter(function (item) {
-        return true;
+        var communities = _this3.getValueRow(item, 'Community', ',').map(function (item) {
+          return item.toLowerCase();
+        });
+
+        var location = item.Location.replaceAll(/\s+/g, '-').toLowerCase();
+        var connections = {
+          'instagram': item.Instagram,
+          'facebook': item.Facebook,
+          'pinterest': item.Pinterest,
+          'youtube': item.YouTube,
+          'twitter': item.Twitter
+        };
+        var checkCommunities = true;
+
+        if (_this3.filter.communities && _this3.filter.communities.value) {
+          var value = _this3.filter.communities.value.toLowerCase();
+
+          checkCommunities = communities.includes(value);
+        }
+
+        var checkLocation = true;
+
+        if (_this3.filter.location && _this3.filter.location.value) {
+          var _value = _this3.filter.location.value;
+          checkLocation = location.includes(_value);
+        }
+
+        var checkConnections = true;
+
+        if (_this3.filter.connections && _this3.filter.connections.value) {
+          var _value2 = _this3.filter.connections.value;
+          var availableConnections = [];
+
+          for (var conn in connections) {
+            if (connections[conn]) {
+              availableConnections = [].concat(_toConsumableArray(availableConnections), [conn]);
+            }
+          }
+
+          checkConnections = availableConnections.includes(_value2);
+        }
+
+        var checkAge = true;
+
+        if (_this3.filter.age && _this3.filter.age.value) {
+          checkAge = _this3.filter.age.value === item.Age;
+        }
+
+        return checkLocation && checkCommunities && checkConnections && checkAge;
       });
     },
     currentView: function currentView() {
@@ -5622,6 +5742,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Search',
   props: {
@@ -5640,6 +5771,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getImages: function getImages(item) {
       return item.Images ? item.Images.split(',') : [];
+    },
+    getCommunities: function getCommunities(item) {
+      var communities = item.Community ? item.Community.split(',') : [];
+      return communities;
     }
   }
 });
@@ -30608,6 +30743,14 @@ var render = function () {
     { staticClass: "row" },
     [
       _c("filter-unity-search", {
+        attrs: {
+          "location-options": _vm.locationOptions,
+          "connections-options": _vm.connectionsOptions,
+          "network-options": _vm.networkOptions,
+          "communities-options": _vm.communitiesOptions,
+          "age-options": _vm.ageOptions,
+        },
+        on: { clear: _vm.onClearFilter },
         model: {
           value: _vm.filter,
           callback: function ($$v) {
@@ -30715,143 +30858,186 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "campaign-audio col-md-12" },
-    _vm._l(_vm.items, function (item, index) {
-      return _c(
-        "div",
-        {
-          key: index,
-          staticClass:
-            "compaign-row align-items-center p-sm-4 p-3 row sp16 mx-0 mb-2",
-        },
-        [
-          _c("div", { staticClass: "col-lg-2 col-md-4" }, [
-            _c("div", { staticClass: "text-center" }, [
-              _c("img", {
-                staticClass: "img-thumbnail",
-                attrs: { src: _vm.getImages(item)[0], alt: "..." },
-              }),
+    [
+      _vm._l(_vm.items, function (item, index) {
+        return _c(
+          "div",
+          {
+            key: index,
+            staticClass:
+              "compaign-row align-items-center p-sm-4 p-3 row sp16 mx-0 mb-2",
+          },
+          [
+            _c("div", { staticClass: "col-lg-2 col-md-4" }, [
+              _c("div", { staticClass: "text-center" }, [
+                _c("img", {
+                  staticClass: "img-thumbnail",
+                  attrs: { src: _vm.getImages(item)[0], alt: "..." },
+                }),
+              ]),
             ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-4" }, [
-            _c("h3", [_vm._v(_vm._s(item.Name))]),
             _vm._v(" "),
-            _c("div", { staticClass: "location" }, [
-              _c("span", [_vm._v(_vm._s(item.Location))]),
+            _c("div", { staticClass: "col-lg-4 col-md-4" }, [
+              _c("h3", [_vm._v(_vm._s(item.Name))]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "communities" },
+                _vm._l(_vm.getCommunities(item), function (comm, index) {
+                  return _c(
+                    "span",
+                    {
+                      key: index,
+                      staticClass:
+                        "community badge bg-success text-white mb-1 mr-1",
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(comm) +
+                          "\n                "
+                      ),
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "location" }, [
+                _c("span", [
+                  _c("i", { staticClass: "lni lni-map-marker" }),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(item.Location) +
+                      "\n                "
+                  ),
+                ]),
+              ]),
             ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-4" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6" }, [
-                _c("ul", [
-                  _c("li", [
-                    _c("b", [_vm._v("FOLLOWERS")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-4 col-md-4" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6" }, [
+                  _c("ul", [
+                    _c("li", [
+                      _c("b", [_vm._v("FOLLOWERS")]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(item.Followers) +
+                          "\n                        "
+                      ),
+                    ]),
                     _vm._v(" "),
-                    _c("br"),
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(item.Followers) +
-                        "\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("b", [_vm._v("SPONSORED")]),
+                    _c("li", [
+                      _c("b", [_vm._v("SPONSORED")]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(item.Sponsored) +
+                          "\n                        "
+                      ),
+                    ]),
                     _vm._v(" "),
-                    _c("br"),
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(item.Sponsored) +
-                        "\n                        "
-                    ),
+                    _vm._m(0, true),
                   ]),
-                  _vm._v(" "),
-                  _vm._m(0, true),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _c("div", { staticClass: "d-flex flex-column" }, [
+                    _c("div", [
+                      _c(
+                        "a",
+                        { attrs: { href: item.Instagram, target: "_blank" } },
+                        [
+                          _c("i", {
+                            staticClass: "lni lni-instagram-original",
+                          }),
+                          _vm._v(" Instagram\n                            "),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "a",
+                        { attrs: { href: item.Facebook, target: "_blank" } },
+                        [
+                          _c("i", { staticClass: "lni lni-facebook-original" }),
+                          _vm._v(" Facebook\n                            "),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "a",
+                        { attrs: { href: item.Twitter, target: "_blank" } },
+                        [
+                          _c("i", { staticClass: "lni lni-twitter-original" }),
+                          _vm._v(" Twitter\n                            "),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "a",
+                        { attrs: { href: item.Pinterest, target: "_blank" } },
+                        [
+                          _c("i", { staticClass: "lni lni-pinterest" }),
+                          _vm._v(" Pinterest\n                            "),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-2 col-md-4" }, [
+              _c("div", { staticClass: "rates mb-3" }, [
+                _c("b", [_vm._v("Rates")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "range" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(item.Rates) +
+                      "\n                "
+                  ),
                 ]),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c("div", { staticClass: "d-flex flex-column" }, [
-                  _c("div", [
-                    _c(
-                      "a",
-                      { attrs: { href: item.Instagram, target: "_blank" } },
-                      [
-                        _c("i", { staticClass: "lni lni-instagram-original" }),
-                        _vm._v(" Instagram\n                            "),
-                      ]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "a",
-                      { attrs: { href: item.Facebook, target: "_blank" } },
-                      [
-                        _c("i", { staticClass: "lni lni-facebook-original" }),
-                        _vm._v(" Facebook\n                            "),
-                      ]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "a",
-                      { attrs: { href: item.Twitter, target: "_blank" } },
-                      [
-                        _c("i", { staticClass: "lni lni-twitter-original" }),
-                        _vm._v(" Twitter\n                            "),
-                      ]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "a",
-                      { attrs: { href: item.Pinterest, target: "_blank" } },
-                      [
-                        _c("i", { staticClass: "lni lni-pinterest" }),
-                        _vm._v(" Pinterest\n                            "),
-                      ]
-                    ),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-2 col-md-4" }, [
-            _c("div", { staticClass: "rates" }, [
-              _vm._v("\n                Rates\n                "),
-              _c("div", { staticClass: "range" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(item.Rates) +
-                    "\n                "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-sm btn-primary",
-                attrs: { href: "#" },
-                on: {
-                  click: function ($event) {
-                    $event.preventDefault()
-                    return _vm.onClickView(item)
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm btn-primary",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.onClickView(item)
+                    },
                   },
                 },
-              },
-              [_vm._v("\n                View Profile\n            ")]
-            ),
-          ]),
-        ]
-      )
-    }),
-    0
+                [_vm._v("\n                View Profile\n            ")]
+              ),
+            ]),
+          ]
+        )
+      }),
+      _vm._v(" "),
+      !_vm.items.length
+        ? _c(
+            "div",
+            { staticClass: "alert alert-warning", attrs: { role: "alert" } },
+            [_vm._v("\n        Nothing was found for this query!\n    ")]
+          )
+        : _vm._e(),
+    ],
+    2
   )
 }
 var staticRenderFns = [
@@ -30863,7 +31049,7 @@ var staticRenderFns = [
       _c("b", [_vm._v("ENG. RATE")]),
       _vm._v(" "),
       _c("br"),
-      _vm._v("\n                            4.7M\n                        "),
+      _vm._v("\n                            —\n                        "),
     ])
   },
 ]

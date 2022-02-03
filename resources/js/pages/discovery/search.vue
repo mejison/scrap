@@ -12,8 +12,16 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <h3>{{ item.Name }}</h3>
+                <div class="communities">
+                    <span class="community badge bg-success text-white mb-1 mr-1" v-for="(comm, index) in getCommunities(item)" :key="index">
+                        {{ comm }}
+                    </span>
+                </div>
                 <div class="location">
-                    <span>{{ item.Location }}</span>
+                    <span>
+                       <i class="lni lni-map-marker"></i>
+                        {{ item.Location }}
+                    </span>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
@@ -33,7 +41,7 @@
                             <li>
                                 <b>ENG. RATE</b>
                                 <br />
-                                4.7M
+                                —
                             </li>
                         </ul>
                     </div>
@@ -64,8 +72,8 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4">
-                <div class="rates">
-                    Rates
+                <div class="rates mb-3">
+                    <b>Rates</b>
                     <div class="range">
                         {{ item.Rates }}
                     </div>
@@ -74,6 +82,9 @@
                     View Profile
                 </a>
             </div>
+        </div>
+        <div v-if=" ! items.length" class="alert alert-warning" role="alert">
+            Nothing was found for this query!
         </div>
     </div>
 </template>
@@ -102,6 +113,10 @@ export default {
         },
         getImages(item) {
             return item.Images ? item.Images.split(',') : [];
+        },
+        getCommunities(item) {
+            const communities = item.Community ? item.Community.split(',') : [];
+            return communities;
         },
     }
 }

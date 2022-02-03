@@ -37,296 +37,24 @@ export default {
             type: Object,
             default: () => ({}),
         },
+        'location-options': {},
+        'connections-options': {},
+        'network-options': {},
+        'communities-options': {},
+        'age-options': {},
     },
 
     data() {
         return {
             payload: this.value,
-            locationOptions: [
-                {
-                    label: 'Any',
-                    value: null,
-                },
-                {
-                    label: 'Los Angeles, CA, US',
-                    value: 'los-angeles-ca-us'
-                },
-                {
-                    label: 'New York City, NY, US',
-                    value: 'new-your-city-ny-us'
-                },
-                {
-                    label: 'Seattle, WA, US',
-                    value: 'seattle-wa-us'
-                },
-            ],
-            connectionsOptions: [
-                {
-                    label: 'Any',
-                    value: null,
-                },
-                {
-                    label: 'Facebook',
-                    value: 'facebook'
-                },
-                {
-                    label: 'Instagram',
-                    value: 'instagram'
-                },
-                {
-                    label: 'Pinterest',
-                    value: 'pinterest'
-                },
-                {
-                    label: 'Blog',
-                    value: 'blog'
-                },
-                {
-                    label: 'Twitter',
-                    value: 'twitter',
-                },
-                {
-                    label: 'Youtube',
-                    value: 'youtube',
-                },
-                {
-                    label: 'Wordpress',
-                    value: 'wordpress',
-                },
-                {
-                    label: 'Twitch',
-                    value: 'twitch',
-                }
-            ],
-            networkOptions: [
-                {
-                    label: 'Any',
-                    value: null,
-                },
-                {
-                    label: 'One',
-                    value: 'one'
-                },
-                {
-                    label: 'Two',
-                    value: 'two'
-                },
-                {
-                    label: 'Three',
-                    value: 'three'
-                },
-            ],
-            communitiesOptions: [
-                {
-                    label: 'Any',
-                    value: null,
-                },
-                {
-                    label: 'Beauty',
-                    value: 'beauty',
-                },
-                {
-                    label: 'DIY / Craft',
-                    value: 'diy',
-                },
-                {
-                    label: 'Family',
-                    value: 'family',
-                },
-                {
-                    label: 'Celebrity',
-                    value: 'celebrity',
-                },
-                {
-                    label: 'Fashion',
-                    value: 'fashion',
-                },
-                {
-                    label: 'Food',
-                    value: 'food',
-                },
-                {
-                    label: 'Health',
-                    value: 'health',
-                },
-                {
-                    label: 'Business',
-                    value: 'business',
-                },
-                {
-                    label: 'Entertainment',
-                    value: 'entertainment',
-                },
-                {
-                    label: 'Music',
-                    value: 'music',
-                },
-                {
-                    label: 'Pop Culture',
-                    value: 'pop_culture',
-                },
-                {
-                    label: 'Sports',
-                    value: 'sports',
-                },
-                {
-                    label: 'Technology',
-                    value: 'technology',
-                },
-                {
-                    label: 'Travel',
-                    value: 'travel',
-                },
-                {
-                    label: 'Video Games',
-                    value: 'video-games',
-                },
-            ],
-            ageOptions: [
-                {
-                    label: 'Any',
-                    value: null,
-                },
-                {
-                    label: '18',
-                    value: 18
-                },
-                {
-                    label: '19',
-                    value: 19
-                },
-                {
-                    label: '20',
-                    value: 20
-                },
-                {
-                    label: '21',
-                    value: 21
-                },
-                {
-                    label: '22',
-                    value: 22
-                },
-                {
-                    label: '23',
-                    value: 23
-                },
-                {
-                    label: '24',
-                    value: 24
-                },
-                {
-                    label: '25',
-                    value: 25
-                },
-                {
-                    label: '26',
-                    value: 26
-                },
-                {
-                    label: '27',
-                    value: 27
-                },
-                {
-                    label: '28',
-                    value: 28
-                },
-                {
-                    label: '29',
-                    value: 29
-                },
-                {
-                    label: '30',
-                    value: 30
-                },
-                {
-                    label: '31',
-                    value: 31
-                },
-                {
-                    label: '32',
-                    value: 32
-                },
-                {
-                    label: '33',
-                    value: 33
-                },
-                {
-                    label: '34',
-                    value: 34
-                },
-                {
-                    label: '35',
-                    value: 35
-                },
-                {
-                    label: '36',
-                    value: 36
-                },
-                {
-                    label: '37',
-                    value: 37
-                },
-                {
-                    label: '38',
-                    value: 38
-                },
-                {
-                    label: '39',
-                    value: 39
-                },
-                {
-                    label: '40',
-                    value: 40
-                },
-                {
-                    label: '41',
-                    value: 41
-                },
-                {
-                    label: '42',
-                    value: 42
-                },
-                {
-                    label: '43',
-                    value: 43
-                },
-                {
-                    label: '44',
-                    value: 44
-                },
-                {
-                    label: '45',
-                    value: 45
-                },
-                {
-                    label: '46',
-                    value: 46
-                },
-                {
-                    label: '47',
-                    value: 47
-                },
-                {
-                    label: '48',
-                    value: 48
-                },
-                {
-                    label: '49',
-                    value: 49
-                },
-                {
-                    label: '50',
-                    value: 50
-                },
-            ],
         }
     },
 
     watch: {
         value() {
             this.payload = this.value
-        }
+            this.setQueryParams()
+        },
     },
 
     methods: {
@@ -335,7 +63,11 @@ export default {
         },
         onChange() {
             this.$emit('input', this.payload)
-        }
+            this.setQueryParams()
+        },
+        setQueryParams() {
+            this.$router.push({ query: { filter: JSON.stringify(this.payload) }})
+        },
     },
 }
 </script>
