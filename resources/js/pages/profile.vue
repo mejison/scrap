@@ -2,22 +2,24 @@
     <!-- row -->
     <div class="container-fluid">
 
-        <div class="card card-body">
+        <div class="card card-body" v-if="item.attributes">
             <div class="row">
                 <div class="col-lg-2 col-md-12 col-12 text-center">
-                    <img src="https://via.placeholder.com/150x150" :src2="getImages(item)" class="img-fluid rounded-circle" alt="">
+                    <img :src="item.attributes.avatar_url" class="img-fluid rounded-circle" alt="">
                 </div>
                 <div class="col-lg-8 col-md-9 col-12">
-                    <h3 class="my-3 text-center text-lg-left">{{ item.Name }}</h3>
+                    <h3 class="my-3 text-center text-lg-left" >{{ item.attributes.name }}</h3>
                     <div class="comunities mb-2">
-                        <span class="badge bg-success text-white mr-2 mt-2" v-for="(conn, index) in item.Community.split(',')" :key="index">{{ conn }}</span>
+                        <span class="community badge bg-success text-white mb-1 mr-1" v-for="(comm, index) in item.overview.communities" :key="index">
+                            {{ comm.value }}
+                        </span>
                     </div>
                     <p class="bio mb-2" v-if="item.Bio">
                         {{ item.Bio}}
                     </p>
                     <div class="address">
                         <i class="lni lni-map-marker"></i>
-                        <b>{{ item.Location }}</b>
+                        <b>{{ item.attributes.country }}<span v-if="item.attributes.country && item.attributes.city">,</span>{{ item.attributes.city }}</b>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-12">
@@ -32,14 +34,18 @@
                         <div class="profile-statistics">
                             <div class="text-center">
                                 <div class="row">
-                                    <div class="col">
-                                        <h3 class="m-b-0">{{ item.Followers }}</h3><span>Follower</span>
+                                    <div class="col" >
+                                        <h3 class="m-b-0" v-if="item.metrics && item.metrics.followers">
+                                            {{ humanformat(item.metrics.followers) }}</h3><span>Follower
+                                        </span>
+                                    </div>
+                                    <div class="col" >
+                                        <h3 class="m-b-0" v-if="item.metrics && item.metrics.sponsored_rate">
+                                            {{  (item.metrics.sponsored_rate * 100).toFixed(2) }} %</h3><span v-else>0.00 %</span><span>Sponsored</span>
+                                            
                                     </div>
                                     <div class="col">
-                                        <h3 class="m-b-0">{{ item.Sponsored }}</h3><span>Sponsored</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="m-b-0">{{ item['AUDIENCE AUTHENTICITY'] }}</h3><span>AUDIENCE AUTHENTICITY</span>
+                                        <h3 class="m-b-0">-</h3><span>AUDIENCE AUTHENTICITY</span>
                                     </div>
                                 </div>
                             </div>
@@ -108,9 +114,11 @@ import Audience from '../components/audience.vue'
 import RecentContent from '../components/recent-content.vue'
 import Bio from '../components/bio.vue'
 import Contact from '../components/contact.vue'
-import Communities from './discovery/communities.vue'
 import Tags from '../components/tags.vue'
 import CommunitiesTags from '../components/communities-tags.vue'
+import { mapActions, mapState } from 'vuex'
+import requestMixin from '../mixins/requestMixin';
+import HumanFormat from  'human-format';
 
 export default {
     name: 'Profile',
@@ -124,14 +132,17 @@ export default {
         RecentContent,
         Bio,
         Contact,
-        Communities,
         Tags,
         CommunitiesTags
     },
 
+    mixins: [
+        requestMixin,
+    ],
+
     data() {
         return {
-            item: {},
+            humanformat: HumanFormat,
         }
     },
 
@@ -140,19 +151,31 @@ export default {
     },
 
     methods: {
+        ...mapActions("unity", ['setItem']),
         async fetchData() {
-            let data = await fetch("/storage/data/stmlnportal.com.json").then(r => r.json());
-            this.item = data.find(item => {
-                let id =  0;
-                if (item.Link) {
-                    id = item.Link.split('/').reverse().shift()
-                }
-                return id == this.$route.params.id
-            })
+            this.startLoader()
+            const unit_id = this.$route.params.id
+            let { data } = await fetch(`/api/v1/unity/get?unit_id=${unit_id}`).then(r => r.json());
+            let metrics = await this.getMetric(data.id);
+            let contacts = await this.getContacts(data.id);
+            let overview = await this.getOverview(data.id);
+
+            data = {
+                ...data,
+                metrics: metrics.data.attributes,
+                contacts: contacts.data.attributes,
+                overview: overview.data.attributes,
+            }
+            this.setItem(data)
+            this.stopLoader()
         },
         getImages(item) {
            return []; // return item && item.Images ? item.Images.split(',') : [];
         },
+    },
+
+    computed: {
+        ...mapState("unity", ['item']),
     },
 }
 </script>

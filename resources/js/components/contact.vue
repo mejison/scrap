@@ -6,7 +6,7 @@
                 <h5 class="f-w-500">Email <span class="pull-right"></span>
                 </h5>
             </div>
-            <div class="col-9"><span>{{ item.Email ? item.Email : '--' }}</span>
+            <div class="col-9"><span>{{ item.contacts && item.contacts.email ? item.contacts.email : '--' }}</span>
             </div>
         </div>
         <div class="row mb-2">
@@ -14,7 +14,7 @@
                 <h5 class="f-w-500">Phone Number <span class="pull-right"></span>
                 </h5>
             </div>
-            <div class="col-9"><span>{{ item.Phone ? item.Phone : '--' }}</span>
+            <div class="col-9"><span>{{ item.contacts && item.contacts.phone_number ? item.contacts.phone_number : '--' }}</span>
             </div>
         </div>
         <div class="row mb-2">
@@ -22,7 +22,7 @@
                 <h5 class="f-w-500">Shipping Address <span class="pull-right"></span>
                 </h5>
             </div>
-            <div class="col-9"><span>{{ item['Shipping Address'] ? item['Shipping Address'] : '--' }}</span>
+            <div class="col-9"><span>{{ item.contacts && item.contacts.address ? item.contacts.address : '--' }}</span>
             </div>
         </div>
     </div>

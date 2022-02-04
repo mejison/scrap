@@ -7,7 +7,7 @@
                     <h5 class="f-w-500 text-primary">Insight <span class="pull-right"></span>
                     </h5>
                 </div>
-                <div class="col-9 text-right text-primary ">
+                <div class="col-9 text-right text-primary">
                   Eng. Rate (# Posts)
                 </div>
             </div>

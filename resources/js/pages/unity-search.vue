@@ -15,9 +15,15 @@
                 :communities-options="communitiesOptions"
                 :age-options="ageOptions"
                 @clear="onClearFilter"
+                @input="onChangeFilter"
                 ></filter-unity-search>
             <div class="col-12">
-                <component :items="itemsFiltered" :is="currentView" @selected-community="onSelectedCommunity"></component>
+                <unity-search-results :items="items" />
+                <pagination 
+                    :current="filter.page"
+                    @next="onClickNext" 
+                    @prev="onClickPrev"
+                />
             </div>
         </div>
     </div>
@@ -25,28 +31,29 @@
 
 <script>
 import FilterUnitySearch from '../components/filters/unity-search.vue'
-import Communities from './discovery/communities';
-import Search from './discovery/search';
+import UnitySearchResults from '../components/unity-search-results.vue';
+import Pagination from '../components/pagination.vue'
 import _ from 'lodash';
+import requestMixin from '../mixins/requestMixin';
+import { mapState } from 'vuex';
+import countries from '../countries.js';
 
 export default {
     name: 'discovery',
 
     components: {
         FilterUnitySearch,
-        Communities,
-        Search,
+        UnitySearchResults,
+        Pagination,
     },
+
+    mixins: [
+        requestMixin,
+    ],
 
     data() {
         return {
-            filter: {
-                location: null,
-                connections: null,
-                communities: null,
-                age: null,
-            },
-            items: [],
+            countries,
             locationOptions: [
                 {
                     label: 'Any',
@@ -316,12 +323,23 @@ export default {
         }
     },
 
-    created() {
+    mounted() {
         this.fetchData();
-        this.readQueryParams();
+        this.initLocationOptions();
     },
 
     methods: {
+        initLocationOptions() {
+            for(var c in this.countries) {
+                this.locationOptions = [
+                    ...this.locationOptions,
+                    {
+                        label: this.countries[c],
+                        value: c
+                    }
+                ]
+            }
+        },
         onClearFilter() {
             this.filter = {
                 location: null,
@@ -329,7 +347,7 @@ export default {
                 communities: null,
                 age: null,
             }
-            this.router.push({ query: {}})
+            this.fetchData();
         },
         readQueryParams() {
             const params = this.$route.query
@@ -337,11 +355,6 @@ export default {
                 const filter = JSON.parse(params.filter)
                 this.filter = filter
             }
-        },
-        async fetchData() {
-            let data = await fetch("/storage/data/stmlnportal.com.json").then(r => r.json());
-            this.items = data;
-            this.getLocationOptions();
         },
         getLocationOptions() {
             let options = {};
@@ -375,50 +388,7 @@ export default {
     },
 
     computed: {
-        itemsFiltered() {
-            return this.items.filter(item => {
-                const communities = this.getValueRow(item, 'Community', ',').map(item => item.toLowerCase());
-                const location =  item.Location.replaceAll(/\s+/g, '-').toLowerCase()
-                const connections = {'instagram': item.Instagram, 'facebook': item.Facebook, 'pinterest': item.Pinterest, 'youtube' : item.YouTube, 'twitter' : item.Twitter};
-
-                let checkCommunities = true;
-                if (this.filter.communities && this.filter.communities.value) {
-                    const value = this.filter.communities.value.toLowerCase();
-                    checkCommunities = communities.includes(value);
-                }
-
-                let checkLocation = true;
-                if (this.filter.location && this.filter.location.value) {
-                    const value = this.filter.location.value
-                    checkLocation = location.includes(value)
-                }
-
-                let checkConnections = true;
-                if (this.filter.connections && this.filter.connections.value) {
-                    const value = this.filter.connections.value
-                    let availableConnections = [];
-                    for(let conn in connections) {
-                        if (connections[conn]) {
-                            availableConnections = [
-                                ...availableConnections,
-                                conn
-                            ];
-                        }
-                    }
-                    checkConnections = availableConnections.includes(value)
-                }
-
-                let checkAge = true;
-                if (this.filter.age && this.filter.age.value) {
-                    checkAge = this.filter.age.value === item.Age;
-                }
-                
-                return checkLocation && checkCommunities && checkConnections && checkAge;
-            });
-        },
-        currentView() {
-            return this.filter.communities && this.filter.communities.value ? 'search' : 'communities'
-        },
+        ...mapState('unity', ["items"]),
     },
 }
 </script>

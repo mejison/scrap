@@ -14,6 +14,10 @@ Vue.use(VueRouter)
 
 import router from './router.js'
 
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+import store from './store'
 
 /**
  * The following block of code may be used to automatically register your
@@ -37,4 +41,5 @@ Vue.component('filter-unity-search', require('./components/filters/unity-search.
 const app = new Vue({
     el: '#main-wrapper',
     router,
+    store,
 });

@@ -1,20 +1,27 @@
 import VueRouter from 'vue-router'
 
-import Discovery from './pages/discovery'
+import UnitySearch from './pages/unity-search'
 import Profile from './pages/profile'
+
+import VizSearch from './pages/viz-search'
 
 export default new VueRouter({
     // mode: 'history',
     routes: [
         {
-            path: '/search',
-            name: 'Discovery',
-            component: Discovery
+            path: '/search-unity',
+            name: 'UnitySearch',
+            component: UnitySearch
         },
         {
-            path: `/search/profile/:id`,
+            path: `/search-unity/profile/:id`,
             name: 'Profile',
             component: Profile
+        },
+        {
+            path: '/search-viz',
+            name: 'VizSearch',
+            component: VizSearch
         },
     ],
 });

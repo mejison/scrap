@@ -1,8 +1,8 @@
 <template>
     <div class="contact">
         <h3 class="page-title my-4">Bio</h3>
-        <p>
-            {{ item.Bio ? item.Bio : '--' }}
+        <p v-if="item && item.attributes">
+            {{ item.attributes.bio ? item.attributes.bio : '--' }}
         </p>
     </div>
 </template>
