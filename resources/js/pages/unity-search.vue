@@ -324,6 +324,7 @@ export default {
     },
 
     mounted() {
+        this.readQueryParams();
         this.fetchData();
         this.initLocationOptions();
     },

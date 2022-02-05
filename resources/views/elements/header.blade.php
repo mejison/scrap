@@ -671,9 +671,6 @@
 									</div>
                                 </div>
 							</li>
-                             <li class="nav-item dropdown d-none d-xl-flex">
-                                <a class="btn btn-primary" href="{!! url('/new-compaign'); !!}">+ New Campaign</a>
-                            </li>
 							<li class="nav-item dropdown header-profile side">
                                 <a class="nav-link" href="#">
 									<div class="header-info">

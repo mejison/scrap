@@ -16,17 +16,6 @@ class UnityController extends Controller
         $this->csrf = env('CSRF', 'vC3vDCuuGVOzuFgeueaolR-No2oeCaOnalix30OX4QLnEXvVAXeoXGeil_a_9Uj7a_mL7H9Q_JDKHXjzeoYR7A');
     }
 
-    public function get() {
-        $page_title = 'Compaign';
-        $page_description = 'Some description for the page';
-        $logo = "images/logo.png";
-        $logoText = "images/logo-text.png";
-		
-        $action = 'unity';
-
-        return view('unity.index', compact('page_title', 'page_description','action','logo','logoText'));
-    }
-
     public function searchUnity(Request $request) {
         
         $page = request()->input('page') ?? 1;

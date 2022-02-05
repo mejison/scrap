@@ -6309,7 +6309,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     onClickView: function onClickView(item) {
       var id = item.id;
-      this.$router.push("/search-unity/profile/".concat(id));
+      this.$router.push("/#/profile/".concat(id));
     },
     getImages: function getImages(item) {
       return item.Images ? item.Images.split(',') : [];
@@ -6851,6 +6851,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   mounted: function mounted() {
+    this.readQueryParams();
     this.fetchData();
     this.initLocationOptions();
   },
@@ -7641,13 +7642,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
-  // mode: 'history',
+  mode: 'history',
   routes: [{
-    path: '/search-unity',
+    path: '',
     name: 'UnitySearch',
     component: _pages_unity_search__WEBPACK_IMPORTED_MODULE_0__["default"]
   }, {
-    path: "/search-unity/profile/:id",
+    path: "/profile/:id",
     name: 'Profile',
     component: _pages_profile__WEBPACK_IMPORTED_MODULE_1__["default"]
   }, {

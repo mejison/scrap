@@ -127,7 +127,7 @@ export default {
         },
         onClickView(item) {
             const id = item.id
-            this.$router.push(`/search-unity/profile/${id}`);
+            this.$router.push(`/#/profile/${id}`);
         },
         getImages(item) {
             return item.Images ? item.Images.split(',') : [];

@@ -6,15 +6,15 @@ import Profile from './pages/profile'
 import VizSearch from './pages/viz-search'
 
 export default new VueRouter({
-    // mode: 'history',
+    mode: 'history',
     routes: [
         {
-            path: '/search-unity',
+            path: '',
             name: 'UnitySearch',
             component: UnitySearch
         },
         {
-            path: `/search-unity/profile/:id`,
+            path: `/profile/:id`,
             name: 'Profile',
             component: Profile
         },

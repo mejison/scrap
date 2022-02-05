@@ -1,22 +1,17 @@
 <div class="deznav">
     <div class="deznav-scroll">
         <ul class="metismenu" id="menu">
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+            <li>
+                <router-link to="/" class="has-arrow ai-icon">
                     <i class="flaticon-381-networking"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a class="has-arrow ai-icon" href="{!! url('/unity#/search-unity') !!}" aria-expanded="false">
-                    <i class="flaticon-381-search"></i>
                     <span class="nav-text">Unity Search</span>
-                </a>
+                </router-link>
             </li>
             <li>
-                <a class="has-arrow ai-icon" href="{!! url('/viz#/search-viz') !!}" aria-expanded="false">
+                <router-link to="/search-viz" class="has-arrow ai-icon">
                     <i class="flaticon-381-search"></i>
                     <span class="nav-text">Viz Search</span>
-                </a>
+                </router-link>
             </li>
             {{--
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -143,9 +138,5 @@
                 </ul>
             </li> --}}
         </ul>
-        <div class="copyright mt-auto">
-            <p><strong>Eclan Dashboard</strong><br/>© All Rights Reserved</p>
-            <p>By DexignZone</p>
-        </div>
     </div>
 </div>
