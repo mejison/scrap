@@ -5362,85 +5362,80 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mixins_requestMixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/requestMixin */ "./resources/js/mixins/requestMixin.js");
-/* harmony import */ var human_format__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! human-format */ "./node_modules/human-format/index.js");
-/* harmony import */ var human_format__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(human_format__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _mixins_requestMixin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mixins/requestMixin */ "./resources/js/mixins/requestMixin.js");
+/* harmony import */ var human_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! human-format */ "./node_modules/human-format/index.js");
+/* harmony import */ var human_format__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(human_format__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var numeral__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral.js");
+/* harmony import */ var numeral__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(numeral__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5453,50 +5448,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     }
   },
-  mixins: [_mixins_requestMixin__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  mixins: [_mixins_requestMixin__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
-      humanformat: (human_format__WEBPACK_IMPORTED_MODULE_2___default()),
-      connections: {}
+      humanformat: (human_format__WEBPACK_IMPORTED_MODULE_1___default()),
+      numeral: (numeral__WEBPACK_IMPORTED_MODULE_2___default())
     };
   },
-  watch: {
-    item: function item() {
-      var _this = this;
-
-      if (this.item && this.item.relationships) {
-        var connections = this.item.relationships.official_connections.data;
-        connections.map( /*#__PURE__*/function () {
-          var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(conn) {
-            var _yield$_this$getConne, data;
-
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    _context.next = 2;
-                    return _this.getConnection(conn.id);
-
-                  case 2:
-                    _yield$_this$getConne = _context.sent;
-                    data = _yield$_this$getConne.data;
-                    _this.connections[data.id] = data.attributes;
-                    _this.connections = _objectSpread({}, _this.connections);
-
-                  case 6:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee);
-          }));
-
-          return function (_x) {
-            return _ref.apply(this, arguments);
-          };
-        }());
-      } //getConnection
-
+  methods: {
+    getPrice: function getPrice(conn) {
+      return conn.estimated_asking_price_in_cents ? (conn.estimated_asking_price_in_cents / 100).toFixed(0) : (conn.asking_price_in_cents / 100).toFixed(0);
     }
   }
 });
@@ -6309,7 +6270,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     onClickView: function onClickView(item) {
       var id = item.id;
-      this.$router.push("/#/profile/".concat(id));
+      this.$router.push("/profile/".concat(id));
     },
     getImages: function getImages(item) {
       return item.Images ? item.Images.split(',') : [];
@@ -6465,6 +6426,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6502,62 +6472,130 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.fetchData();
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_13__.mapActions)("unity", ['setItem'])), {}, {
-    fetchData: function fetchData() {
+    getCountry: function getCountry(item) {
+      return item.overview && item.overview.country ? item.overview.country : '';
+    },
+    getCity: function getCity(item) {
+      if (item.overview && item.overview.city) {
+        return item.overview.city;
+      }
+
+      if (item.overview && item.overview.discovered_demographics && item.overview.discovered_demographics.city) {
+        return item.overview.discovered_demographics.city[0];
+      }
+
+      return '';
+    },
+    getLocation: function getLocation(item) {
+      if (item.overview && item.overview.discovered_demographics && item.overview.discovered_demographics.location) {
+        return item.overview.discovered_demographics.location[0];
+      }
+
+      return '';
+    },
+    getMetricsConnection: function getMetricsConnection(connections) {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var unit_id, _yield$fetch$then, data, metrics, contacts, overview;
+      return new Promise(function (resolve, reject) {
+        connections = connections.map( /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(conn) {
+            var _yield$_this$getConne, data;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return _this.getConnection(conn.id);
+
+                  case 2:
+                    _yield$_this$getConne = _context.sent;
+                    data = _yield$_this$getConne.data;
+                    return _context.abrupt("return", _objectSpread(_objectSpread({}, conn), {}, {
+                      metrics: data.attributes
+                    }));
+
+                  case 5:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+
+          return function (_x) {
+            return _ref.apply(this, arguments);
+          };
+        }());
+        Promise.all(connections).then(function (items) {
+          resolve(items);
+        });
+      });
+    },
+    fetchData: function fetchData() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var unit_id, _yield$fetch$then, data, metrics, contacts, overview, connections;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _this.startLoader();
+                _this2.startLoader();
 
-                unit_id = _this.$route.params.id;
-                _context.next = 4;
+                unit_id = _this2.$route.params.id;
+                _context2.next = 4;
                 return fetch("/api/v1/unity/get?unit_id=".concat(unit_id)).then(function (r) {
                   return r.json();
                 });
 
               case 4:
-                _yield$fetch$then = _context.sent;
+                _yield$fetch$then = _context2.sent;
                 data = _yield$fetch$then.data;
-                _context.next = 8;
-                return _this.getMetric(data.id);
+                _context2.next = 8;
+                return _this2.getMetric(data.id);
 
               case 8:
-                metrics = _context.sent;
-                _context.next = 11;
-                return _this.getContacts(data.id);
+                metrics = _context2.sent;
+                _context2.next = 11;
+                return _this2.getContacts(data.id);
 
               case 11:
-                contacts = _context.sent;
-                _context.next = 14;
-                return _this.getOverview(data.id);
+                contacts = _context2.sent;
+                _context2.next = 14;
+                return _this2.getOverview(data.id);
 
               case 14:
-                overview = _context.sent;
+                overview = _context2.sent;
+                _context2.next = 17;
+                return _this2.getConnectionPreperety(data.id);
+
+              case 17:
+                connections = _context2.sent;
+                _context2.next = 20;
+                return _this2.getMetricsConnection(connections.data);
+
+              case 20:
+                connections = _context2.sent;
                 data = _objectSpread(_objectSpread({}, data), {}, {
                   metrics: metrics.data.attributes,
                   contacts: contacts.data.attributes,
-                  overview: overview.data.attributes
+                  overview: overview.data.attributes,
+                  connections: connections
                 });
 
-                _this.setItem(data);
+                _this2.setItem(data);
 
-                _this.stopLoader();
+                _this2.stopLoader();
 
-              case 18:
+              case 24:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
-    },
-    getImages: function getImages(item) {
-      return []; // return item && item.Images ? item.Images.split(',') : [];
     }
   }),
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_13__.mapState)("unity", ['item']))
@@ -7315,7 +7353,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         communities: null,
         age: null,
         page: 1
-      }
+      },
+      loaderInterval: null
     };
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("unity", ['setItems'])), {}, {
@@ -7379,7 +7418,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                               _this.setItems(data);
 
-                            case 9:
+                              _this.stopLoader();
+
+                            case 10:
                             case "end":
                               return _context.stop();
                           }
@@ -7403,7 +7444,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return function (_x) {
           return _ref2.apply(this, arguments);
         };
-      }())["finally"](function () {
+      }())["catch"](function () {
         _this.stopLoader();
       });
     },
@@ -7515,6 +7556,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }
         }, _callee7);
+      }))();
+    },
+    getConnectionPreperety: function getConnectionPreperety(conn_id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.next = 2;
+                return fetch("/api/v1/connection-preperety/unity?conn_id=".concat(conn_id)).then(function (r) {
+                  return r.json();
+                });
+
+              case 2:
+                return _context8.abrupt("return", _context8.sent);
+
+              case 3:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     },
     startLoader: function startLoader() {
@@ -77013,171 +77076,216 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.item.relationships && _vm.item.relationships.official_connections
-    ? _c("div", { staticClass: "connections" }, [
-        _c("h3", { staticClass: "my-4" }, [
+  return _c("div", { staticClass: "connections" }, [
+    _vm.item.connections
+      ? _c("h3", { staticClass: "my-4" }, [
           _vm._v(
             "\n        " +
-              _vm._s(_vm.item.relationships.official_connections.data.length) +
+              _vm._s(_vm.item.connections.length) +
               " Connections\n   "
           ),
-        ]),
-        _vm._v(" "),
-        _c(
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.item.connections
+      ? _c(
           "div",
           { staticClass: "row" },
-          _vm._l(
-            _vm.item.relationships.official_connections.data,
-            function (connect, index) {
-              return _c("div", { key: index, staticClass: "col-lg-4 col-12" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-4" }, [
-                        _c("div", { staticClass: "text-center connection" }, [
+          _vm._l(_vm.item.connections, function (connect, index) {
+            return _c("div", { key: index, staticClass: "col-lg-4 col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-4" }, [
+                      _c("div", { staticClass: "text-center connection" }, [
+                        _c("div", [
                           _c("img", {
                             staticClass: "rounded-circle",
                             attrs: {
-                              src: "https://via.placeholder.com/64x64",
+                              width: "64",
+                              height: "64",
+                              src: connect.attributes.avatar_url,
                               alt: "",
                             },
                           }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "social" }, [
-                            ["instagram"].includes(connect.type)
-                              ? _c("i", { staticClass: "lni lni-instagram" })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            ["facebook"].includes(connect.type)
-                              ? _c("i", { staticClass: "lni lni-facebook" })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            ["twitter"].includes(connect.type)
-                              ? _c("i", { staticClass: "lni lni-twitter" })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            ["website"].includes(connect.type)
-                              ? _c("i", { staticClass: "lni lni-website" })
-                              : _vm._e(),
-                          ]),
                         ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _c("div", {}, [
-                          _c("h3", [_vm._v(_vm._s(_vm.item.attributes.name))]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "social" }, [
+                          ["InstagramProperty"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-instagram" })
+                            : _vm._e(),
                           _vm._v(" "),
-                          _c(
-                            "a",
-                            { staticClass: "text-muted", attrs: { href: "#" } },
-                            [
-                              _c("small", { staticClass: "text-primary" }, [
-                                _vm._v(
-                                  "\n                                        View On " +
-                                    _vm._s(connect.name) +
-                                    " "
-                                ),
-                                _c("i", { staticClass: "lni lni-link" }),
-                              ]),
-                            ]
-                          ),
+                          ["FacebookProperty"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-facebook" })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          ["TwitterProperty"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-twitter" })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          ["WebsiteProperty"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-website" })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          ["WordPressProperty"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-wordpress" })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          ["YouTubeProperty"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-youtube" })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          ["BlogProperty"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-blogger" })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          ["PinterestPropertyWithProfileReach"].includes(
+                            connect.attributes.chart_publishable_type
+                          )
+                            ? _c("i", { staticClass: "lni lni-pinterest" })
+                            : _vm._e(),
                         ]),
                       ]),
                     ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("ul", [
-                      _c("li", { staticClass: "text-muted mb-2" }, [
-                        _c("i", { staticClass: "lni lni-users" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-8" }, [
+                      _c("div", [
+                        _c("h4", [
+                          _vm._v(_vm._s(connect.attributes.connection_name)),
+                        ]),
                         _vm._v(" "),
-                        _vm.connections[connect.id]
-                          ? _c("span", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-muted",
+                            attrs: {
+                              href: connect.attributes.property_url,
+                              target: "_blank",
+                            },
+                          },
+                          [
+                            _c("small", { staticClass: "text-primary" }, [
                               _vm._v(
-                                _vm._s(
-                                  _vm.humanformat(
-                                    _vm.connections[connect.id].followers
-                                  )
-                                )
+                                "\n                                        View On " +
+                                  _vm._s(
+                                    connect.attributes.chart_publishable_type
+                                      .replace("Property", "")
+                                      .replace("WithProfileReach", "")
+                                  ) +
+                                  " "
                               ),
-                            ])
-                          : _c("span", [_vm._v("0")]),
-                        _vm._v(
-                          "\n                           Followers\n                       "
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "text-muted mb-2" }, [
-                        _c("i", { staticClass: "lni lni-bullhorn" }),
-                        _vm._v(" "),
-                        _vm.connections[connect.id] &&
-                        _vm.connections[connect.id].sponsored_rate
-                          ? _c("span", [
-                              _vm._v(
-                                _vm._s(
-                                  (
-                                    _vm.connections[connect.id].sponsored_rate *
-                                    100
-                                  ).toFixed(2)
-                                ) + " %"
-                              ),
-                            ])
-                          : _c("span", [_vm._v("0.00 %")]),
-                        _c("span", [_vm._v("Sponsored")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "text-muted" }, [
-                        _c("i", { staticClass: "lni lni-pulse" }),
-                        _vm._v(" "),
-                        _vm.connections[connect.id] &&
-                        _vm.connections[connect.id].eng_rate
-                          ? _c("span", [
-                              _vm._v(
-                                _vm._s(
-                                  (
-                                    _vm.connections[connect.id].eng_rate * 100
-                                  ).toFixed(2)
-                                ) + " %"
-                              ),
-                            ])
-                          : _c("span", [_vm._v("0.00 %")]),
-                        _vm._v(
-                          "\n                            Eng. Rate By Followers\n                       "
+                              _c("i", { staticClass: "lni lni-link" }),
+                            ]),
+                          ]
                         ),
                       ]),
                     ]),
                   ]),
-                  _vm._v(" "),
-                  _vm._m(0, true),
                 ]),
-              ])
-            }
-          ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("ul", [
+                    _c("li", { staticClass: "text-muted mb-2" }, [
+                      _c("i", { staticClass: "lni lni-users" }),
+                      _vm._v(" "),
+                      connect.metrics && connect.metrics.followers
+                        ? _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.humanformat(connect.metrics.followers))
+                            ),
+                          ])
+                        : _c("span", [_vm._v("0")]),
+                      _vm._v(
+                        "\n                           Followers\n                       "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "text-muted mb-2" }, [
+                      _c("i", { staticClass: "lni lni-bullhorn" }),
+                      _vm._v(" "),
+                      connect.metrics && connect.metrics.sponsored_rate
+                        ? _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                (connect.metrics.sponsored_rate * 100).toFixed(
+                                  2
+                                )
+                              ) + " %"
+                            ),
+                          ])
+                        : _c("span", [_vm._v("0.00 %")]),
+                      _c("span", [_vm._v("Sponsored")]),
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "text-muted" }, [
+                      _c("i", { staticClass: "lni lni-pulse" }),
+                      _vm._v(" "),
+                      connect.metrics && connect.metrics.eng_rate
+                        ? _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                (connect.metrics.eng_rate * 100).toFixed(2)
+                              ) + " %"
+                            ),
+                          ])
+                        : _c("span", [_vm._v("0.00 %")]),
+                      _vm._v(
+                        "\n                            Eng. Rate By Followers\n                       "
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-footer d-flex justrify-content-bwteeen",
+                  },
+                  [
+                    _c(
+                      "span",
+                      {
+                        staticClass:
+                          "badge bg-primary text-white text-uppercase",
+                      },
+                      [_vm._v("authorized")]
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "ml-auto" }, [
+                      _vm._v(
+                        "$" +
+                          _vm._s(
+                            _vm
+                              .numeral(_vm.getPrice(connect.attributes))
+                              .format("0,0")
+                          )
+                      ),
+                    ]),
+                  ]
+                ),
+              ]),
+            ])
+          }),
           0
-        ),
-      ])
-    : _vm._e()
+        )
+      : _vm._e(),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-footer d-flex justrify-content-bwteeen" },
-      [
-        _c(
-          "span",
-          { staticClass: "badge bg-primary text-white text-uppercase" },
-          [_vm._v("authorized")]
-        ),
-        _vm._v(" "),
-        _c("span", { staticClass: "ml-auto" }, [_vm._v("$0")]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -78169,12 +78277,20 @@ var render = function () {
                 _c("i", { staticClass: "lni lni-map-marker" }),
                 _vm._v(" "),
                 _c("b", [
-                  _vm._v(_vm._s(_vm.item.attributes.country)),
-                  _vm.item.attributes.country && _vm.item.attributes.city
-                    ? _c("span", [_vm._v(",")])
+                  _vm._v(_vm._s(_vm.getCountry(_vm.item))),
+                  _vm.getCountry(_vm.item) && _vm.getCity(_vm.item)
+                    ? _c("span", [_vm._v(", ")])
                     : _vm._e(),
-                  _vm._v(_vm._s(_vm.item.attributes.city)),
+                  _vm._v(_vm._s(_vm.getCity(_vm.item))),
                 ]),
+                _vm._v("\n                     \n                    "),
+                _vm.getLocation(_vm.item)
+                  ? _c("span", [
+                      _c("i", { staticClass: "lni lni-compass" }),
+                      _vm._v(" "),
+                      _c("b", [_vm._v(_vm._s(_vm.getLocation(_vm.item)))]),
+                    ])
+                  : _vm._e(),
               ]),
             ]),
             _vm._v(" "),
@@ -78202,13 +78318,13 @@ var render = function () {
                             "\n                                        " +
                               _vm._s(
                                 _vm.humanformat(_vm.item.metrics.followers)
-                              )
+                              ) +
+                              "\n                                    "
                           ),
                         ])
                       : _vm._e(),
-                    _c("span", [
-                      _vm._v("Follower\n                                    "),
-                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Follower")]),
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col" }, [
@@ -78221,10 +78337,11 @@ var render = function () {
                                   2
                                 )
                               ) +
-                              " %"
+                              " %\n                                    "
                           ),
                         ])
-                      : _c("span", [_vm._v("0.00 %")]),
+                      : _c("h3", [_vm._v("0.00 %")]),
+                    _vm._v(" "),
                     _c("span", [_vm._v("Sponsored")]),
                   ]),
                   _vm._v(" "),
@@ -78328,6 +78445,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col" }, [
       _c("h3", { staticClass: "m-b-0" }, [_vm._v("-")]),
+      _vm._v(" "),
       _c("span", [_vm._v("AUDIENCE AUTHENTICITY")]),
     ])
   },

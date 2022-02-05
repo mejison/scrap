@@ -16,7 +16,7 @@ class UnityController extends Controller
         $this->csrf = env('CSRF', 'vC3vDCuuGVOzuFgeueaolR-No2oeCaOnalix30OX4QLnEXvVAXeoXGeil_a_9Uj7a_mL7H9Q_JDKHXjzeoYR7A');
     }
 
-    public function searchUnity(Request $request) {
+    public function searchUnity() {
         
         $page = request()->input('page') ?? 1;
         $per_page = request()->input('per_page') ?? 50;
@@ -28,7 +28,7 @@ class UnityController extends Controller
         return response()->json($data);
     }
 
-    public function getMetric(Request $request) {
+    public function getMetric() {
         $unit_id = request()->input('unit_id') ? request()->unit_id : '';
 
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
@@ -37,7 +37,7 @@ class UnityController extends Controller
         return response()->json($data);
     }
 
-    public function getUnity(Request $request) {
+    public function getUnity() {
         $unit_id = request()->input('unit_id') ? request()->unit_id : '';
 
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
@@ -46,7 +46,7 @@ class UnityController extends Controller
         return response()->json($data);
     }
 
-    public function getContacts(Request $request) {
+    public function getContacts() {
         $unit_id = request()->input('unit_id') ? request()->unit_id : '';
 
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
@@ -55,7 +55,7 @@ class UnityController extends Controller
         return response()->json($data);
     }
 
-    public function getOverview(Request $request) {
+    public function getOverview() {
         $unit_id = request()->input('unit_id') ? request()->unit_id : '';
 
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
@@ -64,12 +64,19 @@ class UnityController extends Controller
         return response()->json($data);
     }
 
-    public function getConnection(Request $Request) {
+    public function getConnection() {
         $conn_id = request()->input('conn_id') ? request()->conn_id : '';
 
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
         $data = $stmln_portal->getConnection($conn_id);
 
+        return response()->json($data);
+    }
+
+    public function getProperetyConnection() {
+        $conn_id = request()->input('conn_id') ? request()->conn_id : '';
+        $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
+        $data = $stmln_portal->getProperetyConnection($conn_id);
         return response()->json($data);
     }
 

@@ -9,6 +9,7 @@ export default {
                 age: null,
                 page: 1,
             },
+            loaderInterval: null,
         }
     },
     methods: {
@@ -51,9 +52,9 @@ export default {
                         }
                         data = [...data]
                         this.setItems(data);
+                        this.stopLoader();
                     });
-
-                }).finally(() => {
+                }).catch(() => {
                     this.stopLoader();
                 })
         },
@@ -71,6 +72,9 @@ export default {
         },
         async getConnection(conn_id) {
             return await fetch(`/api/v1/connection/unity?conn_id=${conn_id}`).then(r => r.json())
+        },
+        async getConnectionPreperety(conn_id) {
+            return await fetch(`/api/v1/connection-preperety/unity?conn_id=${conn_id}`).then(r => r.json())
         },
         startLoader() {
             const el = document.getElementById('preloader')

@@ -29,4 +29,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/contacts/unity', [UnityController::class, 'getContacts']);
     Route::get('/overview/unity', [UnityController::class, 'getOverview']);
     Route::get('/connection/unity', [UnityController::class, 'getConnection']);
+    Route::get('/connection-preperety/unity', [UnityController::class, 'getProperetyConnection']);
 });

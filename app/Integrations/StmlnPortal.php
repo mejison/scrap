@@ -50,6 +50,11 @@ class StmlnPortal
         return json_decode($response->getBody());
     }
 
+    public function getProperetyConnection($conn_id) {
+        $response = Http::withHeaders($this->getHeaders())->get('https://api.izeaexchange.com/v5/profiles/property_connections?filter[account_id]=' . $conn_id . '&include=latest_metric');
+        return json_decode($response->getBody());
+    }
+
     private function getRunnersBody($query, $page, $per_page) {
        return [
             "filter" => [

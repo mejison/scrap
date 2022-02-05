@@ -19,7 +19,12 @@
                     </p>
                     <div class="address">
                         <i class="lni lni-map-marker"></i>
-                        <b>{{ item.attributes.country }}<span v-if="item.attributes.country && item.attributes.city">,</span>{{ item.attributes.city }}</b>
+                        <b>{{ getCountry(item) }}<span v-if="getCountry(item) && getCity(item)">, </span>{{ getCity(item) }}</b>
+                        &nbsp;
+                        <span v-if="getLocation(item)">
+                            <i class="lni lni-compass"></i>
+                            <b>{{ getLocation(item) }}</b>
+                        </span>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-12">
@@ -36,16 +41,20 @@
                                 <div class="row">
                                     <div class="col" >
                                         <h3 class="m-b-0" v-if="item.metrics && item.metrics.followers">
-                                            {{ humanformat(item.metrics.followers) }}</h3><span>Follower
-                                        </span>
+                                            {{ humanformat(item.metrics.followers) }}
+                                        </h3>
+                                        <span>Follower</span>
                                     </div>
                                     <div class="col" >
                                         <h3 class="m-b-0" v-if="item.metrics && item.metrics.sponsored_rate">
-                                            {{  (item.metrics.sponsored_rate * 100).toFixed(2) }} %</h3><span v-else>0.00 %</span><span>Sponsored</span>
-                                            
+                                            {{  (item.metrics.sponsored_rate * 100).toFixed(2) }} %
+                                        </h3>
+                                        <h3 v-else>0.00 %</h3>
+                                        <span>Sponsored</span>
                                     </div>
                                     <div class="col">
-                                        <h3 class="m-b-0">-</h3><span>AUDIENCE AUTHENTICITY</span>
+                                        <h3 class="m-b-0">-</h3>
+                                        <span>AUDIENCE AUTHENTICITY</span>
                                     </div>
                                 </div>
                             </div>
@@ -152,6 +161,42 @@ export default {
 
     methods: {
         ...mapActions("unity", ['setItem']),
+        getCountry(item) {
+            return item.overview && item.overview.country ? item.overview.country : '';
+        },
+        getCity(item) {
+            if (item.overview && item.overview.city) {
+                return item.overview.city
+            }
+
+            if (item.overview && item.overview.discovered_demographics && item.overview.discovered_demographics.city) {
+                return item.overview.discovered_demographics.city[0]
+            }
+
+            return '';
+        },
+        getLocation(item) {
+            if (item.overview && item.overview.discovered_demographics && item.overview.discovered_demographics.location) {
+                return item.overview.discovered_demographics.location[0]
+            }
+
+            return '';
+        },
+        getMetricsConnection(connections) {
+            return new Promise((resolve, reject) => {
+                connections = connections.map(async (conn) => {
+                    const { data } = await this.getConnection(conn.id);
+                    return {
+                        ...conn,
+                        metrics: data.attributes,
+                    }
+                });
+
+                Promise.all(connections).then((items) => {
+                    resolve(items);
+                });
+            });
+        },
         async fetchData() {
             this.startLoader()
             const unit_id = this.$route.params.id
@@ -159,18 +204,19 @@ export default {
             let metrics = await this.getMetric(data.id);
             let contacts = await this.getContacts(data.id);
             let overview = await this.getOverview(data.id);
+            let connections = await this.getConnectionPreperety(data.id);
+            connections = await this.getMetricsConnection(connections.data);
 
             data = {
                 ...data,
                 metrics: metrics.data.attributes,
                 contacts: contacts.data.attributes,
                 overview: overview.data.attributes,
+                connections,
             }
+            
             this.setItem(data)
             this.stopLoader()
-        },
-        getImages(item) {
-           return []; // return item && item.Images ? item.Images.split(',') : [];
         },
     },
 
