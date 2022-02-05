@@ -76,6 +76,51 @@ export default {
         async getConnectionPreperety(conn_id) {
             return await fetch(`/api/v1/connection-preperety/unity?conn_id=${conn_id}`).then(r => r.json())
         },
+        async getAudienceAccount(conn_id) {
+            return await fetch(`/api/v1/audience-account/unity?conn_id=${conn_id}`).then(r => r.json())
+        },
+        async searchContent(connection_id, organization_id) {
+            const query = JSON.stringify(this.searchQueryBuilder(connection_id, organization_id));
+            return await fetch(`/api/v1/search/content?query=${query}`).then(r => r.json())
+        },
+        async getWhiteLabelOrganizations() {
+            return await fetch(`/api/v1/white-label-organizations`).then(r => r.json())
+        },
+        searchQueryBuilder(connection_id, organization_id) {
+            return {
+                "data":{
+                   "attributes":{
+                      "api-version":null,
+                      "sort":"-created_at",
+                      "total":null,
+                      "organization-id":794978,
+                      "opts":null,
+                      "filter":{
+                         "audienceAgeSource":null,
+                         "audienceGenderSource":null,
+                         "hasEmail":null,
+                         "creatorNameQuery":null,
+                         "creatorAccount":null,
+                         "connectionName":null,
+                         "creatorProperty":connection_id,
+                         "docType":null,
+                         "endDate":null,
+                         "isDiscovered":null,
+                         "isSponsored":null,
+                         "query":null,
+                         "startDate":null,
+                         "metricsSeries":null
+                      },
+                      "page":{
+                         "number":1,
+                         "size":15
+                      },
+                      "aggs-result":null
+                   },
+                   "type":"content/searches"
+                }
+             };
+        },
         startLoader() {
             const el = document.getElementById('preloader')
             el.style.display = 'block'
@@ -201,5 +246,6 @@ export default {
                 ]
             };
         },
+
     }
 }

@@ -55,6 +55,21 @@ class StmlnPortal
         return json_decode($response->getBody());
     }
 
+    public function getAudienceAccount($unit_id) {
+        $response = Http::withHeaders($this->getHeaders())->get('https://obsidian.izeaexchange.com/v2/metrics/audience/accounts/' . $unit_id);
+        return json_decode($response->getBody());
+    }
+
+    public function getWhiteLabelOrganizations() {
+        $response = Http::withHeaders($this->getHeaders())->get('https://api.izeaexchange.com/v5/whitelabel_organizations?filter[domain]=stmlnportal.com');
+        return json_decode($response->getBody());
+    }
+
+    public function getSearchContent($query) {
+        $response = Http::withHeaders($this->getSearchContentHeaders())->post('https://obsidian.izeaexchange.com/v2/content/searches', $query);
+        return json_decode($response->getBody());
+    }
+
     private function getRunnersBody($query, $page, $per_page) {
        return [
             "filter" => [
@@ -79,6 +94,13 @@ class StmlnPortal
             'Origin' => 'https://stmlnportal.com',
             'Referer' => 'https://stmlnportal.com/',
             'X-IZEA-Account-ID' => '1004170'
+        ];
+    }
+
+    private function getSearchContentHeaders() {
+        return [
+            'Authorization' => 'Bearer ' . $this->bearer,
+            'Content-Type' => 'application/vnd.api+json'
         ];
     }
 }

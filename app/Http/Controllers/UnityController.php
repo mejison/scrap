@@ -74,9 +74,29 @@ class UnityController extends Controller
     }
 
     public function getProperetyConnection() {
-        $conn_id = request()->input('conn_id') ? request()->conn_id : '';
+        $unit_id = request()->input('conn_id') ? request()->conn_id : '';
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
-        $data = $stmln_portal->getProperetyConnection($conn_id);
+        $data = $stmln_portal->getProperetyConnection($unit_id);
+        return response()->json($data);
+    }
+
+    public function getAudienceAccount() {
+        $unit_id = request()->input('unit_id') ? request()->unit_id : '';
+        $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
+        $data = $stmln_portal->getAudienceAccount($unit_id);
+        return response()->json($data);
+    }
+
+    public function getSearchContent() {
+        $query = request()->input('query');
+        $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
+        $data = $stmln_portal->getSearchContent(json_decode($query, true));
+        return response()->json($data);
+    }
+
+    public function getWhiteLabelOrganizations() {
+        $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
+        $data = $stmln_portal->getWhiteLabelOrganizations();
         return response()->json($data);
     }
 

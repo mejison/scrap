@@ -30,4 +30,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/overview/unity', [UnityController::class, 'getOverview']);
     Route::get('/connection/unity', [UnityController::class, 'getConnection']);
     Route::get('/connection-preperety/unity', [UnityController::class, 'getProperetyConnection']);
+    Route::get('/audience-account/unity', [UnityController::class, 'getAudienceAccount']);
+    Route::get('/search/content', [UnityController::class, 'getSearchContent']);
+    Route::get('/white-label-organizations', [UnityController::class, 'getWhiteLabelOrganizations']);
 });

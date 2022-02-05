@@ -5987,6 +5987,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_requestMixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/requestMixin */ "./resources/js/mixins/requestMixin.js");
+/* harmony import */ var _components_dropdown_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dropdown.vue */ "./resources/js/components/dropdown.vue");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -6007,8 +6037,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'RecentContent',
+  components: {
+    Dropdown: _components_dropdown_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   props: {
     item: {
       type: Object,
@@ -6017,12 +6057,91 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  mixins: [_mixins_requestMixin__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  data: function data() {
+    return {
+      currentConnection: null,
+      connectionOptions: [{
+        label: 'Any',
+        value: null
+      }],
+      items: []
+    };
+  },
+  watch: {
+    item: function item() {
+      var options = [];
+      this.item.connections.forEach(function (conn) {
+        options = [].concat(_toConsumableArray(options), [{
+          label: "".concat(conn.attributes.publishable_type, ": ").concat(conn.attributes.connection_name),
+          type: conn.attributes.publishable_type,
+          value: conn.id
+        }]);
+      });
+
+      if (options && options.length) {
+        var instOption = options.find(function (item) {
+          return item.type == 'InstagramProperty';
+        });
+        this.fetchRecentPosts(instOption.value);
+        this.currentConnection = instOption;
+      }
+
+      this.connectionOptions = [].concat(_toConsumableArray(this.connectionOptions), _toConsumableArray(options));
+    }
+  },
   methods: {
-    getInstagram: function getInstagram(item) {
-      return item.Instagram.replace("http://instagram.com/", "");
+    onChange: function onChange() {
+      this.fetchRecentPosts(this.currentConnection.value);
     },
-    getImages: function getImages(item) {
-      return item && item.Images ? item.Images.split(',').slice(0, 4) : [];
+    fetchRecentPosts: function fetchRecentPosts(connection_id) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var orgId, _yield$_this$searchCo, included;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.startLoader();
+
+                orgId = _this.getOrganizationId();
+
+                if (!orgId) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _this.items = [];
+                _context.next = 6;
+                return _this.searchContent(connection_id, orgId);
+
+              case 6:
+                _yield$_this$searchCo = _context.sent;
+                included = _yield$_this$searchCo.included;
+
+                if (included) {
+                  _this.items = included.slice(0, 4);
+                }
+
+                _this.stopLoader();
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getOrganizationId: function getOrganizationId() {
+      if (this.item) {
+        var _this$item$organizati = _slicedToArray(this.item.organization, 1),
+            firstOrg = _this$item$organizati[0];
+
+        return firstOrg.id;
+      }
     }
   }
 });
@@ -6536,7 +6655,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var unit_id, _yield$fetch$then, data, metrics, contacts, overview, connections;
+        var unit_id, _yield$fetch$then, data, metrics, contacts, overview, connections, organization;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
@@ -6574,14 +6693,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 17:
                 connections = _context2.sent;
                 _context2.next = 20;
-                return _this2.getMetricsConnection(connections.data);
+                return _this2.getWhiteLabelOrganizations();
 
               case 20:
+                organization = _context2.sent;
+                _context2.next = 23;
+                return _this2.getMetricsConnection(connections.data);
+
+              case 23:
                 connections = _context2.sent;
                 data = _objectSpread(_objectSpread({}, data), {}, {
                   metrics: metrics.data.attributes,
                   contacts: contacts.data.attributes,
                   overview: overview.data.attributes,
+                  organization: organization.data,
                   connections: connections
                 });
 
@@ -6589,7 +6714,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this2.stopLoader();
 
-              case 24:
+              case 27:
               case "end":
                 return _context2.stop();
             }
@@ -7579,6 +7704,111 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }, _callee8);
       }))();
+    },
+    getAudienceAccount: function getAudienceAccount(conn_id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.next = 2;
+                return fetch("/api/v1/audience-account/unity?conn_id=".concat(conn_id)).then(function (r) {
+                  return r.json();
+                });
+
+              case 2:
+                return _context9.abrupt("return", _context9.sent);
+
+              case 3:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9);
+      }))();
+    },
+    searchContent: function searchContent(connection_id, organization_id) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+        var query;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                query = JSON.stringify(_this2.searchQueryBuilder(connection_id, organization_id));
+                _context10.next = 3;
+                return fetch("/api/v1/search/content?query=".concat(query)).then(function (r) {
+                  return r.json();
+                });
+
+              case 3:
+                return _context10.abrupt("return", _context10.sent);
+
+              case 4:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10);
+      }))();
+    },
+    getWhiteLabelOrganizations: function getWhiteLabelOrganizations() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                _context11.next = 2;
+                return fetch("/api/v1/white-label-organizations").then(function (r) {
+                  return r.json();
+                });
+
+              case 2:
+                return _context11.abrupt("return", _context11.sent);
+
+              case 3:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11);
+      }))();
+    },
+    searchQueryBuilder: function searchQueryBuilder(connection_id, organization_id) {
+      return {
+        "data": {
+          "attributes": {
+            "api-version": null,
+            "sort": "-created_at",
+            "total": null,
+            "organization-id": 794978,
+            "opts": null,
+            "filter": {
+              "audienceAgeSource": null,
+              "audienceGenderSource": null,
+              "hasEmail": null,
+              "creatorNameQuery": null,
+              "creatorAccount": null,
+              "connectionName": null,
+              "creatorProperty": connection_id,
+              "docType": null,
+              "endDate": null,
+              "isDiscovered": null,
+              "isSponsored": null,
+              "query": null,
+              "startDate": null,
+              "metricsSeries": null
+            },
+            "page": {
+              "number": 1,
+              "size": 15
+            },
+            "aggs-result": null
+          },
+          "type": "content/searches"
+        }
+      };
     },
     startLoader: function startLoader() {
       var el = document.getElementById('preloader');
@@ -77845,25 +78075,38 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("a", { attrs: { href: "#" } }, [
-      _c("h3", { staticClass: "page-title my-4" }, [
-        _vm._v("Recent Content  "),
-        _c("small", { staticClass: "text-muted" }, [
-          _c("i", { staticClass: "lni lni-instagram-original" }),
-          _vm._v(" " + _vm._s(_vm.getInstagram(_vm.item)) + " "),
-          _c("i", { staticClass: "lni lni-arrow-down" }),
-        ]),
-      ]),
+      _c(
+        "h3",
+        { staticClass: "page-title my-4" },
+        [
+          _vm._v("Recent Content   \n            "),
+          _c("dropdown", {
+            attrs: { label: "Connection", options: _vm.connectionOptions },
+            on: { input: _vm.onChange },
+            model: {
+              value: _vm.currentConnection,
+              callback: function ($$v) {
+                _vm.currentConnection = $$v
+              },
+              expression: "currentConnection",
+            },
+          }),
+        ],
+        1
+      ),
     ]),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.getImages(_vm.item), function (image, index) {
+      _vm._l(_vm.items, function (content, index) {
         return _c("div", { key: index, staticClass: "col-3" }, [
-          _c("img", {
-            staticClass: "img-thumbnail",
-            attrs: { src: "https://via.placeholder.com/250x250", alt: "" },
-          }),
+          content && content.attributes
+            ? _c("img", {
+                staticClass: "img-thumbnail",
+                attrs: { src: content.attributes["content-preview"], alt: "" },
+              })
+            : _vm._e(),
         ])
       }),
       0

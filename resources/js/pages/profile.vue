@@ -205,6 +205,7 @@ export default {
             let contacts = await this.getContacts(data.id);
             let overview = await this.getOverview(data.id);
             let connections = await this.getConnectionPreperety(data.id);
+            let organization = await this.getWhiteLabelOrganizations();
             connections = await this.getMetricsConnection(connections.data);
 
             data = {
@@ -212,6 +213,7 @@ export default {
                 metrics: metrics.data.attributes,
                 contacts: contacts.data.attributes,
                 overview: overview.data.attributes,
+                organization: organization.data,
                 connections,
             }
             
