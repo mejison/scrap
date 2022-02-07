@@ -27,23 +27,23 @@
 <script>
 export default {
     props: {
-        item: {
+        data: {
             type: Object,
-            default: () => ({}),
+            default: () => ([]),
         },
     },
 
     computed: {
         insights() {
-            const audience_insights = this.item && this.item['Audience insights'] ? this.item['Audience insights'] : '';
-            const items = audience_insights.split(',')
-            return items.map(item => {
-                let parts = item.trim().split(' ')
-                return {
-                    title: parts[0],
-                    value: parts.slice(1, parts.length).join(' '),
-                }
-            })
+            // const audience_insights = this.item && this.item['Audience insights'] ? this.item['Audience insights'] : '';
+            // const items = audience_insights.split(',')
+            // return items.map(item => {
+            //     let parts = item.trim().split(' ')
+            //     return {
+            //         title: parts[0],
+            //         value: parts.slice(1, parts.length).join(' '),
+            //     }
+            // })
         }
     }
 }

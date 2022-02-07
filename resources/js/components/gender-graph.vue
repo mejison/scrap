@@ -38,9 +38,9 @@ export default {
     },
 
     props: {
-        item: {
-            type: Object,
-            default: () => ({}),
+        data: {
+            type: Array,
+            default: () => ([]),
         },
     },
 
@@ -56,18 +56,18 @@ export default {
 
     methods:{
         setData() {
-            let ag = this.item && this.item['Audience gender'] ? this.item['Audience gender'] : '';
-            ag = ag.split(', ').map(item => {
-                let parts = item.trim().split(' ')
-                return parts.length ? parts[1].replace('%', '') : 0;
-            });
+            let famalePercent = 1;
+            let malePercent = 1;
 
-            let famalePercent = ag[0] * 1;
-            let malePercent = ag[1] * 1;
+            const male = this.data.find(item => ['M'].includes(item.name));
+            const famale = this.data.find(item => ['F'].includes(item.name));
 
-            if (ag && ag.length) {
-                famalePercent = ag[0] * 1;
-                malePercent = ag[1] * 1;
+            if (male) {
+                malePercent = male.reachValue
+            }
+
+            if (famale) {
+                famalePercent = famale.reachValue
             }
 
             this.option = {

@@ -56,7 +56,7 @@ class StmlnPortal
     }
 
     public function getAudienceAccount($unit_id) {
-        $response = Http::withHeaders($this->getHeaders())->get('https://obsidian.izeaexchange.com/v2/metrics/audience/accounts/' . $unit_id);
+        $response = Http::withHeaders($this->getSearchContentHeaders())->get('https://obsidian.izeaexchange.com/v2/metrics/audience/accounts/' . $unit_id);
         return json_decode($response->getBody());
     }
 

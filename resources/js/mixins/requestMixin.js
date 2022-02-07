@@ -77,7 +77,7 @@ export default {
             return await fetch(`/api/v1/connection-preperety/unity?conn_id=${conn_id}`).then(r => r.json())
         },
         async getAudienceAccount(conn_id) {
-            return await fetch(`/api/v1/audience-account/unity?conn_id=${conn_id}`).then(r => r.json())
+            return await fetch(`/api/v1/audience-account/unity?unit_id=${conn_id}`).then(r => r.json())
         },
         async searchContent(connection_id, organization_id) {
             const query = JSON.stringify(this.searchQueryBuilder(connection_id, organization_id));

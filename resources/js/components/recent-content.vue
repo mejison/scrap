@@ -61,7 +61,7 @@ export default {
             let options = [];
             this.item.connections.forEach(conn => {
                 options = [...options, {
-                    label: `${conn.attributes.publishable_type}: ${conn.attributes.connection_name}`,
+                    label: `${conn.attributes.publishable_type.replace('Property', '')}: ${conn.attributes.connection_name}`,
                     type: conn.attributes.publishable_type,
                     value: conn.id,
                 }];
