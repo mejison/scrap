@@ -2,7 +2,7 @@
     <div class="search_bar dropdown show">
         <div class="dropdown-menu p-0 m-0 show">
             <form>
-                <input class="form-control search" type="search" @search="onSearch" @input="onInput" v-model="query"  placeholder="Search Here" aria-label="Search">
+                <input class="form-control search" type="search" @input="onInput" v-model="query"  placeholder="Search Here" aria-label="Search">
             </form>
         </div>
         <span @click.prevent="onSearch" class="search_icon p-3 c-pointer" data-toggle="dropdown">
@@ -24,6 +24,12 @@ export default {
         }
     },
 
+    mounted() {
+        if (this.filter.search) {
+            this.query = this.filter.search
+        }
+    },
+
     computed: {
         ...mapState("unity", ["filter"]),
     },
@@ -41,8 +47,6 @@ export default {
         onSearch() {
             this.setFilter({
                 ...this.filter,
-                total: 0,
-                page: 1,
             })
             this.fetchData();
         },

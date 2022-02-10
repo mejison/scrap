@@ -71,7 +71,7 @@ export default {
                 ...this.payload,
                 total: 0,
                 page: 1,
-            }) }})
+            }) }}).catch(()=>{});
         },
     },
 }
