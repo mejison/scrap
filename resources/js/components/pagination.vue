@@ -1,27 +1,48 @@
 <template>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link btn" @click.prevent="onClickPrev" :class="{'disabled': ! canPrev}" href="#" :disabled=" ! canPrev">Previous</a>
-            </li>
-            <li class="page-item ml-2">
-                <a class="page-link btn" @click.prevent="onClickNext" href="#" :class="{'disabled': ! canNext}" :disabled="canNext" >Next</a>
-            </li>
-        </ul>
-    </nav>
+   <pagi 
+        v-model="page" 
+        :records="total"
+        :per-page="perPage"
+        ref="pagination"
+    />
 </template>
 
 <script>
+import Pagination from 'vue-pagination-2';
+
 import { mapState } from 'vuex';
 export default {
     name: 'pagination',
 
+    components: {
+        'pagi': Pagination,
+    },
 
     props: {
         current: {
             type: Number,
             default: 1,
         },
+        perPage: {
+            type: Number,
+            default: 10,
+        },
+        total: {
+            type: Number,
+            default: 0,
+        },
+    },
+
+    watch: {
+        page() {
+            this.$emit('page', this.page)
+        }
+    },
+
+    data() {
+        return {
+            page: 1,
+        }
     },
 
     methods: {
@@ -35,18 +56,16 @@ export default {
 
     computed: {
         ...mapState("unity", ['items']),
+        pages() {
+            const pages = Math.round(this.total / this.perPage);
+            return [...(new Array(pages))]
+        },
         canPrev() {
             return this.current != 1
         },
         canNext() {
-            return this.items.length == 10;
+            return this.items.length == this.perPage;
         },
     },
 }
 </script>
-
-<style lang="scss">
-    .disabled {
-
-    }
-</style>

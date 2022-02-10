@@ -21,8 +21,11 @@
                 <unity-search-results :items="items" />
                 <pagination 
                     :current="filter.page"
+                    :total="filter.total"
+                    :per-page="filter.per_page"
                     @next="onClickNext" 
                     @prev="onClickPrev"
+                    @page="onClickPage"
                 />
             </div>
         </div>

@@ -8,6 +8,8 @@ export default {
                 communities: null,
                 age: null,
                 page: 1,
+                per_page: 10,
+                total: 0,
             },
             loaderInterval: null,
         }
@@ -28,6 +30,13 @@ export default {
             }
             this.fetchData();
         },
+        onClickPage(page) {
+            this.filter = {
+                ...this.filter,
+                page,
+            }
+            this.fetchData();
+        },
         onClickNext() {
             this.filter = {
                 ...this.filter,
@@ -41,7 +50,7 @@ export default {
             let query = JSON.stringify(this.buildQueryBuilder)
             fetch(`/api/v1/search/unity?query=${query}&per_page=10&page=${this.filter.page}`)
                 .then(r => r.json())
-                .then(async ({ data }) => {
+                .then(async ({ data, meta }) => {
                     await data.forEach(async (item, index) => {
                         let dataMetric = await this.getMetric(item.id);
                         let dataRates = await this.getRates(item.id);
@@ -51,6 +60,10 @@ export default {
                             rates: dataRates.data,
                         }
                         data = [...data]
+                        this.filter = {
+                            ...this.filter,
+                            total: meta.total
+                        }
                         this.setItems(data);
                         this.stopLoader();
                     });
