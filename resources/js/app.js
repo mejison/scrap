@@ -31,6 +31,7 @@ import store from './store'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('filter-unity-search', require('./components/filters/unity-search.vue').default);
+Vue.component('search-bar', require('./components/filters/search-bar.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

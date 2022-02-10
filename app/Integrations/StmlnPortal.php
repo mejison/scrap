@@ -15,8 +15,8 @@ class StmlnPortal
         $this->csrf = $csrf;
     }
 
-    public function searchRunners($query, $page = 1, $per_page = 50) {
-        $response = Http::withHeaders($this->getHeaders())->post('https://api.izeaexchange.com/v5/query_builder/runners', $this->getRunnersBody($query, $page, $per_page));
+    public function searchRunners($query, $searchQuery, $page = 1, $per_page = 50) {
+        $response = Http::withHeaders($this->getHeaders())->post('https://api.izeaexchange.com/v5/query_builder/runners', $this->getRunnersBody($query, $searchQuery, $page, $per_page));
         return json_decode($response->getBody());
     }
 
@@ -70,12 +70,18 @@ class StmlnPortal
         return json_decode($response->getBody());
     }
 
-    private function getRunnersBody($query, $page, $per_page) {
+    private function getRunnersBody($query, $querySearch = '', $page, $per_page) {
+        $top_level_filters = [];
+
+        if ($querySearch) {
+            $top_level_filters = [["keywords" => $querySearch ]];
+        }
+    
        return [
             "filter" => [
                 "json_query" => $query,
                 "type" =>   'DiscoverySearch',
-                "top_level_filters" => [],
+                "top_level_filters" => json_encode($top_level_filters),
                 "no_save" => true,
             ],
             "include" => 'account',

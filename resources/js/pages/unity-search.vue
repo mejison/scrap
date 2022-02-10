@@ -40,6 +40,7 @@ import _ from 'lodash';
 import requestMixin from '../mixins/requestMixin';
 import { mapState } from 'vuex';
 import countries from '../countries.js';
+import { mapActions } from 'vuex';
 
 export default {
     name: 'discovery',
@@ -327,12 +328,13 @@ export default {
     },
 
     mounted() {
-        this.readQueryParams();
+        // this.readQueryParams();
         this.fetchData();
         this.initLocationOptions();
     },
 
     methods: {
+        ...mapActions("unity", ['setFilter']),
         initLocationOptions() {
             for(var c in this.countries) {
                 this.locationOptions = [
@@ -345,19 +347,22 @@ export default {
             }
         },
         onClearFilter() {
-            this.filter = {
+            this.setFilter({
                 location: null,
                 connections: null,
                 communities: null,
-                age: null,
-            }
+                page: 1,
+                per_page: 10,
+                total: 0,
+                search: '',
+            })
             this.fetchData();
         },
         readQueryParams() {
             const params = this.$route.query
             if (params.filter) {
                 const filter = JSON.parse(params.filter)
-                this.filter = filter
+                this.setFilter(filter);
             }
         },
         getLocationOptions() {
@@ -377,13 +382,13 @@ export default {
             })
         },
         onSelectedCommunity(community) {
-            this.filter = {
+            this.setFilter({
                 ...this.filter,
                 communities: {
                     label: community.name,
                     value: community.name.toLowerCase()
-                },
-            }
+                }
+            });
         },
         getValueRow(item, name, separator = ',') {
             item = item[name]

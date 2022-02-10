@@ -4,6 +4,16 @@ export default {
     state: {
         items: [],
         item: {},
+        filter: {
+            location: null,
+            connections: null,
+            communities: null,
+            age: null,
+            page: 1,
+            per_page: 10,
+            total: 0,
+            search: '',
+        },
     },
 
     actions: {
@@ -13,6 +23,9 @@ export default {
         setItem({ commit }, data) {
             commit('setItem', data)
         },
+        setFilter({ commit }, data) {
+            commit('setFilter', data)
+        },
     },
 
     mutations: {
@@ -21,6 +34,9 @@ export default {
         },
         setItem(state, data) {
             state.item = data;
+        },
+        setFilter(state, data) {
+            state.filter = data;
         },
     },
 }

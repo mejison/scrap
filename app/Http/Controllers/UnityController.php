@@ -21,9 +21,10 @@ class UnityController extends Controller
         $page = request()->input('page') ?? 1;
         $per_page = request()->input('per_page') ?? 50;
         $query = request()->input('query');
+        $searchQuery = request()->input('search');
 
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
-        $data = $stmln_portal->searchRunners($query, $page, $per_page);
+        $data = $stmln_portal->searchRunners($query, $searchQuery, $page, $per_page);
         
         return response()->json($data);
     }

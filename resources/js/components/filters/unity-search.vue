@@ -60,13 +60,18 @@ export default {
     methods: {
         onClickClear() {
             this.$emit('clear')
+            // this.$router.push({});
         },
         onChange() {
             this.$emit('input', this.payload)
             this.setQueryParams()
         },
         setQueryParams() {
-            this.$router.push({ query: { filter: JSON.stringify(this.payload) }})
+            this.$router.push({ query: { filter: JSON.stringify({
+                ...this.payload,
+                total: 0,
+                page: 1,
+            }) }})
         },
     },
 }

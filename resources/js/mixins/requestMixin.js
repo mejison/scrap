@@ -1,56 +1,57 @@
-import { mapActions} from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
     data() {
         return {
-            filter: {
-                location: null,
-                connections: null,
-                communities: null,
-                age: null,
-                page: 1,
-                per_page: 10,
-                total: 0,
-            },
             loaderInterval: null,
         }
     },
+    
     methods: {
         ...mapActions("unity", ['setItems']),
         onChangeFilter() {
-            this.filter = {
+            this.setFilter({
                 ...this.filter,
                 page: 1
-            }
+            });
             this.fetchData();
         },
         onClickPrev() {
-            this.filter = {
+            this.setFilter({
                 ...this.filter,
                 page: this.filter.page  - 1
-            }
+            })
             this.fetchData();
         },
         onClickPage(page) {
-            this.filter = {
+            this.setFilter({
                 ...this.filter,
                 page,
-            }
+            })
             this.fetchData();
         },
         onClickNext() {
-            this.filter = {
+            this.setFilter({
                 ...this.filter,
-                page: this.filter.page  + 1
-            }
+                page: this.filter.page  + 1     
+            });
             this.fetchData();
         },
         fetchData() {
             this.startLoader();
             this.setItems([]);
+            this.setFilter({
+                ...this.filter,
+                total: 0,
+                page: 1,
+            });
             let query = JSON.stringify(this.buildQueryBuilder)
-            fetch(`/api/v1/search/unity?query=${query}&per_page=10&page=${this.filter.page}`)
+            fetch(`/api/v1/search/unity?query=${query}&per_page=10&page=${this.filter.page}&search=${this.filter.search}`)
                 .then(r => r.json())
                 .then(async ({ data, meta }) => {
+                    if ( ! data.length) {
+                        this.stopLoader();
+                    }
+                    
                     await data.forEach(async (item, index) => {
                         let dataMetric = await this.getMetric(item.id);
                         let dataRates = await this.getRates(item.id);
@@ -60,15 +61,21 @@ export default {
                             rates: dataRates.data,
                         }
                         data = [...data]
-                        this.filter = {
+                        
+                        this.setFilter({
                             ...this.filter,
                             total: meta.total
-                        }
+                        });
+                        
                         this.setItems(data);
                         this.stopLoader();
                     });
-                }).catch(() => {
+                })
+                .catch(() => {
                     this.stopLoader();
+                })
+                .finally(() => {
+                    // this.stopLoader();
                 })
         },
         async getMetric(unit_id) {
@@ -147,6 +154,8 @@ export default {
     },
 
     computed: {
+        ...mapState("unity", ["filter"]),
+
         buildQueryBuilder() {
             const community = this.filter.communities && this.filter.communities.value ? this.filter.communities.value : '';
             const connections = this.filter.connections && this.filter.connections.value ? this.filter.connections.value : '';
