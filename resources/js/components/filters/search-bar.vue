@@ -30,16 +30,20 @@ export default {
 
     methods: {
         ...mapActions("unity", ['setFilter']),
-        onSearch() {
-            console.log('clear')
-        },
         onInput() {
             this.setFilter({
                 ...this.filter,
+                total: 0,
+                page: 1,
                 search: this.query
             })
         },
         onSearch() {
+            this.setFilter({
+                ...this.filter,
+                total: 0,
+                page: 1,
+            })
             this.fetchData();
         },
     },

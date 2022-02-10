@@ -15,25 +15,12 @@ export default {
             });
             this.fetchData();
         },
-        onClickPrev() {
-            this.setFilter({
-                ...this.filter,
-                page: this.filter.page  - 1
-            })
-            this.fetchData();
-        },
         onClickPage(page) {
+            console.log(page)
             this.setFilter({
                 ...this.filter,
-                page,
+                page: page
             })
-            this.fetchData();
-        },
-        onClickNext() {
-            this.setFilter({
-                ...this.filter,
-                page: this.filter.page  + 1     
-            });
             this.fetchData();
         },
         fetchData() {
@@ -42,7 +29,6 @@ export default {
             this.setFilter({
                 ...this.filter,
                 total: 0,
-                page: 1,
             });
             let query = JSON.stringify(this.buildQueryBuilder)
             fetch(`/api/v1/search/unity?query=${query}&per_page=10&page=${this.filter.page}&search=${this.filter.search}`)

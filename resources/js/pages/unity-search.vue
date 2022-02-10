@@ -23,8 +23,6 @@
                     :current="filter.page"
                     :total="filter.total"
                     :per-page="filter.per_page"
-                    @next="onClickNext" 
-                    @prev="onClickPrev"
                     @page="onClickPage"
                 />
             </div>
@@ -183,7 +181,7 @@ export default {
                 },
                 {
                     label: 'Video Games',
-                    value: 'video-games',
+                    value: 'video_games',
                 },
             ],
             ageOptions: [
