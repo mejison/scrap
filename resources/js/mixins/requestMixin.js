@@ -217,9 +217,8 @@ export default {
                 ]
             }
 
-            return {
-                "condition" : "AND",
-                "rules" : [
+            if (community) {
+                rules = [
                     ...rules,
                     {
                         "condition" : "OR",
@@ -251,6 +250,13 @@ export default {
                             },
                         ]
                     }
+                ]
+            }
+
+            return {
+                "condition" : "AND",
+                "rules" : [
+                    ...rules,
                 ]
             };
         },
