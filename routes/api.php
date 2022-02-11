@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\UnityController;
-
+use \App\Http\Controllers\VizController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,4 +33,6 @@ Route::prefix('v1')->group(function () {
     Route::get('/audience-account/unity', [UnityController::class, 'getAudienceAccount']);
     Route::get('/search/content', [UnityController::class, 'getSearchContent']);
     Route::get('/white-label-organizations', [UnityController::class, 'getWhiteLabelOrganizations']);
+
+    Route::post('/search/viz', [VizController::class, 'searchViz']);
 });

@@ -109,4 +109,9 @@ class StmlnPortal
             'Content-Type' => 'application/vnd.api+json'
         ];
     }
+
+    public function getViz($query) {
+        $response = Http::withHeaders($this->getHeaders())->get('https://api.izeaexchange.com/v5/viz_searches?' . $query);
+        return json_decode($response->getBody());
+    }
 }

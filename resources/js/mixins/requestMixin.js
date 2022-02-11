@@ -64,6 +64,43 @@ export default {
                     // this.stopLoader();
                 })
         },
+        fetchDataViz() {
+            this.startLoader();
+            let query = this.searchVizQueryViz()
+            console.log(query)
+            fetch(`/api/v1/search/viz`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    query,
+                }),
+            })
+                .then(r => r.json())
+                .then(async (data) => {
+                    console.log(data)
+                    this.stopLoader();
+                });
+        },
+        searchVizQueryViz() {
+            let startDate = '2022-02-04';
+            let source_type = [
+                'youtube_post_discovered',
+                'tiktok_post_discovered',
+                'instagram_post_discovered',
+                'instagram_post_on_platform',
+                'youtube_post_on_platform',
+                'pinterest_post_on_platform',
+                'pinterest_post_on_platform',
+            ];
+            let per_page = 20;
+            let page = 1;
+            let sort = '-score';
+            let collapse = 'true';
+
+            return `?filter[startDate]=${startDate}&` + source_type.map(item => `filter[content_source_type][]=${item}`).join('&') + `&filter[query]=_exists_:brandgraph_fields.brand_ids AND !(brandgraph_fields.category_names:"Social Network")&filter[collapse]=${collapse}&page[size]=${per_page}&page[number]=${page}&sort=${sort}`;
+        },
         async getMetric(unit_id) {
             return await fetch(`/api/v1/metrics/unity?unit_id=${unit_id}`).then(r => r.json())
         },

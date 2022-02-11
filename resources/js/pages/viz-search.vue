@@ -9,31 +9,65 @@
         <div class="row">
             <filter-viz-search />
             <div class="col-12">
-                <viz-search-results />
+                <viz-search-results
+                    :items="items"
+                    @open="onOpen"
+                    />
+                 <pagination 
+                    :current="filter.page"
+                    :total="filter.total"
+                    :per-page="filter.per_page"
+                    @page="onClickPage"
+                />
             </div>
+            <details-view-post :item="item" @close="setItem(null)" />
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import FilterVizSearch from '../components/filters/viz-search.vue'
+import Pagination from '../components/pagination.vue';
 import VizSearchResults from '../components/viz-search-results.vue';
 import requestMixin from '../mixins/requestMixin';
+import vizMixin from '../mixins/vizMixin';
+import detailsViewPost from '../popups/detailsViewPost.vue'
 
 export default {
     name: 'viz-search-filter',
 
     components: {
         FilterVizSearch,
-        VizSearchResults
+        VizSearchResults,
+        Pagination,
+        detailsViewPost
+    },
+
+    data() {
+        return {
+            
+        }
     },
 
     mixins: [
-        requestMixin
+        requestMixin,
+        vizMixin,
     ],
 
     mounted() {
-        this.stopLoader();
+        this.fetchDataViz();
+    },
+
+    methods: {
+        onOpen(item) {
+            this.setItem(item)
+        },
+    },
+
+    computed: {
+        ...mapState("viz", ['items', 'filter', 'item']),
     }
+
 }
 </script>
