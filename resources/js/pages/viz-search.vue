@@ -7,7 +7,7 @@
             </div>
         </div>	
         <div class="row">
-            <filter-viz-search />
+            <filter-viz-search @change="onChangeFilter" />
             <div class="col-12">
                 <viz-search-results
                     :items="items"
@@ -67,7 +67,7 @@ export default {
 
     computed: {
         ...mapState("viz", ['items', 'filter', 'item']),
-    }
+    },
 
 }
 </script>

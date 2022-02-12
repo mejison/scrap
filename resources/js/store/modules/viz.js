@@ -5,11 +5,16 @@ export default {
         items: [],
         item: null,
         filter: {
-            age: null,
+            connection: '',
+            status: '',
             page: 1,
             per_page: 20,
             total: 0,
             search: '',
+            date: {
+                startDate: '',
+                endDate: '',
+            },
         },
     },
 

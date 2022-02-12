@@ -48,6 +48,10 @@ export default {
             this.fetchData();
         },
         onInput() {
+            if(this.$route.name == 'VizSearch') {
+                return
+            }
+            
             this.setFilter({
                 ...this.filter,
                 total: 0,
@@ -56,6 +60,10 @@ export default {
             })
         },
         onSearch() {
+            if(this.$route.name == 'VizSearch') {
+                return
+            }
+
             this.setFilter({
                 ...this.filter,
             })

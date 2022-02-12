@@ -22,11 +22,27 @@
                         <div class="content">
                             <div class="preview">
                                 <iframe 
+                                    v-if="item.attributes.platform == 'instagram'"
                                     class="embedded-platform-instagram" 
                                     :src="`https://www.instagram.com/p/${item.attributes.platform_content_id}/embed`" 
                                     scrolling="yes" 
                                     title="embedded-platform"
                                 ></iframe>
+                                <iframe 
+                                    v-if="item.attributes.platform == 'tiktok'" 
+                                    class="embedded-platform-tiktok"
+                                    :src="`https://stmlnportal.com/embed/tiktok?post_id=${item.attributes.platform_content_id}&amp;connection_id=${item.attributes.connection_id}`"
+                                    scrolling="yes"
+                                    title="embedded-platform"
+                                ></iframe>
+                                <iframe
+                                     v-if="item.attributes.platform == 'youtube'" 
+                                    class="embedded-platform-youtube"
+                                    :src="`https://www.youtube.com/embed/${item.attributes.platform_content_id}`" 
+                                    scrolling="yes"
+                                    title="embedded-platform"
+                                ></iframe>
+                                <iframe v-if="item.attributes.platform == 'pinterest'"  class="embedded-platform-pinterest" :src="`https://stmlnportal.com/embed/pinterest?post_id=${item.attributes.platform_content_id}`" scrolling="yes" title="embedded-platform"></iframe>
                             </div>
                             <div class="description">
                                 <div class="platform">
@@ -211,7 +227,9 @@ export default {
         }
     }
     
-    .embedded-platform-instagram {
+    .embedded-platform-instagram,
+    .embedded-platform-youtube
+    .embedded-platform-tiktok {
         border: 1px solid #dbdbdb;
         border-radius: 2px;
         height: 665px;
