@@ -178,7 +178,7 @@ export default {
 
         buildQueryBuilder() {
             const community = this.filter.communities && this.filter.communities.value ? this.filter.communities.value : '';
-            const connections = this.filter.connections && this.filter.connections.value ? this.filter.connections.value : '';
+            const connections = this.filter.connections && this.filter.connections.length  ? this.filter.connections : [];
             const age = this.filter.age && this.filter.age.value ? this.filter.age.value : '';
             const location = this.filter.location && this.filter.location.value ? this.filter.location.value : '';
 
@@ -233,19 +233,53 @@ export default {
             }
 
             if (connections) {
+                let selectedConnections = [];
+                connections.forEach(item => {
+                    if (item.from != 0 && item.to != 0) {
+                        selectedConnections = [
+                            ...selectedConnections,
+                            {
+                                "id": `${item.value}_reach`,
+                                "field": `${item.value}_reach`,
+                                "type": "integer",
+                                "input": "text",
+                                "operator": "between",
+                                "value": [item.from, item.to]
+                            },
+                        ]
+                    } else if (item.from != 0 && item.to == 5000000) {
+                        selectedConnections = [
+                            ...selectedConnections,
+                            {
+                                "id": `${item.value}_reach`,
+                                "field": `${item.value}_reach`,
+                                "type": "integer",
+                                "input": "text",
+                                "operator": "greater",
+                                "value": item.from
+                            },
+                        ]
+                    } else {
+                        selectedConnections = [
+                            ...selectedConnections,
+                            {
+                                "id": `${item.value}_reach`,
+                                "field": `${item.value}_reach`,
+                                "type": "integer",
+                                "input": "text",
+                                "operator": "greater",
+                                "value": "0"
+                            },
+                        ]
+                    }
+                });
+
                 rules = [
                     ...rules,
                     {
                         "condition": "AND",
                         "rules" : [
-                            {
-                                "id": `${connections}_reach`,
-                                "field": `${connections}_reach`,
-                                "type": "integer",
-                                "input": "text",
-                                "operator": "greater",
-                                "value": "0" 
-                            },
+                            ...selectedConnections
                         ],
                     },
                 ]

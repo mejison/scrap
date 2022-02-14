@@ -17,15 +17,17 @@
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
-            <div class="col-12">
-                <unity-search-results :items="items" />
-                <pagination 
-                    :current="filter.page"
-                    :total="filter.total"
-                    :per-page="filter.per_page"
-                    @page="onClickPage"
-                />
-            </div>
+                <div class="col-12">
+                    <unity-search-results 
+                        :items="items"
+                    />
+                    <pagination 
+                        :current="filter.page"
+                        :total="filter.total"
+                        :per-page="filter.per_page"
+                        @page="onClickPage"
+                    />
+                </div>
         </div>
     </div>
 </template>
@@ -328,6 +330,7 @@ export default {
     mounted() {
         // this.readQueryParams();
         this.fetchData();
+        this.stopLoader();
         this.initLocationOptions();
     },
 
@@ -348,7 +351,7 @@ export default {
             this.setFilter({
                 location: null,
                 connections: null,
-                communities: null,
+                communities: [],
                 page: 1,
                 per_page: 10,
                 total: 0,

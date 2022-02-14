@@ -6,11 +6,11 @@ export default {
         item: {},
         filter: {
             location: null,
-            connections: null,
+            connections: [],
             communities: null,
             age: null,
             page: 1,
-            per_page: 10,
+            per_page: 20,
             total: 0,
             search: '',
         },
