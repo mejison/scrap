@@ -122,10 +122,6 @@ export default {
             ],
             communitiesOptions: [
                 {
-                    label: 'Any',
-                    value: null,
-                },
-                {
                     label: 'Beauty',
                     value: 'beauty',
                 },

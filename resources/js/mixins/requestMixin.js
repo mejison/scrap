@@ -177,7 +177,7 @@ export default {
         ...mapState("unity", ["filter"]),
 
         buildQueryBuilder() {
-            const community = this.filter.communities && this.filter.communities.value ? this.filter.communities.value : '';
+            const community = this.filter.communities && this.filter.communities.length ? this.filter.communities : [];
             const connections = this.filter.connections && this.filter.connections.length  ? this.filter.connections : [];
             const age = this.filter.age && this.filter.age.value ? this.filter.age.value : '';
             const location = this.filter.location && this.filter.location.value ? this.filter.location.value : '';
@@ -274,30 +274,33 @@ export default {
                     }
                 });
 
-                rules = [
-                    ...rules,
-                    {
-                        "condition": "AND",
-                        "rules" : [
-                            ...selectedConnections
-                        ],
-                    },
-                ]
+                if (selectedConnections && selectedConnections.length) {
+                    rules = [
+                        ...rules,
+                        {
+                            "condition": "AND",
+                            "rules" : [
+                                ...selectedConnections
+                            ],
+                        },
+                    ]
+                }
             }
 
             if (community) {
-                rules = [
-                    ...rules,
-                    {
-                        "condition" : "OR",
-                        "rules" : [
+                let selectedCommunity = [];
+
+                community.forEach(item => {
+                    selectedCommunity = [
+                        ...selectedCommunity,
+                        ...[
                             {
                                 "id" : "verticals",
                                 "field" : "verticals",
                                 "type" : "string",
                                 "input" : "select",
                                 "operator" : "equal",
-                                "value" : community,
+                                "value" : item,
                                 "group" : "Creator"
                             },
                             {
@@ -306,7 +309,7 @@ export default {
                                 "type" : "string",
                                 "input" : "select",
                                 "operator" : "equal",
-                                "value" : community
+                                "value" : item
                             },
                             {
                                 "id" : "list_tags",
@@ -314,8 +317,19 @@ export default {
                                 "type" : "string",
                                 "input" : "select",
                                 "operator" : "equal",
-                                "value" : community
+                                "value" : item
                             },
+                        ]
+                    ]
+                });
+
+                
+                rules = [
+                    ...rules,
+                    {
+                        "condition" : "OR",
+                        "rules" : [
+                            ...selectedCommunity,
                         ]
                     }
                 ]

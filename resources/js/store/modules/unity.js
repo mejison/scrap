@@ -7,7 +7,7 @@ export default {
         filter: {
             location: null,
             connections: [],
-            communities: null,
+            communities: [],
             age: null,
             page: 1,
             per_page: 20,
