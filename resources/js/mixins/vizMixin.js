@@ -44,7 +44,11 @@ export default {
     },
 
     methods: {
-        ...mapActions("viz", ['setItems', 'setFilter', 'setItem']),
+        ...mapActions({
+            setItemsViz: 'viz/setItems',
+            setFilterViz: 'viz/setFilter',
+            setItemViz: 'viz/setItem',
+        }),
         fetchDataViz() {
             this.startLoader();
             let query = this.searchVizQueryViz()
@@ -59,9 +63,9 @@ export default {
             })
                 .then(r => r.json())
                 .then(async ({ data, meta}) => {
-                    this.setItems(data)
-                    this.setFilter({
-                        ...this.filter,
+                    this.setItemsViz(data)
+                    this.setFilterViz({
+                        ...this.filterVizSearch,
                         total: meta.total,
                     })
                     this.stopLoader();
@@ -73,8 +77,8 @@ export default {
         },
 
         onClickPage(page) {
-            this.setFilter({
-                ...this.filter,
+            this.setFilterViz({
+                ...this.filterVizSearch,
                 page,
             });
             this.fetchDataViz();
@@ -95,18 +99,18 @@ export default {
         },
 
         searchVizQueryViz() {
-            let startDate = this.filter.date.startDate ? moment(this.filter.date.startDate).format('YYYY-MM-DD') :  '';
-            let endDate = this.filter.date.endDate ? moment(this.filter.date.endDate).format('YYYY-MM-DD')  : '';
-            const status = this.filter.status ? this.filter.status : '';
-            const search = this.filter.search ? this.filter.search : '';
-            const connection = this.filter.connection ? this.filter.connection : '';
+            let startDate = this.filterVizSearch.date.startDate ? moment(this.filterVizSearch.date.startDate).format('YYYY-MM-DD') :  '';
+            let endDate = this.filterVizSearch.date.endDate ? moment(this.filterVizSearch.date.endDate).format('YYYY-MM-DD')  : '';
+            const status = this.filterVizSearch.status ? this.filterVizSearch.status : '';
+            const search = this.filterVizSearch.search ? this.filterVizSearch.search : '';
+            const connection = this.filterVizSearch.connection ? this.filterVizSearch.connection : '';
             
-            let per_page = this.filter.per_page;
-            let page = this.filter.page;
+            let per_page = this.filterVizSearch.per_page;
+            let page = this.filterVizSearch.page;
             let sort = '-score';
 
             if ( ! startDate) {
-                if ( ! connection && ! status) {
+                if ( ! connection && ! status && ! search) {
                     startDate = moment().subtract(7,'d').format('YYYY-MM-DD');
                 }
             }
@@ -119,30 +123,45 @@ export default {
                 query += `filter[reach][0][min]=0&`
             }
 
-            if (startDate) {
+            if (startDate && ! endDate) {
                 query += `filter[startDate]=${startDate}&`
                 network = `filter[query]=_exists_:brandgraph_fields.brand_ids AND !(brandgraph_fields.category_names:"Social Network")&`
             }
+
+            if (startDate && endDate) {
+                query += `filter[startDate]=${startDate}&`
+           }
 
             if (search) {
                 query += `filter[query]=${search}&`
             }
 
-            if (endDate) {
+            if (startDate && endDate) {
                 query += `filter[endDate]=${endDate}&`
             }
 
             if (status) {
-                query += `filter[is_discovered]=${['is_discovered'].includes(status) ? 'true' : 'false' }&`
+                query += `filter[is_discovered]=${['on_platform'].includes(status) ? 'false' : 'true' }&`
             }
 
             return `${query}filter[content_source_type][]=youtube_post_discovered&filter[content_source_type][]=tiktok_post_discovered&filter[content_source_type][]=instagram_post_discovered&filter[content_source_type][]=instagram_post_on_platform&filter[content_source_type][]=youtube_post_on_platform&filter[content_source_type][]=pinterest_post_on_platform&${network}filter[collapse]=true&page[size]=${per_page}&page[number]=${page}&sort=${sort}`;
+        },
+
+        startLoader() {
+            const el = document.getElementById('preloader')
+            el.style.display = 'block'
+            el.style['z-index'] = 999;
+        },
+        stopLoader() {
+            const el = document.getElementById('preloader')
+            el.style.display = 'none'
+            el.style['z-index'] = 0;
         }
     },
 
     computed: {
-        ...mapState("viz", ['filter']),
-        
-
+        ...mapState("viz", {
+            filterVizSearch: state => state.filter,
+        }),
     }
 }

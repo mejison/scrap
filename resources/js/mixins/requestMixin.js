@@ -16,7 +16,6 @@ export default {
             this.fetchData();
         },
         onClickPage(page) {
-            console.log(page)
             this.setFilter({
                 ...this.filter,
                 page: page
@@ -67,7 +66,6 @@ export default {
         fetchDataViz() {
             this.startLoader();
             let query = this.searchVizQueryViz()
-            console.log(query)
             fetch(`/api/v1/search/viz`, {
                 method: 'post',
                 headers: {
@@ -79,7 +77,6 @@ export default {
             })
                 .then(r => r.json())
                 .then(async (data) => {
-                    console.log(data)
                     this.stopLoader();
                 });
         },

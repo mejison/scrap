@@ -42,7 +42,13 @@
                                     scrolling="yes"
                                     title="embedded-platform"
                                 ></iframe>
-                                <iframe v-if="item.attributes.platform == 'pinterest'"  class="embedded-platform-pinterest" :src="`https://stmlnportal.com/embed/pinterest?post_id=${item.attributes.platform_content_id}`" scrolling="yes" title="embedded-platform"></iframe>
+                                <iframe 
+                                    v-if="item.attributes.platform == 'pinterest'" 
+                                    class="embedded-platform-pinterest"
+                                    :src="`https://stmlnportal.com/embed/pinterest?post_id=${item.attributes.platform_content_id}`" 
+                                    scrolling="yes" 
+                                    title="embedded-platform"
+                                ></iframe>
                             </div>
                             <div class="description">
                                 <div class="platform">
@@ -132,6 +138,9 @@ export default {
     methods: {
         onClickClose() {
             this.$emit('close')
+        },
+        async fetchPinterestPreview(url) {
+            return await fetch(url)
         }
     },
 }

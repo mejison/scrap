@@ -14,9 +14,9 @@
                     @open="onOpen"
                     />
                  <pagination 
-                    :current="filter.page"
-                    :total="filter.total"
-                    :per-page="filter.per_page"
+                    :current="filterVizSearch.page"
+                    :total="filterVizSearch.total"
+                    :per-page="filterVizSearch.per_page"
                     @page="onClickPage"
                 />
             </div>
@@ -30,9 +30,9 @@ import { mapState } from 'vuex';
 import FilterVizSearch from '../components/filters/viz-search.vue'
 import Pagination from '../components/pagination.vue';
 import VizSearchResults from '../components/viz-search-results.vue';
-import requestMixin from '../mixins/requestMixin';
 import vizMixin from '../mixins/vizMixin';
 import detailsViewPost from '../popups/detailsViewPost.vue'
+import { mapActions } from 'vuex'
 
 export default {
     name: 'viz-search-filter',
@@ -44,14 +44,7 @@ export default {
         detailsViewPost
     },
 
-    data() {
-        return {
-            
-        }
-    },
-
     mixins: [
-        requestMixin,
         vizMixin,
     ],
 
@@ -60,13 +53,14 @@ export default {
     },
 
     methods: {
+        ...mapActions("viz", ['setItem']),
         onOpen(item) {
             this.setItem(item)
         },
     },
 
     computed: {
-        ...mapState("viz", ['items', 'filter', 'item']),
+        ...mapState("viz", ['items', 'item']),
     },
 
 }

@@ -15,9 +15,10 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import requestMixin from '../../mixins/requestMixin';
+import vizMixin from '../../mixins/vizMixin';
 
 export default {
-    mixins: [requestMixin],
+    mixins: [requestMixin, vizMixin],
 
     data() {
         return {
@@ -33,11 +34,64 @@ export default {
 
     computed: {
         ...mapState("unity", ["filter"]),
+        ...mapState("viz", {
+            filterVizSearch: state => state.filter,
+        }),
     },
 
     methods: {
         ...mapActions("unity", ['setFilter']),
+        ...mapActions({
+            setFilterVizSearch: "viz/setFilter"
+        }),
         onClear() {
+            this[`${this.$route.name}Clear`]();
+        },
+        onInput() {
+            this[`${this.$route.name}Input`]();
+        },
+        onSearch() {
+            this[`${this.$route.name}Search`]();
+        },
+        VizSearchSearch() {
+            this.setFilterVizSearch({
+                ...this.filterVizSearch,
+            });
+            this.fetchDataViz();
+        },
+        VizSearchInput() {
+            this.setFilterVizSearch({
+                ...this.filterVizSearch,
+                total: 0,
+                page: 1,
+                search: this.query
+            });
+        },
+        VizSearchClear() {
+            this.setFilterVizSearch({
+                ...this.filterVizSearch,
+                total: 0,
+                page: 1,
+                search: ''
+            })
+            this.query = ''
+            this.fetchDataViz();
+        },
+        UnitySearchSearch() {
+            this.setFilter({
+                ...this.filter,
+            });
+            this.fetchData();
+        },
+        UnitySearchInput() {
+            this.setFilter({
+                ...this.filter,
+                total: 0,
+                page: 1,
+                search: this.query
+            });
+        },
+        UnitySearchClear() {
             this.setFilter({
                 ...this.filter,
                 total: 0,
@@ -45,28 +99,6 @@ export default {
                 search: ''
             })
             this.query = ''
-            this.fetchData();
-        },
-        onInput() {
-            if(this.$route.name == 'VizSearch') {
-                return
-            }
-            
-            this.setFilter({
-                ...this.filter,
-                total: 0,
-                page: 1,
-                search: this.query
-            })
-        },
-        onSearch() {
-            if(this.$route.name == 'VizSearch') {
-                return
-            }
-
-            this.setFilter({
-                ...this.filter,
-            })
             this.fetchData();
         },
     },

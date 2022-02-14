@@ -28,7 +28,6 @@ import vizMixin from '../../mixins/vizMixin'
 import moment from 'moment';
 import DateRangePicker from 'vue2-daterange-picker'
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
-import { mapState } from 'vuex';
 
 export default {
     components: {
@@ -42,10 +41,23 @@ export default {
         vizMixin,
     ],
 
+
+    data() {
+        return {
+            connection: null,
+            status: null,
+            dateRange: {
+                startDate:  moment().subtract(7, 'days').format('YYYY-MM-DD'),
+                endDate: moment().format('YYYY-MM-DD'),
+            },
+            moment: moment,
+        }
+    },
+
     methods: {
         updateValues(data) {
-            this.setFilter({
-                ...this.filter,
+            this.setFilterViz({
+                ...this.filterVizSearch,
                 date: {
                     startDate: data.startDate,
                     endDate: data.endDate,
@@ -62,7 +74,7 @@ export default {
                 endDate: moment().format('YYYY-MM-DD'),
             };
 
-            this.setFilter({
+            this.setFilterViz({
                 status: '',
                 page: 1,
                 per_page: 20,
@@ -78,32 +90,21 @@ export default {
         },
 
         onInputStatus({ value }) {
-            this.setFilter({
-                ...this.filter,
+            this.setFilterViz({
+                ...this.filterVizSearch,
                 status: value
             })
             this.$emit('change')
         },
 
         onInputConnection({ value }) {
-            this.setFilter({
-                ...this.filter,
+            this.setFilterViz({
+                ...this.filterVizSearch,
                 connection: value
             })
             this.$emit('change')
         }
     },
 
-    data() {
-        return {
-            connection: null,
-            status: null,
-            dateRange: {
-                startDate:  moment().subtract(7, 'days').format('YYYY-MM-DD'),
-                endDate: moment().format('YYYY-MM-DD'),
-            },
-            moment: moment,
-        }
-    },
 }
 </script>
