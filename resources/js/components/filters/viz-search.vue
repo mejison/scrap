@@ -47,7 +47,7 @@ export default {
             connection: null,
             status: null,
             dateRange: {
-                startDate:  moment().subtract(7, 'days').format('YYYY-MM-DD'),
+                startDate:  moment().format('YYYY-MM-DD'),
                 endDate: moment().format('YYYY-MM-DD'),
             },
             moment: moment,
