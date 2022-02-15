@@ -25,4 +25,8 @@ class VizController extends Controller
         
         return response()->json($data);
     }
+
+    public function preview(Request $request) {
+        return file_get_contents($request->url);
+    }
 }

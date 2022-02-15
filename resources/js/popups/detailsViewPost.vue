@@ -26,29 +26,35 @@
                                     class="embedded-platform-instagram" 
                                     :src="`https://www.instagram.com/p/${item.attributes.platform_content_id}/embed`" 
                                     scrolling="yes" 
-                                    title="embedded-platform"
-                                ></iframe>
-                                <iframe 
-                                    v-if="item.attributes.platform == 'tiktok'" 
-                                    class="embedded-platform-tiktok"
-                                    :src="`https://stmlnportal.com/embed/tiktok?post_id=${item.attributes.platform_content_id}&amp;connection_id=${item.attributes.connection_id}`"
-                                    scrolling="yes"
+                                    frameBorder="0"
                                     title="embedded-platform"
                                 ></iframe>
                                 <iframe
-                                     v-if="item.attributes.platform == 'youtube'" 
+                                    v-if="item.attributes.platform == 'tiktok'" 
+                                    class=" embedded-platform-tiktok"
+                                    scrolling="yes"
+                                    frameBorder="0"
+                                    title="embedded-platform"
+                                    :src="`/preview?url=https://stmlnportal.com/embed/tiktok?post_id=${this.item.attributes.platform_content_id}&amp;connection_id=${this.item.attributes.connection_id}`"
+                                >
+                                </iframe>
+                                <iframe
+                                    v-if="item.attributes.platform == 'youtube'" 
                                     class="embedded-platform-youtube"
                                     :src="`https://www.youtube.com/embed/${item.attributes.platform_content_id}`" 
                                     scrolling="yes"
+                                    frameBorder="0"
                                     title="embedded-platform"
                                 ></iframe>
                                 <iframe 
                                     v-if="item.attributes.platform == 'pinterest'" 
-                                    class="embedded-platform-pinterest"
-                                    :src="`https://stmlnportal.com/embed/pinterest?post_id=${item.attributes.platform_content_id}`" 
+                                    class=" embedded-platform-pinterest"
                                     scrolling="yes" 
+                                    frameBorder="0"
                                     title="embedded-platform"
-                                ></iframe>
+                                    :src="`/preview?url=https://stmlnportal.com/embed/pinterest?post_id=${this.item.attributes.platform_content_id}`" 
+                                    >
+                                </iframe>
                             </div>
                             <div class="description">
                                 <div class="platform">
@@ -137,11 +143,14 @@ export default {
 
     methods: {
         onClickClose() {
-            this.$emit('close')
+            this.$emit('close');
         },
         async fetchPinterestPreview(url) {
-            return await fetch(url)
-        }
+            return await fetch(url);
+        },
+        async getIframe(url) {
+            return await fetch(`/api/v1/preview?url=${url}`).then(res => res.text())
+        },
     },
 }
 </script>
@@ -237,7 +246,8 @@ export default {
     }
     
     .embedded-platform-instagram,
-    .embedded-platform-youtube
+    .embedded-platform-youtube,
+    .embedded-platform-pinterest,
     .embedded-platform-tiktok {
         border: 1px solid #dbdbdb;
         border-radius: 2px;

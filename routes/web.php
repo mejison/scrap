@@ -83,4 +83,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/widget-basic', 'App\Http\Controllers\EclanadminController@widget_basic');
 // Route::get('/dashboard', 'App\Http\Controllers\EclanadminController@dashboard_1');
 
+
+Route::get('/preview', 'App\Http\Controllers\PageController@getPreview');
 Route::get('/{any}', 'App\Http\Controllers\PageController@get')->where('any', '.*');

@@ -36,4 +36,6 @@ Route::prefix('v1')->group(function () {
     Route::get('/search-location', [UnityController::class, 'searchLocation']);
 
     Route::post('/search/viz', [VizController::class, 'searchViz']);
+
+    Route::get('/preview/', [VizController::class, 'preview']);
 });

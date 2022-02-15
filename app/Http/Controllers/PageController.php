@@ -16,4 +16,8 @@ class PageController extends Controller
 
         return view('unity.index', compact('page_title', 'page_description','action','logo','logoText'));
     }
+
+    public function getPreview(Request $request) {
+        return file_get_contents($request->url);
+    }
 }
