@@ -48,6 +48,9 @@ export default {
 
             this.printBar(labels, data);
         },
+        formatPercentage(value) {
+        return Number(value).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2});
+        },
         printBar(labels, data) {
             const chartDom = this.$refs.chartDom;
             const myChart = echarts.init(chartDom);
@@ -55,7 +58,7 @@ export default {
            const  option = {
                 xAxis: {
                     type: 'category',
-                    data: labels
+                    data: labels,
                 },
                 yAxis: {
                     type: 'value'

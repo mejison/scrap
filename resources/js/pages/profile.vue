@@ -53,7 +53,12 @@
                                         <span>Sponsored</span>
                                     </div>
                                     <div class="col">
-                                        <h3 class="m-b-0">-</h3>
+                                        <h3 class="m-b-0" v-if="item.overview && item.overview.discovered_demographics">
+                                            {{ 100 - item.overview.discovered_demographics.average_fake_followers }} %
+                                        </h3>
+                                        <h3 v-else>
+                                            -
+                                        </h3>
                                         <span>AUDIENCE AUTHENTICITY</span>
                                     </div>
                                 </div>
