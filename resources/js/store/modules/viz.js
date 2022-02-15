@@ -5,7 +5,11 @@ export default {
         items: [],
         item: null,
         filter: {
-            connection: '',
+            connection: {
+                from: 0,
+                to: 5000000,
+                value: "",
+            },
             status: '',
             page: 1,
             per_page: 20,

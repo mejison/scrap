@@ -1,15 +1,14 @@
 <template>
-    <div class="dropdown custom-dropdown mb-2">
+    <div class="dropdown custom-dropdown connection mb-2">
         
-        <div class="btn bg-white d-flex align-items-center" data-toggle="dropdown">
+        <div class="btn bg-white d-flex align-items-center" @click.prevent="onToggle">
             <div class="text-left mr-3">
                 <span class="text-black">{{ value && value.length ? (value.length >= 2 ? "Multiple Platforms" : value.map(item => item.value).join(', ')) : label }}</span>
             </div>
             <i class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
-        <div class="dropdown-menu dropdown-menu-right">
-            <span
-                class="dropdown-item" 
+        <div class="menu-right" :class="{'show': isShow}">
+            <span 
                 v-for="(option, index) in options" 
                 :key="index"
                 @click.stop
@@ -86,16 +85,25 @@ export default {
         return {
             payload: [],
             ranges: {},
-
             humanformat: humanformat,
+            isShow: false,
         }
     },
 
     mounted() {
         this.initRanges()
+        document.body.addEventListener('click', (e) => {
+            const target = e.target;
+            if ( ! target.closest(".connection")) {
+                this.isShow = false;
+            }
+        }, false);
     },
 
     methods: {
+        onToggle() {
+            this.isShow = ! this.isShow
+        },
         initRanges() {
             this.options.forEach(item => {
                 this.ranges[item.value] = [0, 5000000]
@@ -138,5 +146,33 @@ export default {
         border: 1px solid #999;
         padding-left: 5px;
         max-width: 100px;
+    }
+
+    .connection {
+        position: relative;
+        display: inline-block;
+
+        .menu-right {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            z-index: -1;
+            top: 50px;
+            left: 0;
+            width: 400px; 
+            opacity: 0; 
+            visibility: hidden; 
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 10px 40px 0 rgb(32 28 69 / 10%);
+            margin-top: 0;
+            border-radius: 0.75rem;
+
+            &.show {
+                opacity: 1;
+                z-index: 99;
+                visibility: visible;
+            }
+        }
     }
 </style>

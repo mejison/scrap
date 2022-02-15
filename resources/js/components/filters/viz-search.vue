@@ -1,8 +1,10 @@
 <template>
     <div class="flex justify-content">
-        <dropdown label="Connection" :options="connectionsOptions" v-model="connection" @input="onInputConnection"  />
+        <!-- <dropdown label="Connection" :options="connectionsOptions" v-model="connection" @input="onInputConnection"  /> -->
+        <connectiondropdown label="Connections" v-model="connection" :options="connectionsOptions" @input="onInputConnection" />
         <dropdown label="Status" :options="statusOptions"  v-model="status" @input="onInputStatus" />
         
+
         <div class="btn bg-white">
             <date-range-picker
                 ref="picker"
@@ -24,6 +26,7 @@
 
 <script>
 import Dropdown from '../dropdown.vue';
+import connectiondropdown from '../connection-dropdown.vue'
 import vizMixin from '../../mixins/vizMixin'
 import moment from 'moment';
 import DateRangePicker from 'vue2-daterange-picker'
@@ -33,6 +36,7 @@ export default {
     components: {
         Dropdown,
         DateRangePicker,
+        connectiondropdown,
     },
 
 
@@ -67,7 +71,11 @@ export default {
         },
 
         onClickClear() {
-            this.connection = null;
+            this.connection = {
+                from: 0,
+                to: 5000000,
+                value: "",
+            };
             this.status =  null;
             this.dateRange = {
                 startDate: moment().subtract(7,'d').format('YYYY-MM-DD'),
@@ -97,10 +105,10 @@ export default {
             this.$emit('change')
         },
 
-        onInputConnection({ value }) {
+        onInputConnection(data) {
             this.setFilterViz({
                 ...this.filterVizSearch,
-                connection: value
+                connection: data
             })
             this.$emit('change')
         }

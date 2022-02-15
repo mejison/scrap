@@ -6,10 +6,6 @@ export default {
         return {
             connectionsOptions: [
                 {
-                    label: 'Any',
-                    value: null,
-                },
-                {
                     label: 'Instagram',
                     value: 'instagram'
                 },
@@ -103,14 +99,14 @@ export default {
             let endDate = this.filterVizSearch.date.endDate ? moment(this.filterVizSearch.date.endDate).format('YYYY-MM-DD')  : '';
             const status = this.filterVizSearch.status ? this.filterVizSearch.status : '';
             const search = this.filterVizSearch.search ? this.filterVizSearch.search : '';
-            const connection = this.filterVizSearch.connection ? this.filterVizSearch.connection : '';
+            const connection = this.filterVizSearch.connection && this.filterVizSearch.connection.length ? this.filterVizSearch.connection : [];
             
             let per_page = this.filterVizSearch.per_page;
             let page = this.filterVizSearch.page;
             let sort = '-score';
 
             if ( ! startDate) {
-                if ( ! connection && ! status && ! search) {
+                if ( ! connection.length && ! status && ! search) {
                     startDate = moment().subtract(7,'d').format('YYYY-MM-DD');
                 }
             }
@@ -118,9 +114,15 @@ export default {
             let query = '';
             let network = '';
 
-            if (connection) {
-                query += `filter[reach][0][content_type][]=${connection}_post&`
-                query += `filter[reach][0][min]=0&`
+            if (connection.length) {
+                connection.forEach((connect, index) => {
+                    query += `filter[reach][${index}][content_type][]=${connect.value}_post&`
+                    query += `filter[reach][${index}][content_type][]=${connect.value}_discovered_post&`
+                    query += `filter[reach][${index}][min]=${connect.from}&` 
+                    if (connect.to != 5000000) {
+                        query += `filter[reach][${index}][max]=${connect.to}&` 
+                    }
+                });
             }
 
             if (startDate && ! endDate) {
