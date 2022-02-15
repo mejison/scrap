@@ -22,9 +22,9 @@
                         </a>
                     </div>
                     <div class="tab">
-                        <keep-alive>
+                        <!-- <keep-alive> -->
                             <component :is="active" :value="payload" @input="onChange"></component>
-                        </keep-alive>
+                        <!-- </keep-alive> -->
                     </div>
                 </div>
         </div>
@@ -74,6 +74,29 @@ export default {
                 ...this.payload,
                 [event]: data
             }
+
+            if (['state-country'].includes(event)) {
+                 this.payload = {
+                    ...this.payload,
+                    'location-radius': 5,
+                    'radius-search': [],
+                }
+            }
+
+            if (['location-radius'].includes(event)) {
+                 this.payload = {
+                    ...this.payload,
+                    'state-country': [],
+                }
+            }
+
+            if (['radius-search'].includes(event)) {
+                 this.payload = {
+                    ...this.payload,
+                    'state-country': [],
+                }
+            }
+
             this.$emit('input', this.payload)
         },
     },
@@ -133,10 +156,6 @@ export default {
             .active {
                 font-weight: 600;
             }
-        }
-
-        .tab {
-
         }
     }
 </style>

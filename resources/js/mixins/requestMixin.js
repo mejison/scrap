@@ -182,7 +182,7 @@ export default {
         buildQueryBuilder() {
             const community = this.filter.communities && this.filter.communities.length ? this.filter.communities : [];
             const connections = this.filter.connections && this.filter.connections.length  ? this.filter.connections : [];
-            const age = this.filter.age && this.filter.age.value ? this.filter.age.value : '';
+            const age = this.filter.age && this.filter.age.length ? this.filter.age : '';
 
             const locationRadius = this.filter.location && this.filter.location['location-radius'] ? this.filter.location['location-radius'] : false;
             const radiusSearch = this.filter.location && this.filter.location['radius-search'] ? this.filter.location['radius-search'] : false;
@@ -307,12 +307,20 @@ export default {
                         "condition": "AND",
                         "rules": [
                             {
-                                "id": "user_age_from_birthday",
-                                "field": "user_birthday",
-                                "type": "integer",
-                                "input": "select",
-                                "operator": "greater_or_equal",
-                                "value": age
+                                field: "user_birthday",
+                                id: "user_age_from_birthday",
+                                input: "select",
+                                operator: "less_or_equal",
+                                type: "integer",
+                                value: age[0],
+                            },
+                            {
+                                field: "user_birthday",
+                                id: "user_age_from_birthday",
+                                input: "select",
+                                operator: "greater_or_equal",
+                                type: "integer",
+                                value: age[1],
                             }
                         ]
                     }

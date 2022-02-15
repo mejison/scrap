@@ -12,7 +12,7 @@ export default {
             },
             connections: [],
             communities: [],
-            age: null,
+            age: [0, 120],
             page: 1,
             per_page: 20,
             total: 0,

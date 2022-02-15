@@ -56,16 +56,9 @@
         <div class="nav-header">
             <a href="{!! url('/index'); !!}" class="brand-logo">
 			@if(!empty($logo))
-				<img class="logo-abbr" src="{{ asset($logo) }}" alt="">
+				<img class="logo-abbr"  style="max-width: 150px;" src="{{ asset($logo) }}" alt="" />
 			@else
-                <img class="logo-abbr" src="{{ asset('images/logo.png') }}" alt="">
-			@endif
-			@if(!empty($logoText))
-                <img class="logo-compact" src="{{ asset($logoText) }}" alt="">
-                <img class="brand-title" src="{{ asset($logoText) }}" alt="">
-			@else
-                <img class="logo-compact" src="{{ asset('images/logo-text.png') }}" alt="">
-                <img class="brand-title" src="{{ asset('images/logo-text.png') }}" alt="">
+                <img class="logo-abbr" style="max-width: 150px;" src="{{ asset('images/logo.png') }}" alt="" />
 			@endif	
             </a>
 
@@ -140,5 +133,12 @@
         Scripts
     ***********************************-->
 	@include('elements.footer-scripts')
+
+    <style>
+        .nav-header .logo-abbr {
+            max-width: 150px;
+        }
+    </style>
+    @stack('css')
 </body>
 </html>

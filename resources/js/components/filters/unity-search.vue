@@ -12,8 +12,7 @@
                 
                 <communitydropdown label="Communities" v-model="payload.communities" :options="communitiesOptions" @input="onChange" />
                 <locationdropdown label="Location(Creator)" v-model="payload.location" :options="locationOptions" @input="onChange" />
-                <!-- <dropdown label="Location(Creator)" v-model="payload.location" :options="locationOptions" @input="onChange" /> -->
-                <dropdown label="Age(Creator)" v-model="payload.age" :options="ageOptions" @input="onChange" />
+                <agedropdown label="Age(Creator)" v-model="payload.age" :options="ageOptions" @input="onChange" />
                 <connectiondropdown label="Connections" v-model="payload.connections" :options="connectionsOptions" @input="onChange" />
 
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
@@ -29,12 +28,14 @@ import dropdown from '../dropdown.vue';
 import connectiondropdown from '../connection-dropdown.vue'
 import communitydropdown from '../community-dropdown.vue'
 import locationdropdown from '../location-dropdown.vue'
+import agedropdown from '../age-dropdown.vue'
 
 export default {
     name: "filter-unity-search",
 
     components: {
         dropdown,
+        agedropdown,
         connectiondropdown,
         communitydropdown,
         locationdropdown,

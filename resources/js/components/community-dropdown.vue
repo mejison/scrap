@@ -133,6 +133,5 @@ export default {
         border-radius: 5px;
         border: 1px solid #999;
         padding: 5px;
-
     }
 </style>
