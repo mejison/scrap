@@ -5,7 +5,11 @@ export default {
         items: [],
         item: {},
         filter: {
-            location: null,
+            location: {
+                'location-radius': 5,
+                'radius-search': [],
+                'state-country': [],
+            },
             connections: [],
             communities: [],
             age: null,

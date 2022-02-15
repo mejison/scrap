@@ -110,4 +110,13 @@ class UnityController extends Controller
 
         return response()->json($data);
     }
+
+    public function searchLocation(Request $request) {
+        $characters = request()->input('characters') ? request()->input('characters') : '';
+        $field = request()->input('field') ? request()->input('field') : '';
+        $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
+        $data = $stmln_portal->searchLocation("?characters=" . $characters . "&field=" . $field);
+
+        return response()->json($data);
+    }
 }

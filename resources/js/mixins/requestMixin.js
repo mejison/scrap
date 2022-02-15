@@ -126,6 +126,9 @@ export default {
         async getWhiteLabelOrganizations() {
             return await fetch(`/api/v1/white-label-organizations`).then(r => r.json())
         },
+        async searchLocation(characters, field) {
+            return await fetch(`/api/v1/search-location?characters=${characters}&field=${field}`).then(r => r.json())
+        },
         searchQueryBuilder(connection_id, organization_id) {
             return {
                 "data":{
@@ -180,39 +183,123 @@ export default {
             const community = this.filter.communities && this.filter.communities.length ? this.filter.communities : [];
             const connections = this.filter.connections && this.filter.connections.length  ? this.filter.connections : [];
             const age = this.filter.age && this.filter.age.value ? this.filter.age.value : '';
-            const location = this.filter.location && this.filter.location.value ? this.filter.location.value : '';
+
+            const locationRadius = this.filter.location && this.filter.location['location-radius'] ? this.filter.location['location-radius'] : false;
+            const radiusSearch = this.filter.location && this.filter.location['radius-search'] ? this.filter.location['radius-search'] : false;
+            const stateCountry = this.filter.location && this.filter.location['state-country'] ? this.filter.location['state-country'] : false;
+
+            const radiusHumanFormat = {
+                5: "five",
+                10: "ten",
+                25: "twenty_five",
+                50: "fifty",
+                100: "hundred",
+            };
 
             let rules = [];
 
-            if (location) {
-                rules = [
-                    ...rules,
-                    {
-                        "condition": "AND",
-                        "rules": [
+            if (radiusSearch) {
+                let locationRules = [];
+
+                radiusSearch.forEach(location => {
+                    location = JSON.parse(location)
+                    locationRules = [
+                        ...locationRules,
+                        ...[
                             {
-                                "id": "country",
-                                "field": "country",
-                                "type": "string",
-                                "input": "text",
-                                "operator": "equal",
-                                "value": location,
-                                "group": "Creator"
+                                field: "location",
+                                group: "Creator",
+                                id: "location",
+                                input: "text",
+                                operator: radiusHumanFormat[locationRadius] + "_miles",
+                                type: "string",
+                                value: location.value,
                             },
-                            {
-                                "id": "discovered_country",
-                                "field": "discovered_country",
-                                "type": "string",
-                                "input": "text",
-                                "operator": "equal",
-                                "value": location,
-                                "group": "Creator"
-                            }
                         ]
-                    }
-                ]
+                    ]
+                });
+
+                if (locationRules && locationRules.length) {
+                    rules = [
+                        ...rules,
+                        {
+                            "condition": "OR",
+                            "rules": [
+                                ...locationRules
+                            ]
+                        }
+                    ]
+                }
             }
 
+            if (stateCountry) {
+                let countryRules = []
+                stateCountry.forEach(location => {
+                    location = JSON.parse(location)
+                    if (location.state) {
+                        countryRules = [
+                            ...countryRules,
+                            ...[
+                                {
+                                    "id": "state",
+                                    "field": "state",
+                                    "type": "string",
+                                    "input": "text",
+                                    "operator": "equal",
+                                    "value": location.state,
+                                    "group": "Creator"
+                                },
+                                {
+                                    "id": "discovered_state",
+                                    "field": "discovered_state",
+                                    "type": "string",
+                                    "input": "text",
+                                    "operator": "equal",
+                                    "value": location.state,
+                                    "group": "Creator"
+                                },
+                            ]
+                        ]
+                    } else {
+                        countryRules = [
+                            ...countryRules,
+                            ...[
+                                {
+                                    "id": "country",
+                                    "field": "country",
+                                    "type": "string",
+                                    "input": "text",
+                                    "operator": "equal",
+                                    "value": location.country,
+                                    "group": "Creator"
+                                },
+                                {
+                                    "id": "discovered_country",
+                                    "field": "discovered_country",
+                                    "type": "string",
+                                    "input": "text",
+                                    "operator": "equal",
+                                    "value": location.country,
+                                    "group": "Creator"
+                                },
+                            ]
+                        ]
+                    }
+                });
+
+                if (countryRules && countryRules.length) {
+                    rules = [
+                        ...rules,
+                        {
+                            "condition": "OR",
+                            "rules": [
+                                ...countryRules
+                            ]
+                        }
+                    ]
+                }
+            }
+            
             if (age) {
                 rules = [
                     ...rules,
@@ -323,16 +410,17 @@ export default {
                     ]
                 });
 
-                
-                rules = [
-                    ...rules,
-                    {
-                        "condition" : "OR",
-                        "rules" : [
-                            ...selectedCommunity,
-                        ]
-                    }
-                ]
+                if (selectedCommunity && selectedCommunity.length) {
+                    rules = [
+                        ...rules,
+                        {
+                            "condition" : "OR",
+                            "rules" : [
+                                ...selectedCommunity,
+                            ]
+                        }
+                    ]
+                }
             }
 
             return {

@@ -41,7 +41,7 @@ export default {
         onSelect(option) {
             this.$emit('input', option);
         },
-    }
+    },
 }
 </script>
 

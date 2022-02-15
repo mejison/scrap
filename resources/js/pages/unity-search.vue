@@ -345,8 +345,12 @@ export default {
         },
         onClearFilter() {
             this.setFilter({
-                location: null,
-                connections: null,
+                location: {
+                     'location-radius': 5,
+                    'radius-search': [],
+                    'state-country': [],
+                },
+                connections: [],
                 communities: [],
                 page: 1,
                 per_page: 10,

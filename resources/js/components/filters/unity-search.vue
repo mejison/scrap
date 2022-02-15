@@ -9,11 +9,11 @@
                         <path d="M19 14.25H8.5C8.5 13.4227 7.82725 12.75 7 12.75H5.5C4.67275 12.75 4 13.4227 4 14.25H1C0.586 14.25 0.25 14.5853 0.25 15C0.25 15.4148 0.586 15.75 1 15.75H4C4 16.5773 4.67275 17.25 5.5 17.25H7C7.82725 17.25 8.5 16.5773 8.5 15.75H19C19.414 15.75 19.75 15.4148 19.75 15C19.75 14.5853 19.414 14.25 19 14.25ZM5.5 15.75V14.25H7L7.00075 14.997C7.00075 14.9985 7 14.9992 7 15C7 15.0008 7.00075 15.0015 7.00075 15.003V15.75H5.5Z" fill="#2E2E2E"/>
                     </svg>
                 </a>
-                <communitydropdown label="Communities" v-model="payload.communities" :options="communitiesOptions" @input="onChange" />
-                <dropdown label="Location(Creator)" v-model="payload.location" :options="locationOptions" @input="onChange" />
-                <!-- <dropdown label="Connections" v-model="payload.connections" :options="connectionsOptions" @input="onChange" /> -->
-                <dropdown label="Age(Creator)" v-model="payload.age" :options="ageOptions" @input="onChange" />
                 
+                <communitydropdown label="Communities" v-model="payload.communities" :options="communitiesOptions" @input="onChange" />
+                <locationdropdown label="Location(Creator)" v-model="payload.location" :options="locationOptions" @input="onChange" />
+                <!-- <dropdown label="Location(Creator)" v-model="payload.location" :options="locationOptions" @input="onChange" /> -->
+                <dropdown label="Age(Creator)" v-model="payload.age" :options="ageOptions" @input="onChange" />
                 <connectiondropdown label="Connections" v-model="payload.connections" :options="connectionsOptions" @input="onChange" />
 
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
@@ -28,6 +28,7 @@
 import dropdown from '../dropdown.vue';
 import connectiondropdown from '../connection-dropdown.vue'
 import communitydropdown from '../community-dropdown.vue'
+import locationdropdown from '../location-dropdown.vue'
 
 export default {
     name: "filter-unity-search",
@@ -36,6 +37,7 @@ export default {
         dropdown,
         connectiondropdown,
         communitydropdown,
+        locationdropdown,
     },
 
     props: {

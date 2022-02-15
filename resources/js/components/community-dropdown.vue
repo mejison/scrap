@@ -118,6 +118,7 @@ export default {
     .dropdown-menu {
         max-height: 300px;
         overflow: auto;
+        padding: 10px 15px;
     }
 
     .range-from,
@@ -129,7 +130,6 @@ export default {
     }
 
     .search {
-        margin: 10px 15px;
         border-radius: 5px;
         border: 1px solid #999;
         padding: 5px;
