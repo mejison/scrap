@@ -1,21 +1,20 @@
 <template>
-    <div class="dropdown custom-dropdown mb-2">
-        
-        <div class="btn bg-white d-flex align-items-center" data-toggle="dropdown">
+    <div class="dropdown custom-dropdown mb-2 community">
+        <div class="btn bg-white d-flex align-items-center" @click="onToggle">
             <div class="text-left mr-3">
                 <span class="text-black">{{ value && value.length ? (value.length >= 2 ? "Multiple Communities" : value.map(item => item).join(', ')) : label }}</span>
             </div>
             <i class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
-        <div class="dropdown-menu dropdown-menu-right">
+        <div class="menu-right p-3" :class="{'show': isShow}">
             <input
                 type="text"
-                v-model="query"
                 placeholder="Add Community"
                 class="search"
+                v-model="query"
             />
-            <ul @click.stop>
-                <li class="dropdown-item" 
+            <ul>
+                <li 
                     @click="onAdd(item)" 
                     v-for="(item, index) in optionsFinded" 
                     :key="`search-${index}`">
@@ -23,10 +22,9 @@
                 </li>
             </ul>
             <label
-                class="dropdown-item" 
+               
                 v-for="(option, index) in fined" 
                 :key="`fined-${index}`"
-                @click.stop
                 >
                 <input 
                     @change.stop.prevent="onSelect(option)" 
@@ -41,10 +39,9 @@
                 Top Communities
             </div>
             <label
-                class="dropdown-item" 
+                
                 v-for="(option, index) in added" 
                 :key="`top-${index}`"
-                @click.stop
                 >
                 <input 
                     @change.stop.prevent="onSelect(option)" 
@@ -85,12 +82,29 @@ export default {
             query: '',
             fined: [],
             added: this.options.slice(0, 4),
+            isShow: false,
         }
     },
 
+    mounted() {
+        document.body.addEventListener('click', (e) => {
+            const target = e.target;
+            if ( ! target.closest(".community")) {
+                this.isShow = false;
+            }
+        }, false);
+    },
+
+
     methods: {
+        onToggle() {
+            this.isShow = ! this.isShow
+        },
         onSelect() {
             this.$emit('input', this.payload);
+        },
+        onFocus() {
+            // this.query = ' '
         },
         onAdd(item) {
             this.fined = [
@@ -115,12 +129,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .dropdown-menu {
-        max-height: 300px;
-        overflow: auto;
-        padding: 10px 15px;
-    }
-
     .range-from,
     .range-to {
         border-radius: 4px;
@@ -133,5 +141,31 @@ export default {
         border-radius: 5px;
         border: 1px solid #999;
         padding: 5px;
+    }
+
+    .community {
+        position: relative;
+        display: inline-block;
+
+        .menu-right {
+            position: absolute;
+            z-index: -1;
+            top: 50px;
+            left: 0;
+            width: 400px; 
+            opacity: 0; 
+            visibility: hidden; 
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            box-shadow: 0px 6px 24px 0px rgb(53 55 81 / 6%);
+
+            &.show {
+                opacity: 1;
+                z-index: 99;
+                visibility: visible;
+            }
+        }
     }
 </style>

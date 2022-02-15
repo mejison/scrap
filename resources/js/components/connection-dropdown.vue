@@ -43,7 +43,6 @@
                             v-model="ranges[option.value]" 
                             :min="0"
                             :max="5000000"
-                            tooltip="false"
                             tooltip-dir="bottom"
                             :step="25000"
                         ></vue-range-slider>
@@ -88,6 +87,11 @@ export default {
             humanformat: humanformat,
             isShow: false,
         }
+    },
+
+    created() {
+        VueRangeSlider.methods.handleKeyup = ()=> console.log;
+        VueRangeSlider.methods.handleKeydown = ()=> console.log;
     },
 
     mounted() {

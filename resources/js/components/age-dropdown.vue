@@ -26,7 +26,6 @@
                 @drag-end="onDragEnd" 
                 ref="slider" 
                 v-model="ranges" 
-                tooltip="false"
                 :min="0"
                 :max="120"
                 tooltip-dir="bottom"
@@ -60,6 +59,11 @@ export default {
             type: Array,
             default: () => ([])
         },
+    },
+
+    created() {
+        VueRangeSlider.methods.handleKeyup = ()=> console.log;
+        VueRangeSlider.methods.handleKeydown = ()=> console.log;
     },
 
     watch: {
