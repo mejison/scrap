@@ -66,10 +66,6 @@ export default {
             ],
             connectionsOptions: [
                 {
-                    label: 'Any',
-                    value: null,
-                },
-                {
                     label: 'Facebook',
                     value: 'facebook'
                 },

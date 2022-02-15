@@ -9,29 +9,46 @@
                     @input="onChange" />
             </h3>
         </a>
-             <div class="row">
-                <div 
-                    class="col-3" v-for="(content, index) in items" :key="index">
-                        <img 
-                            v-if="content && content.attributes"
-                            :src="content.attributes['content-preview']" 
-                            class="img-thumbnail"
-                            alt=""
-                        />
-                </div>
-            </div>
+        <div class="carousel-wrapper" v-if="items && items.length">
+             <split-carousel 
+                :display-amount="7" 
+                arrow-visible="always"  
+                :autoplay="false"
+                :height="200">
+                <split-carousel-item v-for="(content, index) in items" :key="index">
+                    <img 
+                        v-if="content && content.attributes"
+                        :src="content.attributes['content-preview']" 
+                        class="img-item"
+                        alt=""
+                    />
+                </split-carousel-item>
+            </split-carousel>
+        </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+
+  .img-item {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+</style>
 
 <script>
 import requestMixin from '../mixins/requestMixin';
 import Dropdown from '../components/dropdown.vue'
+import { SplitCarousel, SplitCarouselItem } from "vue-split-carousel";
 
 export default {
     name: 'RecentContent',
 
     components: {
         Dropdown,
+        SplitCarousel,
+        SplitCarouselItem
     },
 
     props: {
@@ -52,7 +69,7 @@ export default {
                     value: null
                 },
             ],
-            items: []
+            items: [],
         }
     },
 
@@ -84,14 +101,14 @@ export default {
         onChange() {
             this.fetchRecentPosts(this.currentConnection.value);
         },
-       async fetchRecentPosts(connection_id) {
+        async fetchRecentPosts(connection_id) {
            this.startLoader()
            const orgId = this.getOrganizationId();
            if (orgId) {
                this.items = [];
                const { included } = await this.searchContent(connection_id, orgId);
                if (included) {
-                   this.items = included.slice(0, 4);
+                   this.items = included
                }
                this.stopLoader();
            }
