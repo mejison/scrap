@@ -301,30 +301,32 @@ export default {
             }
             
             if (age) {
-                rules = [
-                    ...rules,
-                    {
-                        "condition": "AND",
-                        "rules": [
-                            {
-                                field: "user_birthday",
-                                id: "user_age_from_birthday",
-                                input: "select",
-                                operator: "less_or_equal",
-                                type: "integer",
-                                value: age[0],
-                            },
-                            {
-                                field: "user_birthday",
-                                id: "user_age_from_birthday",
-                                input: "select",
-                                operator: "greater_or_equal",
-                                type: "integer",
-                                value: age[1],
-                            }
-                        ]
-                    }
-                ]
+                if (age[0] != 0) {                
+                    rules = [
+                        ...rules,
+                        {
+                            "condition": "AND",
+                            "rules": [
+                                {
+                                    field: "user_birthday",
+                                    id: "user_age_from_birthday",
+                                    input: "select",
+                                    operator: "less_or_equal",
+                                    type: "integer",
+                                    value: age[0],
+                                },
+                                {
+                                    field: "user_birthday",
+                                    id: "user_age_from_birthday",
+                                    input: "select",
+                                    operator: "greater_or_equal",
+                                    type: "integer",
+                                    value: age[1],
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
 
             if (connections) {
