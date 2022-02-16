@@ -110,6 +110,13 @@ export default {
         onSelect() {
             this.$emit('input', this.payload);
         },
+        addManually(item) {
+            this.payload = [
+                ...this.payload,
+                item.value,
+            ]
+            this.onSelect()
+        },
         onFocus() {
             if ( ! this.query) {
                 this.showAll = true;
@@ -124,6 +131,7 @@ export default {
                 ...this.fined,
                 item
             ]
+            this.addManually(item)
             this.query = ''
             this.showAll = false;
             this.isShowSearch = false;

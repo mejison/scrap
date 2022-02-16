@@ -6,7 +6,7 @@
                 <div
                     class="result-item"
                     v-for="(item, index) in results"
-                    @click.prevent="onSelect(item)"
+                    @click.prevent.stop="onSelect(item)"
                     :key="`result-${type}-${index}`">
                      {{ ['states_and_countries'].includes(type) ? item.label : item.name }}
                 </div>
@@ -20,7 +20,7 @@
                     <input 
                         type="checkbox"
                         name="location"
-                        :value="['states_and_countries'].includes(type) ? JSON.stringify(item) : item.name" 
+                        :value="['states_and_countries'].includes(type) ? JSON.stringify(item) : JSON.stringify(item.name)" 
                         v-model="selectedLocations" 
                         @change="onChange"
                     />
@@ -85,6 +85,15 @@ export default {
             ]
             this.query = '';
             this.results = [];
+            this.addManually(item)
+        },
+        addManually(item) {
+            item = ['states_and_countries'].includes(this.type) ? JSON.stringify(item) : JSON.stringify(item.name);
+            this.selectedLocations = [
+                ...this.selectedLocations,
+                item
+            ]
+            this.onChange();
         },
         onChange() {
             this.$emit('input', this.selectedLocations)

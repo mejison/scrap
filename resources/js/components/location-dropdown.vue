@@ -59,7 +59,7 @@ export default {
     mounted() {
         document.body.addEventListener('click', (e) => {
             const target = e.target;
-            if ( ! target.closest(".location")) {
+            if (target && ! target.closest(".location")) {
                 this.isShow = false;
             }
         }, false);
@@ -105,12 +105,12 @@ export default {
         getLabel() {
             if (this.payload['state-country'] && this.payload['state-country'].length == 1) {
                 const location = JSON.parse(this.payload['state-country']);
-                return location.label;
+                return location.label ? location.label : location ;
             }
 
             if (this.payload['radius-search'] && this.payload['radius-search'].length == 1) {
                 const location = JSON.parse(this.payload['radius-search']);
-                return location.label;
+                return location.label ? location.label : location;
             }
 
             if ( ! this.payload['state-country'].length && ! this.payload['radius-search'].length) {
