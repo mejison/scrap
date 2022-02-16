@@ -123,7 +123,7 @@ export default {
             cursor: pointer;
             font-size: 23px;
             color: #999;
-            z-index: 9999;
+            z-index: 1001;
         }
     }
 

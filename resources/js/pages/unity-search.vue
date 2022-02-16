@@ -17,7 +17,7 @@
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
-                <div class="col-12">
+                <div class="col-12" id="content">
                     <unity-search-results 
                         :items="items"
                     />
@@ -27,6 +27,7 @@
                         :per-page="filter.per_page"
                         @page="onClickPage"
                     />
+                    <loader />
                 </div>
         </div>
     </div>
@@ -36,6 +37,7 @@
 import FilterUnitySearch from '../components/filters/unity-search.vue'
 import UnitySearchResults from '../components/unity-search-results.vue';
 import Pagination from '../components/pagination.vue'
+import loader from '../components/loader.vue'
 import _ from 'lodash';
 import requestMixin from '../mixins/requestMixin';
 import { mapState } from 'vuex';
@@ -49,6 +51,7 @@ export default {
         FilterUnitySearch,
         UnitySearchResults,
         Pagination,
+        loader,
     },
 
     mixins: [
@@ -320,9 +323,7 @@ export default {
     },
 
     mounted() {
-        // this.readQueryParams();
         this.fetchData();
-        this.stopLoader();
         this.initLocationOptions();
     },
 

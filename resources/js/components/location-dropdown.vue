@@ -139,7 +139,7 @@ export default {
 
             &.show {
                 opacity: 1;
-                z-index: 99;
+                z-index: 1001;
                 visibility: visible;
             }
         }

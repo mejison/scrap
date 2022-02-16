@@ -1,10 +1,15 @@
 import { mapActions, mapState } from "vuex";
+import commonMixin from "./commonMixin";
 export default {
     data() {
         return {
             loaderInterval: null,
         }
     },
+
+    mixins: [
+        commonMixin,
+    ],
     
     methods: {
         ...mapActions("unity", ['setItems']),
@@ -23,8 +28,8 @@ export default {
             this.fetchData();
         },
         fetchData() {
-            this.startLoader();
             this.setItems([]);
+            this.startLoader();
             this.setFilter({
                 ...this.filter,
                 total: 0,
@@ -59,12 +64,8 @@ export default {
                 .catch(() => {
                     this.stopLoader();
                 })
-                .finally(() => {
-                    // this.stopLoader();
-                })
         },
         fetchDataViz() {
-            this.startLoader();
             let query = this.searchVizQueryViz()
             fetch(`/api/v1/search/viz`, {
                 method: 'post',
@@ -76,9 +77,6 @@ export default {
                 }),
             })
                 .then(r => r.json())
-                .then(async (data) => {
-                    this.stopLoader();
-                });
         },
         searchVizQueryViz() {
             let startDate = '2022-02-04';
@@ -164,16 +162,6 @@ export default {
                 }
              };
         },
-        startLoader() {
-            const el = document.getElementById('preloader')
-            el.style.display = 'block'
-            el.style['z-index'] = 999;
-        },
-        stopLoader() {
-            const el = document.getElementById('preloader')
-            el.style.display = 'none'
-            el.style['z-index'] = 0;
-        }
     },
 
     computed: {

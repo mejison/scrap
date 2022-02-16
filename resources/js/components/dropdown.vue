@@ -32,7 +32,7 @@ export default {
             type: Array
         },
         value: {
-            type: Object,
+            type: [Object, Number],
             default: () => ({})
         },
     },

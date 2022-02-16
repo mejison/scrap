@@ -8,7 +8,7 @@
         </div>	
         <div class="row">
             <filter-viz-search @change="onChangeFilter" />
-            <div class="col-12">
+            <div class="col-12" id="content">
                 <viz-search-results
                     :items="items"
                     @open="onOpen"
@@ -19,8 +19,9 @@
                     :per-page="filterVizSearch.per_page"
                     @page="onClickPage"
                 />
+                <loader />
             </div>
-            <details-view-post :item="item" @close="setItem(null)" />
+            <details-view-post :item="item" @close="setItem(null)" />   
         </div>
     </div>
 </template>
@@ -33,6 +34,7 @@ import VizSearchResults from '../components/viz-search-results.vue';
 import vizMixin from '../mixins/vizMixin';
 import detailsViewPost from '../popups/detailsViewPost.vue'
 import { mapActions } from 'vuex'
+import loader from '../components/loader.vue';
 
 export default {
     name: 'viz-search-filter',
@@ -41,7 +43,8 @@ export default {
         FilterVizSearch,
         VizSearchResults,
         Pagination,
-        detailsViewPost
+        detailsViewPost,
+        loader,
     },
 
     mixins: [

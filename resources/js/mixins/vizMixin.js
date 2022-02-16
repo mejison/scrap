@@ -1,5 +1,6 @@
 import { mapActions, mapState } from "vuex";
 import moment from 'moment';
+import commonMixin from "./commonMixin";
 
 export default {  
     data() {
@@ -39,6 +40,10 @@ export default {
         }
     },
 
+    mixins: [
+        commonMixin,
+    ],
+
     methods: {
         ...mapActions({
             setItemsViz: 'viz/setItems',
@@ -46,8 +51,8 @@ export default {
             setItemViz: 'viz/setItem',
         }),
         fetchDataViz() {
-            this.startLoader();
             let query = this.searchVizQueryViz()
+            this.startLoader();
             fetch(`/api/v1/search/viz`, {
                 method: 'post',
                 headers: {
@@ -148,17 +153,6 @@ export default {
 
             return `${query}filter[content_source_type][]=youtube_post_discovered&filter[content_source_type][]=tiktok_post_discovered&filter[content_source_type][]=instagram_post_discovered&filter[content_source_type][]=instagram_post_on_platform&filter[content_source_type][]=youtube_post_on_platform&filter[content_source_type][]=pinterest_post_on_platform&${network}filter[collapse]=true&page[size]=${per_page}&page[number]=${page}&sort=${sort}`;
         },
-
-        startLoader() {
-            const el = document.getElementById('preloader')
-            el.style.display = 'block'
-            el.style['z-index'] = 999;
-        },
-        stopLoader() {
-            const el = document.getElementById('preloader')
-            el.style.display = 'none'
-            el.style['z-index'] = 0;
-        }
     },
 
     computed: {

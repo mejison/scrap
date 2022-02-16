@@ -1,7 +1,6 @@
 <template>
     <!-- row -->
     <div class="container-fluid">
-
         <div class="card card-body" v-if="item.attributes">
             <div class="row">
                 <div class="col-lg-2 col-md-12 col-12 text-center">
@@ -116,6 +115,14 @@
                 </div>
             </div>
         </div>
+
+        <div id="preloader">
+            <div class="sk-three-bounce">
+                <div class="sk-child sk-bounce1"></div>
+                <div class="sk-child sk-bounce2"></div>
+                <div class="sk-child sk-bounce3"></div>
+            </div>
+        </div>
     </div>			
 </template>
 
@@ -203,7 +210,6 @@ export default {
             });
         },
         async fetchData() {
-            this.startLoader()
             const unit_id = this.$route.params.id
             let { data } = await fetch(`/api/v1/unity/get?unit_id=${unit_id}`).then(r => r.json());
             let metrics = await this.getMetric(data.id);
@@ -225,8 +231,14 @@ export default {
             }
             
             this.setItem(data)
-            this.stopLoader()
+            this.stopLoader();
         },
+
+        stopLoader() {
+            const el = document.getElementById('preloader')
+            el.style.display = 'none'
+            el.style['z-index'] = 0;
+        }
     },
 
     computed: {
@@ -235,7 +247,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .profile-photo {
         max-width: 100px;
         max-height: 100px;
@@ -249,5 +261,14 @@ export default {
 
     .cover-photo {
         background-size: cover;
+    }
+
+    #preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #fff; 
     }
 </style>

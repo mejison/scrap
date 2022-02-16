@@ -102,7 +102,6 @@ export default {
             this.fetchRecentPosts(this.currentConnection.value);
         },
         async fetchRecentPosts(connection_id) {
-           this.startLoader()
            const orgId = this.getOrganizationId();
            if (orgId) {
                this.items = [];
@@ -110,7 +109,6 @@ export default {
                if (included) {
                    this.items = included
                }
-               this.stopLoader();
            }
        },
        getOrganizationId() {

@@ -111,7 +111,7 @@ export default {
             max-height: 400px;
             overflow: auto;
             position: absolute;
-            z-index: 99;
+            z-index: 1001;
             left: -3px;
             right: -3px;
             top: 50px;
