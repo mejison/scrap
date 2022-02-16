@@ -2,7 +2,7 @@
     <div class="dropdown custom-dropdown mb-2 community">
         <div class="btn bg-white d-flex align-items-center" @click="onToggle">
             <div class="text-left mr-3">
-                <span class="text-black">{{ value && value.length ? (value.length >= 2 ? "Multiple Communities" : value.map(item => item).join(', ')) : label }}</span>
+                <span class="text-black">{{ value && value.length ? (value.length >= 2 ? "Multiple Communities" : getLabel(value)) : label }}</span>
             </div>
             <i class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
@@ -117,6 +117,17 @@ export default {
 
 
     methods: {
+        titleCase(str) {
+            var splitStr = str.toLowerCase().split(' ');
+            for (var i = 0; i < splitStr.length; i++) {
+                splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+            }
+            return splitStr.join(' '); 
+        },
+        getLabel(item) {
+            const target = this.options.find(row => row.value == item)
+            return target ? target.label : item
+        },
         onToggle() {
             this.isShow = ! this.isShow
         },
