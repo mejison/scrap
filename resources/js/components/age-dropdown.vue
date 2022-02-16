@@ -11,14 +11,14 @@
                 <input 
                     type="text"
                     class="range-from" 
-                    :value="ranges[0]"
+                    v-model="ranges[0]"
                     placeholder="0"
                 />
                 <span>&nbsp;to&nbsp;</span>
                 <input 
                     type="text" 
                     class="range-to" 
-                    :value="ranges[1]"
+                    v-model="ranges[1]"
                     placeholder="120"
                 />
             </div>
