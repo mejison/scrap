@@ -7,20 +7,25 @@
             <i class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
         <div class="menu-right p-3" :class="{'show': isShow}">
-            <input
-                type="text"
-                placeholder="Add Community"
-                class="search"
-                v-model="query"
-            />
-            <ul>
-                <li 
-                    @click="onAdd(item)" 
-                    v-for="(item, index) in optionsFinded" 
-                    :key="`search-${index}`">
-                    {{ item.value }}
-                </li>
-            </ul>
+            <div class="search-box">
+                <input
+                    type="text"
+                    placeholder="Add Community"
+                    class="search"
+                    v-model="query"
+                    @focus="onFocus"
+                    @input="onInput"
+                    @blur="onBlur"
+                />
+                <ul class="results" :class="{'show': isShowSearch}">
+                    <li 
+                        @click.prevent.stop="onAdd(item)" 
+                        v-for="(item, index) in optionsFinded" 
+                        :key="`search-${index}`">
+                        {{ item.value }}
+                    </li>
+                </ul>
+            </div>
             <label
                
                 v-for="(option, index) in fined" 
@@ -83,6 +88,8 @@ export default {
             fined: [],
             added: this.options.slice(0, 4),
             isShow: false,
+            showAll: false,
+            isShowSearch: false,
         }
     },
 
@@ -104,7 +111,13 @@ export default {
             this.$emit('input', this.payload);
         },
         onFocus() {
-            // this.query = ' '
+            if ( ! this.query) {
+                this.showAll = true;
+                this.isShowSearch = true;
+            }
+        },
+        onBlur() {
+            // this.showAll = false;
         },
         onAdd(item) {
             this.fined = [
@@ -112,16 +125,37 @@ export default {
                 item
             ]
             this.query = ''
+            this.showAll = false;
+            this.isShowSearch = false;
+        },
+        onInput() {
+            this.showAll = false;
+            if ( ! this.query) {
+                this.isShowSearch = false;
+            }
         }
     },
 
     computed: {
         optionsFinded() {
-            if (this.query) {
-                return this.options.filter((item) => {
+            if (this.query || this.showAll) {
+                const items = this.options.filter((item) => {
                     const exist = this.added.find(row => row.label == item.label);
+
+                    if (this.showAll) {
+                        return ! exist;
+                    }
+                   
                     return ! exist &&  item.value.indexOf(this.query) + 1;
                 });
+
+                if ( ! items.length) {
+                    this.isShowSearch = false;
+                } else {
+                     this.isShowSearch = true;
+                }
+
+                return items;
             }
         },
     },
@@ -129,6 +163,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .search-box {
+        position: relative;
+
+        .results {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 55px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            visibility: hidden;
+            z-index: -1;
+            opacity: 0;
+
+            &.show {
+                visibility: visible;
+                opacity: 1;
+                z-index: 999;
+            }
+
+            li {
+                cursor: pointer;
+            }
+        }
+    }
+
     .range-from,
     .range-to {
         border-radius: 4px;
