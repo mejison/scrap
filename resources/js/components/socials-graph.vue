@@ -1,6 +1,6 @@
 <template>
     <div class="socials">
-       <div id="graph"></div>
+       <div id="graph" width="150" height="150"></div>
     </div>
 </template>
 
@@ -34,6 +34,7 @@ export default {
     },
 
     mounted() {
+        window.scrollTo(0, 0);
         this.print();
     },
 
@@ -121,9 +122,25 @@ export default {
 }
 </script>
 
+<style lang="scss">
+  .bubble {
+        top: 0;
+        left: 0;
+        position: absolute; 
+    }
+</style>
+
 <style lang="scss" scoped>
    #graph {
        width: 200px;
        height: 200px;
+       position: relative;
+
+
+       .bubble {
+          top: 0;
+          left: 0;
+          position: absolute; 
+       }
    }
 </style>
