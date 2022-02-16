@@ -1,14 +1,15 @@
 <template>
     <div>   
-        <socials-graph />
+        <test-graph />
     </div>
 </template>
 
 <script>
-import SocialsGraph from '../components/socials-graph.vue'
+import TestGraph from '../components/test-graph.vue'
+
 export default {
     components: {
-        SocialsGraph,
+        TestGraph,
     }
 }
 </script>

@@ -183,7 +183,7 @@ export default {
             const allowList = ['Facebook', 'Twitter', 'Pinterest', 'Instagram'];
             if (this.item && this.item.connections) {
                 this.item.connections.forEach(conn => {
-                    const name = conn.attributes.publishable_type.replace('Property', '');
+                    const name = conn.attributes.chart_publishable_type.replace('Property', '');
                     const exist = this.socials.find(item => item.Name == name);
                     if (allowList.includes(name) && ! exist) {
                         this.socials = [

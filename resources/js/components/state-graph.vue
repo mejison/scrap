@@ -1,15 +1,14 @@
 <template>
     <div>
         <h4 class="my-3 text-center">TOP STATES</h4>
-        <div class="insight-graph card card-body">
-            <!-- <v-chart class="chart" :option="option" /> -->
-            <div class="chart" id="chartDom" ref="chartDom"></div>
+        <div class="insight-graph card card-body mb-0">
+            <div class="chart" id="chartDomState" ref="chartDom"></div>
         </div>
     </div>
 </template>
 
 <script>
-const echarts = require('echarts');
+import * as echarts from 'echarts';
 
 export default {
     props: {
@@ -42,37 +41,70 @@ export default {
 
                 data = [
                     ...data,
-                    item.reachValue
+                    ((item.reachPercentage) * 100).toFixed(0)
                 ]
             })
 
             this.printBar(labels, data);
         },
         printBar(labels, data) {
-            const chartDom = this.$refs.chartDom;
-            const myChart = echarts.init(chartDom);
-           
-           const  option = {
-                xAxis: {
-                    type: 'category',
-                    data: labels
-                },
-                yAxis: {
-                    type: 'value'
-                },
+            var dom = document.getElementById("chartDomState");
+            var myChart = echarts.init(dom);
+            var app = {};
+
+            app.config = {
+                rotate: 90,
+                align: 'left',
+                verticalAlign: 'center',
+                position: 'outside',
+                distance: 5,
+            };
+
+            const labelOption = {
+                show: true,
+                position: app.config.position,
+                distance: app.config.distance,
+                align: app.config.align,
+                verticalAlign: app.config.verticalAlign,
+                rotate: app.config.rotate,
+                formatter: '{c}% {b}',
+                fontSize: 12,
+                rich: {
+                    name: {}
+                }
+            };
+
+            var option = {
+                xAxis: [
+                    {
+                        show: false,
+                        axisTick: { show: false },
+                        data: labels
+                    }
+                ],
+                yAxis: [
+                    {
+                        show: false,
+                        type: 'value'
+                    }
+                ],
                 series: [
                     {
-                    data: data,
-                    type: 'bar',
-                    showBackground: true,
-                        backgroundStyle: {
-                            color: 'rgba(180, 180, 180, 0.2)'
-                        }
-                    }
+                        name: 'Forest',
+                        type: 'bar',
+                        barGap: 0,
+                        label: labelOption,
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: data
+                    },
                 ]
             };
 
-            option && myChart.setOption(option);
+            if (option && typeof option === 'object') {
+                myChart.setOption(option);
+            }
         },
     }
 }
@@ -80,6 +112,6 @@ export default {
 
 <style scoped>
 .chart {
-  height: 400px;
+  height: 430px;
 }
 </style>
