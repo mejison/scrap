@@ -22,7 +22,7 @@
                         @click.prevent.stop="onAdd(item)" 
                         v-for="(item, index) in optionsFinded" 
                         :key="`search-${index}`">
-                        {{ item.value }}
+                        {{ item.label }}
                     </li>
                 </ul>
             </div>
@@ -86,7 +86,20 @@ export default {
             payload: [],
             query: '',
             fined: [],
-            added: this.options.slice(0, 4),
+            added: [
+                {
+                    label: 'Food',
+                    value: 'food'
+                },
+                {
+                    label: 'Lifestyle',
+                    value: 'lifestyle'
+                },
+                {
+                    label: 'Family',
+                    value: 'family'
+                },
+            ],
             isShow: false,
             showAll: false,
             isShowSearch: false,
@@ -127,10 +140,15 @@ export default {
             // this.showAll = false;
         },
         onAdd(item) {
-            this.fined = [
-                ...this.fined,
-                item
-            ]
+            const exist = this.added.find(row => row.label == item.label);
+
+            if ( ! exist) {
+                this.fined = [
+                    ...this.fined,
+                    item
+                ]
+            }
+            
             this.addManually(item)
             this.query = ''
             this.showAll = false;
@@ -148,13 +166,13 @@ export default {
         optionsFinded() {
             if (this.query || this.showAll) {
                 const items = this.options.filter((item) => {
-                    const exist = this.added.find(row => row.label == item.label);
+                    // const exist = this.added.find(row => row.label == item.label);
 
                     if (this.showAll) {
-                        return ! exist;
+                        return true;
                     }
                    
-                    return ! exist &&  item.value.indexOf(this.query) + 1;
+                    return item.value.indexOf(this.query) + 1;
                 });
 
                 if ( ! items.length) {
