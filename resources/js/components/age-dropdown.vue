@@ -2,7 +2,7 @@
     <div class="age mb-2">
         <div class="btn bg-white d-flex align-items-center" @click.prevent="onToggle">
             <div class="text-left mr-3">
-                <span class="text-black">Age</span>
+                <span class="text-black">{{ getLabel }}</span>
             </div>
             <i class="fa fa-caret-down"></i>
         </div>
@@ -13,6 +13,7 @@
                     class="range-from" 
                     v-model="ranges[0]"
                     placeholder="0"
+                    @input="onInput"
                 />
                 <span>&nbsp;to&nbsp;</span>
                 <input 
@@ -28,6 +29,7 @@
                 v-model="ranges" 
                 :min="0"
                 :max="120"
+                @input="onInput"
                 tooltip-dir="bottom"
             ></vue-range-slider>
         </div>
@@ -89,9 +91,21 @@ export default {
         }, false);
     },
 
+    computed: {
+        getLabel() {
+            if (this.ranges[0] != 0 || this.ranges[1] != 120) {
+                return `Age ${this.ranges[0]} - ${this.ranges[1]}`
+            }
+            return 'Age'
+        }
+    },
+
     methods: {
         onToggle() {
             this.isShow = ! this.isShow
+        },
+        onInput() {
+            this.onSelect();
         },
         onDragEnd() {
             this.onSelect();
