@@ -40,7 +40,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="{!! url('/index'); !!}" class="brand-logo">
+            <a href="{!! url('/'); !!}" class="brand-logo">
 			@if(!empty($logo))
 				<img class="logo-abbr"  style="max-width: 150px;" src="{{ asset($logo) }}" alt="" />
 			@else

@@ -665,9 +665,9 @@
 							<li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
 									<div class="header-info">
-										<span>Samuel Anderson</span>
+										<span>James Ma</span>
 									</div>
-                                    <img src="{{ asset('images/profile/pic1.jpg') }}" width="20" alt=""/>
+                                    <img src="{{ asset('images/profile/pic2.jpg') }}" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="{!! url('/app-profile'); !!}" class="dropdown-item ai-icon">
