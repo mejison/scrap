@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ config('dz.name') }} | @yield('title', $page_title ?? '')</title>
+    <title>Streamline KOL Portal</title>
 	
 	<meta name="description" content="@yield('page_description', $page_description ?? '')"/>
     <!-- Favicon icon -->
