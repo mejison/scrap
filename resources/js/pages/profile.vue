@@ -164,12 +164,7 @@ export default {
     data() {
         return {
             humanformat: HumanFormat,
-            socials: [
-                {
-                    Name: "Instagram",
-                    Count: 12,
-                },
-            ]
+            socials: []
         }
     },
 
@@ -180,12 +175,12 @@ export default {
     methods: {
         ...mapActions("unity", ['setItem']),
         setSocialGraph() {
-            const allowList = ['Facebook', 'Twitter', 'Pinterest', 'Instagram'];
+            // const allowList = ['Facebook', 'Twitter', 'Pinterest', 'Instagram'];
             if (this.item && this.item.connections) {
                 this.item.connections.forEach(conn => {
-                    const name = conn.attributes.chart_publishable_type.replace('Property', '');
-                    const exist = this.socials.find(item => item.Name == name);
-                    if (allowList.includes(name) && ! exist) {
+                    const name = conn.attributes.chart_publishable_type.replace('Property', '').replace('WithProfileReach');
+                    // const exist = this.socials.find(item => item.Name == name);
+                    // if (! exist) {
                         this.socials = [
                             ...this.socials,
                             {
@@ -193,7 +188,7 @@ export default {
                                 Count: conn.attributes.reach
                             },
                         ]
-                    }
+                    // }
                 });
             }
         },
