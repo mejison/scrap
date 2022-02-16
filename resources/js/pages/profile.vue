@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-12">
-                    <socials-graph :item="item"  />
+                    <socials-graph :dataset="socials"  />
                 </div>
             </div>
         </div>
@@ -164,6 +164,12 @@ export default {
     data() {
         return {
             humanformat: HumanFormat,
+            socials: [
+                {
+                    Name: "Instagram",
+                    Count: 12,
+                },
+            ]
         }
     },
 
@@ -173,6 +179,24 @@ export default {
 
     methods: {
         ...mapActions("unity", ['setItem']),
+        setSocialGraph() {
+            const allowList = ['Facebook', 'Twitter', 'Pinterest', 'Instagram'];
+            if (this.item && this.item.connections) {
+                this.item.connections.forEach(conn => {
+                    const name = conn.attributes.publishable_type.replace('Property', '');
+                    const exist = this.socials.find(item => item.Name == name);
+                    if (allowList.includes(name) && ! exist) {
+                        this.socials = [
+                            ...this.socials,
+                            {
+                                Name: name,
+                                Count: conn.attributes.reach
+                            },
+                        ]
+                    }
+                });
+            }
+        },
         getCountry(item) {
             return item.overview && item.overview.country ? item.overview.country : '';
         },
@@ -229,9 +253,10 @@ export default {
                 organization: organization.data,
                 connections,
             }
-            
+
             this.setItem(data)
             this.stopLoader();
+            this.setSocialGraph();
         },
 
         stopLoader() {

@@ -1,30 +1,6 @@
 <template>
     <div class="socials">
-        <span class="social big instagram">
-            <a :href="item.Instagram"  target="_blank">
-                <i class="lni lni-instagram"></i>
-            </a>
-        </span>
-        <span class="social facebook">
-            <a :href="item.Facebook"  target="_blank">
-                <i class="lni lni-facebook"></i>
-            </a>
-        </span>
-        <span class="social twitter">
-            <a :href="item.Twitter" target="_blank">
-                <i class="lni lni-twitter"></i>
-            </a>
-        </span>
-        <span class="social youtube">
-            <a :href="item.Youtube"  target="_blank">
-                <i class="lni lni-youtube"></i>
-            </a>
-        </span>
-         <span class="social pinterest">
-            <a :href="item.Pinterest"  target="_blank">
-                <i class="lni lni-pinterest"></i>
-            </a>
-        </span>
+       <div id="graph"></div>
     </div>
 </template>
 
@@ -37,61 +13,96 @@ export default {
             type: Object,
             default: () => ({}),  
         },
+        dataset: {
+            default: () => ([
+                {
+                    Name: '1',
+                    Count: 2000
+                },
+                {
+                    Name: '2',
+                    Count: 1
+                }
+            ]),
+            type: Array``,
+        }
     },
 
     data() {
         return {
-
         }
     },
+
+    mounted() {
+        const dataset = {
+            "children": [
+                ...this.dataset,
+            ]
+        };
+
+        var diameter = 150;
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+        var bubble = d3.pack(dataset)
+            .size([diameter, diameter])
+            .padding(1.5);
+
+        var svg = d3.select("#graph")
+            .append("svg")
+            .attr("width", diameter)
+            .attr("height", diameter)
+            .attr("class", "bubble");
+
+        var nodes = d3.hierarchy(dataset)
+            .sum(function(d) { return d.Count; });
+
+        let descendants = bubble(nodes).descendants()
+        var node = svg.selectAll(".node")
+            .data(descendants)
+            .enter()
+            .filter(function(d){
+                return  !d.children
+            })
+            .append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+
+        node.append("title")
+            .text(function(d) {
+                return d.Name + ": " + d.Count;
+            });
+
+        node.append("circle")
+            .attr("r", function(d) {
+                return d.r;
+            })
+            .style("fill", function(d,i) {
+                return color(i);
+            });
+
+        node.append("text")
+            .attr("dy", ".2em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+                return d.data.Name.substring(0, d.r / 3);
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", function(d){
+                return d.r/5;
+            })
+            .attr("fill", "white");
+
+        d3.select(self.frameElement)
+            .style("height", diameter + "px");
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-    .socials {
-        width: 130px;
-        height: 130px;
-        position: relative;
-    }
-
-    .social {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        border: 1px solid #999; 
-        margin: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        &.instagram {
-            width: 80px;
-            height: 80px;
-            font-size: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 40px;
-        }
-
-        &.facebook {
-            top: 0px;
-            left: 25px;
-        }
-
-        &.youtube {
-            top: 30px;
-        }
-
-        &.pinterest {
-            top: 70px;
-        }
-
-        &.twitter {
-            top: 100px;
-            left: 25px;
-        }
-    }
+   #graph {
+       width: 200px;
+       height: 200px;
+   }
 </style>

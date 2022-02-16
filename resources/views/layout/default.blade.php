@@ -25,8 +25,7 @@
 			<link href="{{ asset($style) }}" rel="stylesheet" type="text/css"/>
 		@endforeach
 	@endif	
-
-
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 
 <body>
