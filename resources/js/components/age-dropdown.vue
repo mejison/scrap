@@ -13,7 +13,7 @@
                     class="range-from" 
                     v-model="ranges[0]"
                     placeholder="0"
-                    @input="onInput"
+                    @input="onChange"
                 />
                 <span>&nbsp;to&nbsp;</span>
                 <input 
@@ -29,7 +29,7 @@
                 v-model="ranges" 
                 :min="0"
                 :max="120"
-                @input="onInput"
+                @input="onChange"
                 tooltip-dir="bottom"
             ></vue-range-slider>
         </div>
@@ -40,6 +40,8 @@
 import 'vue-range-component/dist/vue-range-slider.css'
 import VueRangeSlider from 'vue-range-component'
 import humanformat from 'human-format';
+import _debounce from 'lodash/debounce'
+
 
 export default {
     name: 'AgeDropDown',
@@ -104,9 +106,12 @@ export default {
         onToggle() {
             this.isShow = ! this.isShow
         },
-        onInput() {
-            this.onSelect();
+        onChange() {
+            this.updateValue()
         },
+        updateValue: _debounce(function () {
+            this.onDragEnd();
+        }, 600),
         onDragEnd() {
             this.onSelect();
         },
