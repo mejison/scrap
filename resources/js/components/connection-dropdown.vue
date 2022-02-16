@@ -32,7 +32,7 @@
                     <input 
                         type="text" 
                         class="range-to" 
-                        :value="humanformat(ranges[option.value][1])"
+                        :value="ranges[option.value][1] == 5000000 ? '5+' : humanformat(ranges[option.value][1])"
                         placeholder="5m+"
                     />
                     <span>followers</span>
