@@ -32,8 +32,8 @@
                     <input 
                         type="text" 
                         class="range-to" 
-                        :value="ranges[option.value][1] == 5000000 ? '5+' : humanformat(ranges[option.value][1])"
-                        placeholder="5m+"
+                        :value="ranges[option.value][1] == 5000000 ? '5M+' : humanformat(ranges[option.value][1])"
+                        placeholder="5M+"
                     />
                     <span>followers</span>
                     <div>
