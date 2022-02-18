@@ -1,13 +1,13 @@
 <template>
-    <div class="brand-mentions" v-if="Object.keys(brands).length">
-        <span>
+    <div class="brand-mentions" v-if="Object.keys(brands).length" :class="{'minimize': minimize}">
+        <span v-if=" ! minimize">
             BRAND MENTIONS
         </span>
         <div class="brand" v-for="(logo, name) in brands" :key="name">
             <div class="logo">
                 <img :src="logo" alt="brand" />
             </div>
-            {{ name }}
+            <span v-if=" ! minimize">{{ name }}</span>
         </div>
     </div>
 </template>
@@ -20,6 +20,10 @@ export default {
         item: {
             type: Object,
             default: () => ({}),
+        },
+        minimize: {
+            type: Boolean,
+            default: false,
         }
     },
 
@@ -55,6 +59,15 @@ export default {
 
 <style lang="scss">
     .brand-mentions {
+        &.minimize {
+            .brand {
+                background-color: transparent;
+            }
+
+            display: flex;
+            flex-direction: column;
+        }
+
         span {
             font-size: 12px;
             font-weight: 500;

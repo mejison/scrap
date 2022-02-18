@@ -19,7 +19,7 @@
                         </a>
                     </div>
                     <div class="modal-body">
-                        <div class="content">
+                        <div class="content" :class="{[item.attributes.platform]: true}">
                             <div class="preview">
                                 <iframe 
                                     v-if="item.attributes.platform == 'instagram'"
@@ -168,6 +168,10 @@ export default {
         grid-template-columns: 1fr 1fr;
         grid-gap: 15px;
 
+        &.youtube {
+            grid-template-columns: 1fr;    
+        }
+
         .platform {
             display: inline-flex;
             background: #52b141;
@@ -264,6 +268,10 @@ export default {
         border: 1px solid #dbdbdb;
         border-radius: 2px;
         height: 665px;
+    }
+
+    .embedded-platform-youtube {
+        width: 100%;
     }
 
     @media (max-width: 768px) {

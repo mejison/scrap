@@ -1,11 +1,12 @@
 <template>
-    <div>
+    <div >
         <div class="items">
             <div 
                 class="item" 
                 v-for="(item, index) in items" 
                 :key="`${index}-key`"
                 @click.prevent="onOpen(item)"
+                v-if="item && item.attributes && item.attributes.content_preview"
                 >
                 <div class="name">
                     <div class="main-avatar">
@@ -30,9 +31,13 @@
                     </div>
                 </div>
                 <div class="image">
-                    <span class="sponsor" v-if="getBrendLogo(item)">
-                        <img :src="getBrendLogo(item)" class="img" alt="" />
-                    </span>
+                    <div class="sponsor">
+                         <brandmentions 
+                            :key="`${index}-brend-${item.attributes.platform}-${item.id}`"
+                            :minimize="true" 
+                            :item="item" 
+                        />
+                    </div>
                     <img class="post" :src="item.attributes.content_preview" alt="image" />
                     <span class="social">
                         <li v-if="item.attributes.platform == 'blog'">
@@ -79,6 +84,7 @@ import HumanFormat from  'human-format';
 import numeral from 'numeral';
 import moment from 'moment'
 import vizMixin from '../mixins/vizMixin';
+import brandmentions from '../components/brand-mentions.vue'
 
 export default {
     name: 'Search',
@@ -88,6 +94,10 @@ export default {
             type: Array,
             default: [],
         },
+    },
+
+    components: {
+        brandmentions,
     },
 
     mixins: [vizMixin],
@@ -175,17 +185,6 @@ export default {
                     position: absolute;
                     left: 10px;
                     top: 10px;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    border-radius: 50%;
-                    overflow: hidden;
-                    
-                    .img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
                 }
 
                 .social {
