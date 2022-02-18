@@ -6,7 +6,6 @@
                 v-for="(item, index) in items" 
                 :key="`${index}-key`"
                 @click.prevent="onOpen(item)"
-                v-if="item && item.attributes && item.attributes.content_preview"
                 >
                 <div class="name">
                     <div class="main-avatar">

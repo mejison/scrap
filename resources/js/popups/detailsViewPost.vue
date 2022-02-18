@@ -278,7 +278,8 @@ export default {
     }
 
     .embedded-platform-youtube {
-        width: 100%;
+        height: 437px;
+        width: 770px;
     }
 
     @media (max-width: 768px) {
