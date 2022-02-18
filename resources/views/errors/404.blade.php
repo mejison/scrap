@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>MetroAdmin - Bootstrap Admin Dashboard </title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/ico" sizes="16x16" href="{{ asset('favicon.ico') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     
 </head>
