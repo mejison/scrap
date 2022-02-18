@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="modal fade none-border" :class="{'show': item}" :style="{'display': item ? 'block': 'none'}" id="event-modal">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog modal-preview">
                 <div class="modal-content" v-if="item">
                     <div class="modal-header">
                         <h4 class="modal-title align-items-center">
@@ -93,16 +93,12 @@
                                         {{ item.attributes.caption }}
                                     </p>
                                 </div>
-                                <div class="brend">
-                                    <span>
-                                        BREND MENTIONS 
-                                        <div class="sponsor">
-                                        <img class="img" :src="getBrendLogo(item)" alt="" />
-                                        </div>
-                                    </span>
+                                <div class="brend my-4" v-if="item">
+                                    <platformlink :item="item" />
+                                    <brandmentions :item="item" />
                                 </div>
                                 <div class="date">
-                                    {{ moment(item.attributes.created_at).format("MMMM d, Y") }}
+                                    {{ moment(item.attributes.created_at).format("MMM DD, Y") }}
                                 </div>
                             </div>
                         </div>
@@ -119,10 +115,16 @@ import vizMixin from '../mixins/vizMixin';
 import HumanFormat from  'human-format';
 import numeral from 'numeral';
 import moment from 'moment'
-
+import brandmentions from '../components/brand-mentions.vue'
+import platformlink from '../components/platform-link.vue'
 
 export default {
     name: 'details-view-post',
+
+    components: {
+        brandmentions,
+        platformlink,
+    },
 
     mixins: [vizMixin],
 
@@ -156,6 +158,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    #add-category .modal-preview, 
+    #event-modal .modal-preview {
+        max-width: 850px;
+    }
+
     .content {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -182,11 +189,16 @@ export default {
 
         .full-description {
             margin: 15px 0 0;
+            font-size: 12px;
+        }
+
+        .date {
+            font-size: 14px;
         }
 
         .brend {
             span {
-                font-size: 18px;
+                font-size: 14px;
                 font-weight: bold;
                 position: relative;
             }
