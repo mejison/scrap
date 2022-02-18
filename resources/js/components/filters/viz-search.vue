@@ -86,6 +86,7 @@ export default {
                 value: "",
             };
             this.status =  null;
+            this.email = null;
             this.dateRange = {
                 startDate: moment().subtract(7,'d').format('YYYY-MM-DD'),
                 endDate: moment().format('YYYY-MM-DD'),
