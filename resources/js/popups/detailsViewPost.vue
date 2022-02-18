@@ -99,7 +99,11 @@
                                     <brandmentions :item="item" />
                                 </div>
                                 <div class="date">
-                                    {{ moment(item.attributes.created_at).format("MMM DD, Y") }}
+                                    <div class="mb-2">{{ moment(item.attributes.created_at).format("MMM DD, Y") }}</div>
+                                    <div v-if="['youtube'].includes(item.attributes.platform)">
+                                        <div class="mb-2">{{ humanformat(item.attributes.reach) }} Followers</div>
+                                        <div class="mb-2">{{ humanformat(item.attributes.engagements)  }} Engagements</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
