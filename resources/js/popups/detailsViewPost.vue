@@ -57,6 +57,7 @@
                                 </iframe>
                             </div>
                             <div class="description">
+                                <discoveredcreator :item="item" v-if="item.attributes.is_discovered" />
                                 <div class="platform">
                                     <span class="social">
                                         <li v-if="item.attributes.platform == 'blog'">
@@ -114,9 +115,10 @@
 import vizMixin from '../mixins/vizMixin';
 import HumanFormat from  'human-format';
 import numeral from 'numeral';
-import moment from 'moment'
-import brandmentions from '../components/brand-mentions.vue'
-import platformlink from '../components/platform-link.vue'
+import moment from 'moment';
+import brandmentions from '../components/brand-mentions.vue';
+import platformlink from '../components/platform-link.vue';
+import discoveredcreator from '../components/discovered-creator.vue';
 
 export default {
     name: 'details-view-post',
@@ -124,6 +126,7 @@ export default {
     components: {
         brandmentions,
         platformlink,
+        discoveredcreator,
     },
 
     mixins: [vizMixin],
@@ -165,8 +168,8 @@ export default {
 
     .content {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 15px;
+        grid-template-columns: 340px 1fr;
+        grid-gap: 5px;
 
         &.youtube {
             grid-template-columns: 1fr;    

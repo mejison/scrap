@@ -3,7 +3,7 @@
         <span v-if=" ! minimize">
             BRAND MENTIONS
         </span>
-        <div class="brand" v-for="(logo, name) in brands" :key="name">
+        <div class="brand mb-1" v-for="(logo, name) in brands" :key="name">
             <div class="logo">
                 <img :src="logo" alt="brand" />
             </div>
