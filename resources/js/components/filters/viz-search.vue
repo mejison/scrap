@@ -18,6 +18,8 @@
             </date-range-picker>
         </div>
 
+       <dropdown label="Email" :options="emailOptions"  v-model="email" @input="onInputEmail" />
+        
         <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
             Clear filter
         </a>
@@ -27,6 +29,7 @@
 <script>
 import Dropdown from '../dropdown.vue';
 import connectiondropdown from '../connection-dropdown.vue'
+import emaildropdown from '../email-dropdown.vue'
 import vizMixin from '../../mixins/vizMixin'
 import moment from 'moment';
 import DateRangePicker from 'vue2-daterange-picker'
@@ -37,19 +40,18 @@ export default {
         Dropdown,
         DateRangePicker,
         connectiondropdown,
+        emaildropdown,
     },
-
-
 
     mixins: [
         vizMixin,
     ],
 
-
     data() {
         return {
             connection: null,
             status: null,
+            email: null,
             dateRange: {
                 startDate:  moment().format('YYYY-MM-DD'),
                 endDate: moment().format('YYYY-MM-DD'),
@@ -59,6 +61,13 @@ export default {
     },
 
     methods: {
+        onInputEmail(value) {
+            this.setFilterViz({
+                ...this.filterVizSearch,
+                email: value
+            })
+            this.$emit('change')
+        },
         updateValues(data) {
             this.setFilterViz({
                 ...this.filterVizSearch,

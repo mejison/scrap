@@ -36,7 +36,17 @@ export default {
                     label: 'Discovered',
                     value: 'discovered'
                 },
-            ]
+            ],
+            emailOptions: [
+                {
+                    label: 'Any',
+                    value: null,
+                },
+                {
+                    label: 'Creator Email is Available',
+                    value: 'email_is_available'
+                },
+            ],
         }
     },
 
@@ -103,6 +113,7 @@ export default {
             let startDate = this.filterVizSearch.date.startDate ? moment(this.filterVizSearch.date.startDate).format('YYYY-MM-DD') :  '';
             let endDate = this.filterVizSearch.date.endDate ? moment(this.filterVizSearch.date.endDate).format('YYYY-MM-DD')  : '';
             const status = this.filterVizSearch.status ? this.filterVizSearch.status : '';
+            const email = this.filterVizSearch.email ? this.filterVizSearch.email : '';
             const search = this.filterVizSearch.search ? this.filterVizSearch.search : '';
             const connection = this.filterVizSearch.connection && this.filterVizSearch.connection.length ? this.filterVizSearch.connection : [];
             
@@ -111,7 +122,7 @@ export default {
             let sort = '-score';
 
             if ( ! startDate) {
-                if ( ! connection.length && ! status && ! search) {
+                if ( ! connection.length && ! status && ! search & ! email) {
                     startDate = moment().subtract(7,'d').format('YYYY-MM-DD');
                 }
             }
@@ -141,6 +152,10 @@ export default {
 
             if (search) {
                 query += `filter[query]=${search}&`
+            }
+
+            if (email) {
+                query += `filter[has_email]=true&`
             }
 
             if (startDate && endDate) {
