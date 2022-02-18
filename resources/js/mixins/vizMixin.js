@@ -109,12 +109,17 @@ export default {
             return '';
         },
 
+        async searchLocationInstagram(query) {
+            return await fetch(`/api/v1/search/viz/instagram-location?query=${query}`).then(r => r.json())
+        },
+
         searchVizQueryViz() {
             let startDate = this.filterVizSearch.date.startDate ? moment(this.filterVizSearch.date.startDate).format('YYYY-MM-DD') :  '';
             let endDate = this.filterVizSearch.date.endDate ? moment(this.filterVizSearch.date.endDate).format('YYYY-MM-DD')  : '';
             const status = this.filterVizSearch.status ? this.filterVizSearch.status : '';
             const email = this.filterVizSearch.email ? this.filterVizSearch.email : '';
             const search = this.filterVizSearch.search ? this.filterVizSearch.search : '';
+            const location_instagram = this.filterVizSearch.location_instagram ? this.filterVizSearch.location_instagram : '';
             const connection = this.filterVizSearch.connection && this.filterVizSearch.connection.length ? this.filterVizSearch.connection : [];
             
             let per_page = this.filterVizSearch.per_page;
@@ -122,7 +127,7 @@ export default {
             let sort = '-score';
 
             if ( ! startDate) {
-                if ( ! connection.length && ! status && ! search & ! email) {
+                if ( ! connection.length && ! status && ! search && ! email && ! location_instagram) {
                     startDate = moment().subtract(7,'d').format('YYYY-MM-DD');
                 }
             }
@@ -156,6 +161,10 @@ export default {
 
             if (email) {
                 query += `filter[has_email]=true&`
+            }
+
+            if (location_instagram) {
+                query += `filter[instagram_location]=${location_instagram}&`
             }
 
             if (startDate && endDate) {

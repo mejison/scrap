@@ -119,4 +119,9 @@ class StmlnPortal
         $response = Http::withHeaders($this->getHeaders())->get('https://api.izeaexchange.com/v5/query_builder/autocompletes/multi_channel_searches' . $query);
         return json_decode($response->getBody());
     }
+
+    public function searchInstagramLocation($query) {
+        $response = Http::withHeaders($this->getHeaders())->get('https://api.izeaexchange.com/v5/viz_searches?suggest[instagram_location]=' . $query);
+        return json_decode($response->getBody());
+    }
 }

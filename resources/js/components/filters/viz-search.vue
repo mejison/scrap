@@ -1,10 +1,8 @@
 <template>
     <div class="flex justify-content">
-        <!-- <dropdown label="Connection" :options="connectionsOptions" v-model="connection" @input="onInputConnection"  /> -->
         <connectiondropdown label="Connections" v-model="connection" :options="connectionsOptions" @input="onInputConnection" />
         <dropdown label="Status" :options="statusOptions"  v-model="status" @input="onInputStatus" />
         
-
         <div class="btn bg-white">
             <date-range-picker
                 ref="picker"
@@ -19,6 +17,12 @@
         </div>
 
        <dropdown label="Email" :options="emailOptions"  v-model="email" @input="onInputEmail" />
+
+       <locationinstagramdropdown 
+            label="Instagram Post Location" 
+            v-model="location_instagram" 
+            @input="onInputPostLocation"
+        />
         
         <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
             Clear filter
@@ -29,6 +33,7 @@
 <script>
 import Dropdown from '../dropdown.vue';
 import connectiondropdown from '../connection-dropdown.vue'
+import locationinstagramdropdown from '../location-instagram-dropdown.vue'
 import emaildropdown from '../email-dropdown.vue'
 import vizMixin from '../../mixins/vizMixin'
 import moment from 'moment';
@@ -40,6 +45,7 @@ export default {
         Dropdown,
         DateRangePicker,
         connectiondropdown,
+        locationinstagramdropdown,
         emaildropdown,
     },
 
@@ -50,6 +56,7 @@ export default {
     data() {
         return {
             connection: null,
+            location_instagram: null,
             status: null,
             email: null,
             dateRange: {
@@ -61,13 +68,22 @@ export default {
     },
 
     methods: {
+        onInputPostLocation(query) {
+            this.setFilterViz({
+                ...this.filterVizSearch,
+                location_instagram: query
+            })
+            this.$emit('change')
+        },
+
         onInputEmail(value) {
             this.setFilterViz({
                 ...this.filterVizSearch,
                 email: value
-            })
+            });
             this.$emit('change')
         },
+
         updateValues(data) {
             this.setFilterViz({
                 ...this.filterVizSearch,
@@ -87,6 +103,7 @@ export default {
             };
             this.status =  null;
             this.email = null;
+            this.location_instagram = null;
             this.dateRange = {
                 startDate: moment().subtract(7,'d').format('YYYY-MM-DD'),
                 endDate: moment().format('YYYY-MM-DD'),
@@ -121,8 +138,7 @@ export default {
                 connection: data
             })
             this.$emit('change')
-        }
+        },
     },
-
 }
 </script>

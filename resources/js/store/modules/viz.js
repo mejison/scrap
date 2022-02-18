@@ -12,6 +12,7 @@ export default {
             },
             status: '',
             email: '',
+            location_instagram: '',
             page: 1,
             per_page: 20,
             total: 0,

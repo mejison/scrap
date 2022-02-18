@@ -18,10 +18,17 @@ class VizController extends Controller
 
     public function searchViz(Request $request) {
         $query = $request->input('query');
-        // dd($query);
-
+     
         $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
         $data = $stmln_portal->getViz($query);
+        
+        return response()->json($data);
+    }
+
+    public function searchInstagramLocation(Request $request) {
+        $query = $request->input('query');
+        $stmln_portal = new StmlnPortal($this->bearer, $this->csrf);
+        $data = $stmln_portal->searchInstagramLocation($query);
         
         return response()->json($data);
     }

@@ -35,6 +35,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/white-label-organizations', [UnityController::class, 'getWhiteLabelOrganizations']);
     Route::get('/search-location', [UnityController::class, 'searchLocation']);
 
+    Route::get('/search/viz/instagram-location', [VizController::class, 'searchInstagramLocation']);
     Route::post('/search/viz', [VizController::class, 'searchViz']);
 
     Route::get('/preview/', [VizController::class, 'preview']);
