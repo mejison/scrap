@@ -11,7 +11,8 @@
                 @update="updateValues"
             >
                 <template v-slot:input="picker" style="min-width: 350px;">
-                    {{ moment(picker.startDate).format('YYYY-MM-DD') }} - {{ moment(picker.endDate).format('YYYY-MM-DD') }}
+                    <span  class="text-black" v-if="selectedDate">{{ moment(picker.startDate).format('YYYY-MM-DD') }} - {{ moment(picker.endDate).format('YYYY-MM-DD') }}</span>
+                    <span class="text-black" v-else>Date Posted <i class="fa fa-caret-down"></i></span>
                 </template>
             </date-range-picker>
         </div>
@@ -59,6 +60,7 @@ export default {
             location_instagram: null,
             status: null,
             email: null,
+            selectedDate: false,
             dateRange: {
                 startDate:  moment().format('YYYY-MM-DD'),
                 endDate: moment().format('YYYY-MM-DD'),
@@ -85,6 +87,7 @@ export default {
         },
 
         updateValues(data) {
+            this.selectedDate = true;
             this.setFilterViz({
                 ...this.filterVizSearch,
                 date: {
@@ -104,6 +107,7 @@ export default {
             this.status =  null;
             this.email = null;
             this.location_instagram = null;
+            this.selectedDate = false;
             this.dateRange = {
                 startDate: moment().subtract(7,'d').format('YYYY-MM-DD'),
                 endDate: moment().format('YYYY-MM-DD'),

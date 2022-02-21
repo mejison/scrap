@@ -68,7 +68,7 @@
                     </span>
                 </div>
                 <div class="info">
-                    {{ moment(item.attributes.created_at).format("MMMM d, Y") }} {{ humanformat(item.attributes.engagements) }} Eng.
+                    {{ moment(item.attributes.created_at).format("MMM DD, Y") }} {{ humanformat(item.attributes.engagements) }} Eng.
                 </div>
                 <div class="description">
                    {{ item.attributes.highlight }}
