@@ -94,6 +94,7 @@ export default {
                         twitter: '#1DA1F2',
                         facebook: '#3B5998',
                         pinterest: '#BD081C',
+                        blog: '#EAB054',
                     }
                     return colors[brand];
                 });

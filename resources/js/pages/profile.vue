@@ -175,7 +175,7 @@ export default {
     methods: {
         ...mapActions("unity", ['setItem']),
         setSocialGraph() {
-            const allowList = ['Facebook', 'Twitter', 'Pinterest', 'Instagram'];
+            const allowList = ['Facebook', 'Twitter', 'Pinterest', 'Instagram', 'Blog'];
             if (this.item && this.item.connections) {
                 this.item.connections.forEach(conn => {
                     const name = conn.attributes
