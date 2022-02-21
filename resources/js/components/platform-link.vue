@@ -41,6 +41,12 @@ export default {
         a {
             color: #4C68C7;
             font-size: 14px;
+            text-overflow: ellipsis;
+            overflow: hidden; 
+            max-width: 400px; 
+            height: 1.2em; 
+            white-space: nowrap;
+            display: inline-block;
         }
     }
 </style>

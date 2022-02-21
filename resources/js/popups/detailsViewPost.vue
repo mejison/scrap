@@ -172,8 +172,8 @@ export default {
 
     .content {
         display: grid;
-        grid-template-columns: 340px 1fr;
-        grid-gap: 5px;
+        grid-template-columns: 365px 1fr;
+        grid-gap: 15px;
 
         &.youtube {
             grid-template-columns: 1fr;    
@@ -275,6 +275,7 @@ export default {
         border: 1px solid #dbdbdb;
         border-radius: 2px;
         height: 665px;
+        width: 100%;
     }
 
     .embedded-platform-youtube {
