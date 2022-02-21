@@ -86,35 +86,42 @@ export default {
                     return d.r;
                 })
                 .style("fill", function(d,i) {
-                    return color(i);
+                     const brand = d.data
+                        .Name
+                        .toLowerCase();
+                    const colors = {
+                        instagram: '#5851DB',
+                        twitter: '#1DA1F2',
+                        facebook: '#3B5998',
+                        pinterest: '#BD081C',
+                    }
+                    return colors[brand];
                 });
 
-            node.append("text")
-                .attr("dy", ".2em")
-                .style("text-anchor", "middle")
-                .text(function(d) {
-                    return d.data.Name.substring(0, d.r / 3);
+            node
+                .append("svg:image")
+                .attr("xlink:href", (d) => {
+                    const brand = d.data
+                        .Name
+                        .toLowerCase()
+                    return "https://scrap.local/images/icons/" + brand + "-brands.svg";
                 })
-                .attr("font-family", "sans-serif")
+                .attr("width", (d) => {
+                    return  d.r / 2;  
+                })
+                .attr("height", (d) => {
+                    return  d.r / 2; 
+                })
+                .attr("fill", "white")
                 .attr("font-size", function(d){
                     return d.r/5;
                 })
-                .attr("fill", "white");
+                .attr("style", function(d) {
+                    const x = (d.r / 2) / 2;
+                    const y = (d.r / 2) / 2;
+                    return `transform:translate(-${x}px, -${y}px)`;
+                });
             
-        
-            node.append("text")
-                .attr("dy", "1.3em")
-                .style("text-anchor", "middle")
-                .text(function(d) {
-                    const count = d.data.Count ? humanformat(d.data.Count) : 0;
-                    return count;
-                })
-                .attr("font-family",  "Gill Sans", "Gill Sans MT")
-                .attr("font-size", function(d){
-                    return d.r/5;
-                })
-                .attr("fill", "white");
-
             d3.select(self.frameElement)
                 .style("height", diameter + "px");
         }
@@ -135,7 +142,6 @@ export default {
        width: 200px;
        height: 200px;
        position: relative;
-
 
        .bubble {
           top: 0;
