@@ -117,11 +117,11 @@ export default {
             let startDate = this.filterVizSearch.date.startDate ? moment(this.filterVizSearch.date.startDate).format('YYYY-MM-DD') :  '';
             let endDate = this.filterVizSearch.date.endDate ? moment(this.filterVizSearch.date.endDate).format('YYYY-MM-DD')  : '';
             const status = this.filterVizSearch.status ? this.filterVizSearch.status : '';
-            const email = this.filterVizSearch.email ? this.filterVizSearch.email : '';
+            const email = this.filterVizSearch.email && this.filterVizSearch.email.value  ? this.filterVizSearch.email.value : '';
             const search = this.filterVizSearch.search ? this.filterVizSearch.search : '';
             const location_instagram = this.filterVizSearch.location_instagram ? this.filterVizSearch.location_instagram : '';
             const connection = this.filterVizSearch.connection && this.filterVizSearch.connection.length ? this.filterVizSearch.connection : [];
-            
+
             let per_page = this.filterVizSearch.per_page;
             let page = this.filterVizSearch.page;
             let sort = '-score';
