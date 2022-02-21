@@ -104,7 +104,7 @@ export default {
                     const brand = d.data
                         .Name
                         .toLowerCase()
-                    return "https://scrap.local/images/icons/" + brand + "-brands.svg";
+                    return "/images/icons/" + brand + "-brands.svg";
                 })
                 .attr("width", (d) => {
                     return  d.r / 2;  
