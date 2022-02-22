@@ -1,6 +1,6 @@
 <template>
     <div class="socials">
-       <div id="graph" width="150" height="150"></div>
+       <div :id="`graph-${uniqueId}`" width="150" height="150"></div>
     </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
     data() {
         return {
             humanformat: humanformat,
+            uniqueId: 0,
         }
     },
 
@@ -31,6 +32,10 @@ export default {
         dataset() {
             this.print();
         }
+    },
+
+    created() {
+        this.uniqueId = (new Date()) * 1
     },
 
     mounted() {
@@ -53,7 +58,7 @@ export default {
                 .size([diameter, diameter])
                 .padding(1.5);
 
-            var svg = d3.select("#graph")
+            var svg = d3.select(`#graph-${this.uniqueId}`)
                 .append("svg")
                 .attr("width", diameter)
                 .attr("height", diameter)

@@ -75,17 +75,17 @@
                         <div class="profile-tab">
                             <div class="custom-tab-1">
                                 <ul class="nav nav-tabs">
-                                    <li class="nav-item"><a href="#overview" data-toggle="tab" class="nav-link  active show">Overview</a>
+                                    <li class="nav-item"><a href="#overview" data-toggle="tab" class="nav-link active show">Overview</a>
                                     </li>
                                     <li class="nav-item"><a href="#connections" data-toggle="tab" class="nav-link">Connections</a>
                                     </li>
                                     <li class="nav-item"><a href="#about" data-toggle="tab" class="nav-link">About</a>
                                     </li>
-                                    <li class="nav-item"><a href="#audience" data-toggle="tab" class="nav-link ">Audience</a>
+                                    <li class="nav-item"><a href="#audience" data-toggle="tab" class="nav-link " @click.prevent="onClickTab('audience')">Audience</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div id="overview" class="tab-pane fade  active show">
+                                    <div id="overview" class="tab-pane fade active show">
                                         <recent-content :item="item" />
                                         <hr />
                                         <connections :item="item" />
@@ -108,7 +108,7 @@
                                         <hr />
                                         <communities-tags :item="item" />
                                     </div>
-                                    <div id="audience" class="tab-pane fade ">
+                                    <div id="audience" class="tab-pane fade  ">
                                         <audience :item="item" />
                                     </div>
                                 </div>

@@ -2,7 +2,7 @@
     <div>
         <h4 class="my-3 text-center">TOP COUNTRIES</h4>
         <div class="insight-graph card card-body mb-0">
-            <div class="chart" id="chartDomCountries" ref="chartDom"></div>
+            <div class="chart" :id="`chartDomCountries-${uniqueId}`" ref="chartDom"></div>
         </div>
     </div>
 </template>
@@ -21,7 +21,12 @@ export default {
     data() {
         return {
             option: {},
+            uniqueId: '',
         }
+    },
+
+    created() {
+        this.uniqueId = (new Date()) * 1
     },
 
     mounted() {
@@ -48,7 +53,7 @@ export default {
             this.printBar(labels, data);
         },
         printBar(labels, data) {
-             var dom = document.getElementById("chartDomCountries");
+             var dom = document.getElementById(`chartDomCountries-${this.uniqueId}`);
             var myChart = echarts.init(dom);
             var app = {};
 
@@ -117,6 +122,7 @@ export default {
 
 <style scoped>
 .chart {
-  height: 430px;
+  height: 400px;
+  width: 400px;
 }
 </style>

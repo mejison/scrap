@@ -73,10 +73,6 @@ export default {
             default: "ConnectionsDropDown",
             type: String,
         },
-        options: {
-            default: [],
-            type: Array
-        },
         value: {
             type: Array,
             default: () => ([])

@@ -3,7 +3,7 @@
         <h4 class="my-3 text-center">AGE</h4>
         <div class="insight-graph card card-body">
             <!-- <v-chart class="chart" :option="option" /> -->
-            <div class="chart" id="chartDomAge" ref="chartDom"></div>
+            <div class="chart" :id="`chartDomAge-${uniqueId}`" ref="chartDom"></div>
         </div>
     </div>
 </template>
@@ -22,7 +22,12 @@ export default {
     data() {
         return {
             option: {},
+            uniqueId: 0,
         }
+    },
+
+     created() {
+        this.uniqueId = (new Date()) * 1
     },
 
     mounted() {
@@ -49,7 +54,7 @@ export default {
             this.printBar(labels, data);
         },
         printBar(labels, data) {
-            var dom = document.getElementById("chartDomAge");
+            var dom = document.getElementById(`chartDomAge-${this.uniqueId}`);
             var myChart = echarts.init(dom);
             var app = {};
 
@@ -112,5 +117,6 @@ export default {
 <style scoped>
 .chart {
   height: 400px;
+  width: 400px;
 }
 </style>
