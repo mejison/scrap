@@ -9,12 +9,15 @@
                 <div class="col-lg-8 col-md-9 col-12">
                     <h3 class="my-3 text-center text-lg-left" >{{ item.attributes.name }}</h3>
                     <div class="comunities mb-2">
-                        <span class="community badge bg-success text-white mb-1 mr-1" v-for="(comm, index) in item.overview.communities" :key="index">
-                            {{ comm.value }}
+                        <span 
+                            class="community badge bg-success text-white mb-1 mr-1" 
+                            v-for="(comm, index) in unique(item.overview.communities)" 
+                            :key="index">
+                            {{ comm }}
                         </span>
                     </div>
-                    <p class="bio mb-2" v-if="item.Bio">
-                        {{ item.Bio}}
+                    <p class="bio mb-2" v-if="item.attributes.bio">
+                        {{ item.attributes.bio }}
                     </p>
                     <div class="address">
                         <i class="lni lni-map-marker"></i>
@@ -140,6 +143,7 @@ import CommunitiesTags from '../components/communities-tags.vue'
 import { mapActions, mapState } from 'vuex'
 import requestMixin from '../mixins/requestMixin';
 import HumanFormat from  'human-format';
+import lodash from 'lodash';
 
 export default {
     name: 'Profile',
@@ -164,7 +168,8 @@ export default {
     data() {
         return {
             humanformat: HumanFormat,
-            socials: []
+            socials: [],
+            lodash: lodash,
         }
     },
 
@@ -174,6 +179,18 @@ export default {
 
     methods: {
         ...mapActions("unity", ['setItem']),
+        unique(items) {
+            let unique = [];
+            items.forEach(item => {
+                if ( ! unique.includes(item.value)) {
+                    unique = [
+                        ...unique,
+                        item.value
+                    ]
+                }
+            })
+            return unique;
+        },
         setSocialGraph() {
             const allowList = ['Facebook', 'Twitter', 'Pinterest', 'Instagram', 'Blog'];
             if (this.item && this.item.connections) {
@@ -284,6 +301,10 @@ export default {
 
     .cover-photo {
         background-size: cover;
+    }
+
+    .community {
+        text-transform: capitalize;
     }
 
     #preloader {
