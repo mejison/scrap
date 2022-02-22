@@ -2,11 +2,16 @@
     <div>
         <a href="#">
             <h3 class="page-title my-4">Recent Content &nbsp; 
-                <dropdown 
+                <!-- <dropdown 
                     label="Connection"
                     v-model="currentConnection"
                     :options="connectionOptions" 
-                    @input="onChange" />
+                    @input="onChange" /> -->
+                    <recent-content-dropdown 
+                        label="Connection"
+                        :connections="item.connections"
+                        @input="onChange"
+                    />
             </h3>
         </a>
         <div class="carousel-wrapper" v-if="items && items.length">
@@ -38,6 +43,7 @@
 </style>
 
 <script>
+import RecentContentDropdown from '../components/recent-content-dropdown.vue'
 import requestMixin from '../mixins/requestMixin';
 import Dropdown from '../components/dropdown.vue'
 import { SplitCarousel, SplitCarouselItem } from "vue-split-carousel";
@@ -48,7 +54,8 @@ export default {
     components: {
         Dropdown,
         SplitCarousel,
-        SplitCarouselItem
+        SplitCarouselItem,
+        RecentContentDropdown
     },
 
     props: {
@@ -64,10 +71,7 @@ export default {
         return {
             currentConnection: null,
             connectionOptions: [
-                {
-                    label: 'Any',
-                    value: null
-                },
+               
             ],
             items: [],
         }
@@ -90,6 +94,10 @@ export default {
                 this.currentConnection = instOption
             }
 
+            options = options.filter(item => {
+                return ['InstagramProperty', 'PinterestProperty'].includes(item.type)
+            })
+
             this.connectionOptions = [
                 ...this.connectionOptions,
                 ...options
@@ -98,8 +106,9 @@ export default {
     },
 
     methods: {
-        onChange() {
-            this.fetchRecentPosts(this.currentConnection.value);
+        onChange(conn) {
+            this.currentConnection = conn.id
+            this.fetchRecentPosts(conn.id);
         },
         async fetchRecentPosts(connection_id) {
            const orgId = this.getOrganizationId();
