@@ -42,6 +42,7 @@
             <a href="{!! url('/'); !!}" class="brand-logo">
 			@if(!empty($logo))
 				<img class="logo-abbr"  style="max-width: 150px;" src="{{ asset($logo) }}" alt="" />
+                <img class="mini-logo-abbr" style="max-with: 50px;" src="{{ asset('images/logo-mini.png') }}" alt="" />
 			@else
                 <img class="logo-abbr" style="max-width: 150px;" src="{{ asset('images/logo.png') }}" alt="" />
 			@endif	
@@ -122,6 +123,25 @@
     <style>
         .nav-header .logo-abbr {
             max-width: 150px;
+        }
+
+        .nav-header .mini-logo-abbr {
+            display: none;
+        }
+
+        .nav-header .mini-logo-abbr {
+            max-width: 150px;
+        }
+
+        @media (max-width: 1200px) {
+            .logo-abbr {
+                display: none !important;
+            }
+
+            .nav-header .mini-logo-abbr {
+                display: block !important;
+                width: 50px;
+            }
         }
     </style>
     @stack('css')
