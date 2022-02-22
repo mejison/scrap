@@ -55,57 +55,33 @@ export default {
         printBar(labels, data) {
             var dom = document.getElementById(`chartDomState-${this.uniqueId}`);
             var myChart = echarts.init(dom);
-            var app = {};
 
-            app.config = {
-                rotate: 90,
-                align: 'left',
-                verticalAlign: 'center',
-                position: 'outside',
-                distance: 5,
-            };
-
-            const labelOption = {
-                show: true,
-                position: app.config.position,
-                distance: app.config.distance,
-                align: app.config.align,
-                verticalAlign: app.config.verticalAlign,
-                rotate: app.config.rotate,
-                formatter: '{c}% {b}',
-                fontSize: 12,
-                rich: {
-                    name: {}
-                }
-            };
+            var dataset = [];
+            labels.forEach((label, index) => {
+                dataset = [
+                    ...dataset,
+                    [data[index], `${data[index]}% ${label}`]
+                ]
+            });
 
             var option = {
-                width: 400,
-                height: 400,
-                xAxis: [
-                    {
-                        show: false,
-                        axisTick: { show: false },
-                        data: labels
-                    }
-                ],
-                yAxis: [
-                    {
-                        show: false,
-                        type: 'value'
-                    }
-                ],
+                dataset: {
+                    source: [
+                        ['score', 'product'],
+                        ...dataset,
+                    ]
+                },
+                grid: { containLabel: true },
+                xAxis: { name: 'amount', show: false },
+                yAxis: { type: 'category' },
                 series: [
                     {
-                        name: 'Forest',
-                        type: 'bar',
-                        barGap: 0,
-                        label: labelOption,
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: data
-                    },
+                    type: 'bar',
+                    encode: {
+                        x: 'amount',
+                        y: 'product'
+                    }
+                    }
                 ]
             };
 

@@ -42,7 +42,7 @@
                             </span>
                         </div>
                         <div class="description">
-                            <h4>
+                            <h4 class="text-left">
                                 <a :href="connect.attributes.link" target="_blank">{{ connect.attributes.connection_name }}</a>
                             </h4>
                             <div class="text-left">

@@ -53,62 +53,35 @@ export default {
             this.printBar(labels, data);
         },
         printBar(labels, data) {
-             var dom = document.getElementById(`chartDomCountries-${this.uniqueId}`);
+            var dom = document.getElementById(`chartDomCountries-${this.uniqueId}`);
             var myChart = echarts.init(dom);
-            var app = {};
 
-
-            app.config = {
-                rotate: 90,
-                top: 'top',
-                distance: 2,
-                position: 'outside',
-                align: 'left',
-                verticalAlign: 'center'
-            };
-
-            const labelOption = {
-                show: true,
-                position: app.config.position,
-                distance: app.config.distance,
-                align: app.config.align,
-                verticalAlign: app.config.verticalAlign,
-                rotate: app.config.rotate,
-                formatter: '{c}% {b}',
-                fontSize: 12,
-                rich: {
-                    name: {}
-                }
-            };
+            var dataset = [];
+            labels.forEach((label, index) => {
+                dataset = [
+                    ...dataset,
+                    [data[index], `${data[index]}% ${label}`]
+                ]
+            });
 
             var option = {
-                xAxis: [
-                    {
-                        show: false,
-                        axisTick: { show: false },
-                        data: labels
-                    }
-                ],
-                grid: {
-                    top: 120,
+                dataset: {
+                    source: [
+                        ['score', 'product'],
+                        ...dataset,
+                    ]
                 },
-                yAxis: [
-                    {
-                        show: false,
-                        type: 'value'
-                    }
-                ],
+                grid: { containLabel: true },
+                xAxis: { name: 'amount', show: false },
+                yAxis: { type: 'category' },
                 series: [
                     {
-                        name: 'Forest',
-                        type: 'bar',
-                        barGap: 0,
-                        label: labelOption,
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: data
-                    },
+                    type: 'bar',
+                    encode: {
+                        x: 'amount',
+                        y: 'product'
+                    }
+                    }
                 ]
             };
 

@@ -2,7 +2,6 @@
     <div>
         <h4 class="my-3 text-center">AGE</h4>
         <div class="insight-graph card card-body">
-            <!-- <v-chart class="chart" :option="option" /> -->
             <div class="chart" :id="`chartDomAge-${uniqueId}`" ref="chartDom"></div>
         </div>
     </div>
@@ -50,6 +49,9 @@ export default {
                     ((item.reachPercentage) * 100).toFixed(0)
                 ]
             })
+
+            data = data.reverse()
+            labels = labels.reverse()
 
             this.printBar(labels, data);
         },
