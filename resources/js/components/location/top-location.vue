@@ -20,7 +20,7 @@
                     <input 
                         type="checkbox"
                         name="location"
-                        :value="['states_and_countries'].includes(type) ? JSON.stringify(item) : JSON.stringify(item.name)" 
+                        :value="['states_and_countries'].includes(type) ? JSON.stringify(item) : JSON.stringify({label: item.name, value: item.name})" 
                         v-model="selectedLocations" 
                         @change="onChange"
                     />
@@ -88,7 +88,7 @@ export default {
             this.addManually(item)
         },
         addManually(item) {
-            item = ['states_and_countries'].includes(this.type) ? JSON.stringify(item) : JSON.stringify(item.name);
+            item = ['states_and_countries'].includes(this.type) ? JSON.stringify(item) : JSON.stringify({label: item.name, value: item.name});
             this.selectedLocations = [
                 ...this.selectedLocations,
                 item
