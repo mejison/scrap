@@ -301,7 +301,7 @@ export default {
                                     input: "select",
                                     operator: "less_or_equal",
                                     type: "integer",
-                                    value: age[0],
+                                    value: age[0] * 1,
                                 },
                                 {
                                     field: "user_birthday",
@@ -309,7 +309,7 @@ export default {
                                     input: "select",
                                     operator: "greater_or_equal",
                                     type: "integer",
-                                    value: age[1],
+                                    value: age[1] * 1,
                                 }
                             ]
                         }
