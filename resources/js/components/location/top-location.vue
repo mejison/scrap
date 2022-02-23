@@ -75,7 +75,20 @@ export default {
 
     methods: {
        async onSearch() {
-            const { data : { attributes : { options } } } = await this.searchLocation(this.query, this.type);
+            let { data : { attributes : { options } } } = await this.searchLocation(this.query, this.type);
+            options = options.filter(item => {
+                if ( ! ['states_and_countries'].includes(this.type)) {
+                    const exist = this.added.find(res => res.name.toLowerCase() == item.name.toLowerCase());
+                    const topExist = this.top.find(res => res.label.toLowerCase() == item.name.toLowerCase());
+                   
+                    return ! exist && ! topExist;
+                } else {
+                    const exist = this.added.find(res => res.id == item.id);
+                    const topExist = this.top.find(res => res.id == item.id);
+                   
+                    return ! exist && ! topExist;
+                }
+            })
             this.results = [...options];
         },
         onSelect(item) {
