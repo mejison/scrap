@@ -39,7 +39,7 @@
                         v-mask="['#', '##', '###', '####', '#,###', '##,###', '###,###', '#,###,###']"
                         @input="updateValue"
                     />
-                    <span>followers</span>
+                    <span v-if="ranges[option.value][1] == '5,000,000'">+</span> <span>followers</span>
                     <div>
                         <vue-range-slider 
                             @drag-end="onDragEnd($event, option.value)" 
@@ -92,9 +92,11 @@ export default {
         sliderComputed() {
             let ranges = {};
             for(let r in this.ranges) {
+                let min = this.ranges[r][0] ? String(this.ranges[r][0]).replaceAll(',', '') * 1 : 0;
+                let max = this.ranges[r][1] ? String(this.ranges[r][1]).replaceAll(',', '') * 1 : 0;
                 ranges[r] = [
-                    this.ranges[r][0] ? String(this.ranges[r][0]).replaceAll(',', '') * 1 : 0,
-                    this.ranges[r][1] ? String(this.ranges[r][1]).replaceAll(',', '') * 1 : 0,
+                    min,
+                    max,
                 ]
             }
             return ranges;
