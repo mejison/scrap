@@ -177,13 +177,11 @@ export default {
         optionsFinded() {
             if (this.query || this.showAll) {
                 const items = this.options.filter((item) => {
-                    // const exist = this.added.find(row => row.label == item.label);
-
                     if (this.showAll) {
                         return true;
                     }
                    
-                    return item.value.indexOf(this.query) + 1;
+                    return item.label.toLowerCase().indexOf(this.query.toLowerCase()) + 1;
                 });
 
                 if ( ! items.length) {
