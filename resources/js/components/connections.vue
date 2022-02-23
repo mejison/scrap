@@ -10,9 +10,12 @@
                        <div class="row">
                            <div class="col-4">
                                <div class="text-center connection">
-                                   <div>
-                                       <img width="64" height="64" :src="connect.attributes.avatar_url"
-                                        class="rounded-circle" alt="" />
+                                   <div class="avatar">
+                                       <img 
+                                            :src="connect.attributes.avatar_url"
+                                            class="rounded-circle" 
+                                            alt=""
+                                        />
                                    </div>
                                    <span class="social">
                                         <i v-if="['InstagramProperty'].includes(connect.attributes.chart_publishable_type)" class="lni lni-instagram"></i>
@@ -104,6 +107,19 @@ export default {
 <style lang="scss" scoped>
     .connection {
         position: relative;    
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
 
         .social {
             position: absolute;
