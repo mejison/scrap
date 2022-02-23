@@ -25,22 +25,26 @@
                     <input 
                         type="text"
                         class="range-from" 
-                        :value="humanformat(ranges[option.value][0])"
+                        v-model="ranges[option.value][0]"
                         placeholder="0"
+                        v-mask="['#', '##', '###', '####', '#,###', '##,###', '###,###', '#,###,###']"
+                        @input="updateValue"
                     />
                     <span>to</span>
                     <input 
                         type="text" 
                         class="range-to" 
-                        :value="ranges[option.value][1] == 5000000 ? '5M+' : humanformat(ranges[option.value][1])"
+                        v-model="ranges[option.value][1]"
                         placeholder="5M+"
+                        v-mask="['#', '##', '###', '####', '#,###', '##,###', '###,###', '#,###,###']"
+                        @input="updateValue"
                     />
                     <span>followers</span>
                     <div>
                         <vue-range-slider 
-                            @drag-end="onDragEnd" 
+                            @drag-end="onDragEnd($event, option.value)" 
                             @click.stop ref="slider" 
-                            v-model="ranges[option.value]" 
+                            :value="sliderComputed[option.value]"
                             :min="0"
                             :max="5000000"
                             tooltip-dir="bottom"
@@ -57,13 +61,17 @@
 import 'vue-range-component/dist/vue-range-slider.css'
 import VueRangeSlider from 'vue-range-component'
 import humanformat from 'human-format';
+import {mask} from 'vue-the-mask'
+import _debounce from 'lodash/debounce'
 
 export default {
     name: 'ConnectionsDropDown',
 
     components: {
-        VueRangeSlider
+        VueRangeSlider,
     },
+
+    directives: {mask},
 
     props: {
         label: {
@@ -78,6 +86,19 @@ export default {
             type: Array,
             default: () => ([])
         },
+    },
+
+    computed: {
+        sliderComputed() {
+            let ranges = {};
+            for(let r in this.ranges) {
+                ranges[r] = [
+                    this.ranges[r][0] ? String(this.ranges[r][0]).replaceAll(',', '') * 1 : 0,
+                    this.ranges[r][1] ? String(this.ranges[r][1]).replaceAll(',', '') * 1 : 0,
+                ]
+            }
+            return ranges;
+        }
     },
 
     data() {
@@ -115,7 +136,12 @@ export default {
 
             this.ranges = {...this.ranges}
         },
-        onDragEnd() {
+        updateValue: _debounce(function () {
+            this.onDragEnd();
+        }, 1000),
+        onDragEnd(event, name) {
+            let { val } = event
+            this.ranges[name] = val
             this.ranges = {...this.ranges}
             this.onSelect();
         },
