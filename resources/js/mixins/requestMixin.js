@@ -175,6 +175,7 @@ export default {
             const age = this.filter.age && this.filter.age.length ? this.filter.age : '';
             const accountcreated = this.filter.accountcreated && this.filter.accountcreated.length ? this.filter.accountcreated : '';
             const celebrity = this.filter.celebrity ? this.filter.celebrity : null;
+            const education = this.filter.education ? this.filter.education : null;
 
             const locationRadius = this.filter.location && this.filter.location['location-radius'] ? this.filter.location['location-radius'] : false;
             const radiusSearch = this.filter.location && this.filter.location['radius-search'] ? this.filter.location['radius-search'] : false;
@@ -514,6 +515,38 @@ export default {
                                 "operator": "equal",
                                 "value": celebrity.value ? 'true' : 'false'
                             }
+                        ]
+                    }
+                ];
+            }
+
+            if (education) {
+                let rulesEducation = [];
+                
+                education.forEach(item => {
+                    if (item) {
+                        rulesEducation = [
+                            ...rulesEducation,
+                            {
+                                field: "education",
+                                group: "Creator",
+                                id: "education",
+                                input: "select",
+                                operator: "equal",
+                                type: "string",
+                                value: item,
+                            },
+                        ]
+                    }
+                })
+                
+
+                rules = [
+                    ...rules,
+                    {
+                        "condition": "OR",
+                        "rules": [
+                            ...rulesEducation,
                         ]
                     }
                 ];

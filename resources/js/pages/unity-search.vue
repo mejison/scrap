@@ -16,6 +16,7 @@
                 :age-options="ageOptions"
                 :account-created-options="accountCreatedOptions"
                 :celebrity-options="celebrityOptions"
+                :education-options="educatinOptions"
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
@@ -349,6 +350,36 @@ export default {
                     value: false
                 },
             ],
+            educatinOptions: [
+                {
+                    label: "Some High School",
+                    value: "some_high_school"
+                },
+                {
+                    label: "High School Diploma/GED",
+                    value: "high_school"
+                },
+                {
+                    label: "In College",
+                    value: "in_college",
+                },
+                {
+                    label: "Some College",
+                    value: "some_college",
+                },
+                {
+                    label: "Associate's Degree",
+                    value: "associate_degree",
+                },
+                {
+                    label: "Bachelor's Degree",
+                    value: "college_degree",
+                },  
+                {
+                    label: "Master's or Higher",
+                    value: "graduate_degree",
+                },    
+            ]
         }
     },
 
@@ -373,7 +404,7 @@ export default {
         onClearFilter() {
             this.setFilter({
                 location: {
-                     'location-radius': 5,
+                    'location-radius': 5,
                     'radius-search': [],
                     'state-country': [],
                 },
@@ -382,6 +413,7 @@ export default {
                 age: [0, 120],
                 accountcreated: null,
                 celebrity: null,
+                education: null,
                 page: 1,
                 per_page: 10,
                 total: 0,

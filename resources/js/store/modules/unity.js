@@ -15,6 +15,7 @@ export default {
             age: [0, 120],
             accountcreated: null,
             celebrity: null,
+            education: null,
             page: 1,
             per_page: 20,
             total: 0,
