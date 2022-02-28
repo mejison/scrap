@@ -14,6 +14,7 @@ export default {
             communities: [],
             age: [0, 120],
             accountcreated: null,
+            celebrity: null,
             page: 1,
             per_page: 20,
             total: 0,

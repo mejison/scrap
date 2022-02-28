@@ -174,6 +174,7 @@ export default {
             const connections = this.filter.connections && this.filter.connections.length  ? this.filter.connections : [];
             const age = this.filter.age && this.filter.age.length ? this.filter.age : '';
             const accountcreated = this.filter.accountcreated && this.filter.accountcreated.length ? this.filter.accountcreated : '';
+            const celebrity = this.filter.celebrity ? this.filter.celebrity : null;
 
             const locationRadius = this.filter.location && this.filter.location['location-radius'] ? this.filter.location['location-radius'] : false;
             const radiusSearch = this.filter.location && this.filter.location['radius-search'] ? this.filter.location['radius-search'] : false;
@@ -494,6 +495,25 @@ export default {
                         "condition": "OR",
                         "rules": [
                             ...rulesAccountCreated,
+                        ]
+                    }
+                ];
+            }
+
+            if (celebrity) {
+                rules = [
+                    ...rules,
+                    {
+                        "condition": "OR",
+                        "rules": [
+                            {
+                                "id": "is_celebrity",
+                                "field": "is_celebrity",
+                                "type": "boolean",
+                                "input": "select",
+                                "operator": "equal",
+                                "value": celebrity.value ? 'true' : 'false'
+                            }
                         ]
                     }
                 ];

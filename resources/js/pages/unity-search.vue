@@ -15,6 +15,7 @@
                 :communities-options="communitiesOptions"
                 :age-options="ageOptions"
                 :account-created-options="accountCreatedOptions"
+                :celebrity-options="celebrityOptions"
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
@@ -337,7 +338,17 @@ export default {
                     label: 'Older than 30 Days',
                     value: '30-'
                 },
-            ]
+            ],
+            celebrityOptions: [
+                {
+                    label: 'Celebrities',
+                    value: true
+                },
+                {
+                    label: 'Non-Celebrities',
+                    value: false
+                },
+            ],
         }
     },
 
@@ -370,6 +381,7 @@ export default {
                 communities: [],
                 age: [0, 120],
                 accountcreated: null,
+                celebrity: null,
                 page: 1,
                 per_page: 10,
                 total: 0,
