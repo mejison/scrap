@@ -6,6 +6,7 @@
                 <locationdropdown label="Location(Creator)" v-model="payload.location" :options="locationOptions" @input="onChange" />
                 <agedropdown label="Age(Creator)" v-model="payload.age" :options="ageOptions" @input="onChange" />
                 <connectiondropdown label="Connections" v-model="payload.connections" :options="connectionsOptions" @input="onChange" />
+                <accountcreated label="Account Created" v-model="payload.accountcreated" :options="accountCreatedOptions" @input="onChange" />
 
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
                     Clear filter
@@ -21,6 +22,7 @@ import connectiondropdown from '../connection-dropdown.vue'
 import communitydropdown from '../community-dropdown.vue'
 import locationdropdown from '../location-dropdown.vue'
 import agedropdown from '../age-dropdown.vue'
+import accountcreated from '../accountcreated.vue';
 
 export default {
     name: "filter-unity-search",
@@ -31,6 +33,7 @@ export default {
         connectiondropdown,
         communitydropdown,
         locationdropdown,
+        accountcreated,
     },
 
     props: {
@@ -43,6 +46,7 @@ export default {
         'network-options': {},
         'communities-options': {},
         'age-options': {},
+        'account-created-options': []
     },
 
     data() {

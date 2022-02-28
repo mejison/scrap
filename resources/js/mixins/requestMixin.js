@@ -1,5 +1,7 @@
 import { mapActions, mapState } from "vuex";
 import commonMixin from "./commonMixin";
+import moment from "moment";
+
 export default {
     data() {
         return {
@@ -171,6 +173,7 @@ export default {
             const community = this.filter.communities && this.filter.communities.length ? this.filter.communities : [];
             const connections = this.filter.connections && this.filter.connections.length  ? this.filter.connections : [];
             const age = this.filter.age && this.filter.age.length ? this.filter.age : '';
+            const accountcreated = this.filter.accountcreated && this.filter.accountcreated.length ? this.filter.accountcreated : '';
 
             const locationRadius = this.filter.location && this.filter.location['location-radius'] ? this.filter.location['location-radius'] : false;
             const radiusSearch = this.filter.location && this.filter.location['radius-search'] ? this.filter.location['radius-search'] : false;
@@ -419,6 +422,81 @@ export default {
                         }
                     ]
                 }
+            }
+
+            if (accountcreated) {
+                let rulesAccountCreated = [];
+                
+                accountcreated.forEach(item => {
+                    if (item.to && ! item.from) {
+                        const dateTo = moment().subtract(item.to, 'd').format('YYYY-MM-DD');
+                       
+                        rulesAccountCreated = [
+                            ...rulesAccountCreated,
+                            {
+                                "id": "created_at",
+                                "field": "created_at",
+                                "type": "time",
+                                "input": "text",
+                                "group": "Creator",
+                                "optionId": `last${item.to}`,
+                                "operator": "greater",
+                                "value": dateTo
+                            },
+                        ]
+                    }
+
+                    if ( ! item.to && item.from) {
+                        const dateFrom = moment().subtract(item.from, 'd').format('YYYY-MM-DD');
+                       
+                        rulesAccountCreated = [
+                            ...rulesAccountCreated,
+                            {
+                                field: "created_at",
+                                group: "Creator",
+                                id: "created_at",
+                                input: "text",
+                                operator: "less",
+                                optionId: "older" + item.from,
+                                type: "time",
+                                value: dateFrom                             
+                            },
+                        ]
+                    }
+
+                    if (item.from && item.to) {
+                        const dateFrom = moment().subtract(item.to, 'd').format('YYYY-MM-DD');
+                        const dateTo = moment().subtract(item.from,'d').format('YYYY-MM-DD');
+
+                        rulesAccountCreated = [
+                            ...rulesAccountCreated,
+                            {
+                                "id": "created_at",
+                                "field": "created_at",
+                                "type": "time",
+                                "input": "text",
+                                "group": "Creator",
+                                "optionId": `${item.from}to${item.to}`,
+                                "operator": "between",
+                                "value": [
+                                    dateFrom,
+                                    dateTo
+                                ],
+                            },
+                        ]
+                    }
+                })
+                
+
+                rules = [
+                    ...rules,
+                    {
+                        "condition": "OR",
+                        "rules": [
+                            ...rulesAccountCreated,
+                        ]
+                    }
+                ];
             }
 
             return {

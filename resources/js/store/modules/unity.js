@@ -13,6 +13,7 @@ export default {
             connections: [],
             communities: [],
             age: [0, 120],
+            accountcreated: null,
             page: 1,
             per_page: 20,
             total: 0,

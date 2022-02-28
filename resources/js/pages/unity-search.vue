@@ -14,6 +14,7 @@
                 :network-options="networkOptions"
                 :communities-options="communitiesOptions"
                 :age-options="ageOptions"
+                :account-created-options="accountCreatedOptions"
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
@@ -319,6 +320,24 @@ export default {
                     value: 50
                 },
             ],
+            accountCreatedOptions: [
+                {
+                    label: 'Last 7 Days',
+                    value: '-7'
+                },
+                {
+                    label: '7 to 14 Days',
+                    value: '7-14'
+                },
+                {
+                    label: '14 to 30 Days',
+                    value: '14-30'
+                },
+                {
+                    label: 'Older than 30 Days',
+                    value: '30-'
+                },
+            ]
         }
     },
 
@@ -350,6 +369,7 @@ export default {
                 connections: [],
                 communities: [],
                 age: [0, 120],
+                accountcreated: null,
                 page: 1,
                 per_page: 10,
                 total: 0,
