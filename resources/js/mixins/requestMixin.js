@@ -177,6 +177,12 @@ export default {
             const celebrity = this.filter.celebrity ? this.filter.celebrity : null;
             const education = this.filter.education ? this.filter.education : null;
 
+            const ethnicity = this.filter.ethnicity && this.filter.ethnicity.length ? this.filter.ethnicity : null;
+            const audienceAuthenticity = this.filter.audienceauthenticity ? this.filter.audienceauthenticity : null;
+            const gender = this.filter.gendercreator ? this.filter.gendercreator : null;
+            const income = this.filter.income ? this.filter.income : null;
+            const sponsorshipIndex = this.filter.sponsorshipindex ? this.filter.sponsorshipindex : null;
+
             const locationRadius = this.filter.location && this.filter.location['location-radius'] ? this.filter.location['location-radius'] : false;
             const radiusSearch = this.filter.location && this.filter.location['radius-search'] ? this.filter.location['radius-search'] : false;
             const stateCountry = this.filter.location && this.filter.location['state-country'] ? this.filter.location['state-country'] : false;
@@ -550,6 +556,55 @@ export default {
                         ]
                     }
                 ];
+            }
+
+            if (ethnicity) {
+                let rulesEthnicity = [];
+                
+                ethnicity.forEach(item => {
+                    if (item) {
+                        rulesEthnicity = [
+                            ...rulesEthnicity,
+                            {
+                                "id": "user_race",
+                                "field": "user_race",
+                                "type": "string",
+                                "input": "select",
+                                "operator": "equal",
+                                "value": item,
+                                "group": "Creator"
+                            },
+                        ]
+                    }
+                });
+
+                console.log(ethnicity)
+                
+                rules = [
+                    ...rules,
+                    {
+                        "condition": "OR",
+                        "rules": [
+                            ...rulesEthnicity,
+                        ]
+                    }
+                ];
+            }
+
+            if (audienceAuthenticity) {
+
+            }
+
+            if (gender) {
+
+            }
+
+            if (income) {
+
+            }
+
+            if (sponsorshipIndex) {
+
             }
 
             return {

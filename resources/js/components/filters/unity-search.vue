@@ -9,6 +9,12 @@
                 <accountcreateddropdown label="Account Created" v-model="payload.accountcreated" :options="accountCreatedOptions" @input="onChange" />
                 <celebritydropdown label="Celebrity" v-model="payload.celebrity" :options="celebrityOptions" @input="onChange" />
                 <educationdropdown label="Education" v-model="payload.education" :options="educationOptions" @input="onChange" />
+                
+                <ethnicitydropdown label="Ethnicity" v-model="payload.ethnicity" :options="ethnicityOptions" @input="onChange" />
+                <audienceauthenticity label="Audience Authenticity" v-model="payload.audienceauthenticity" :options="audienceAuthenticityOptions" @input="onChange" />
+                <gendercreatordropdown label="Gender (Creator)" v-model="payload.gender" :options="genderOptions" @input="onChange" />
+                <incomedropdown label="Income" v-model="payload.income" :options="incomeOptions" @input="onChange" />
+                <sponsorshipindexdropdown label="Sponsorship Index" v-model="payload.sponsorshipindex" :options="sponsorshipOptions" @input="onChange" />
 
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
                     Clear filter
@@ -28,6 +34,12 @@ import accountcreateddropdown from '../accountcreateddropdown.vue';
 import celebritydropdown from '../celebritydropdown.vue';
 import educationdropdown from '../educationdropdown.vue';
 
+import ethnicitydropdown from '../ethnicity-dropdown.vue';
+import audienceauthenticity from '../audience-authenticity.vue';
+import gendercreatordropdown from '../gender-creator-dropdown.vue';
+import incomedropdown from '../income.vue';
+import sponsorshipindexdropdown from '../sponsorship-index.vue';
+
 export default {
     name: "filter-unity-search",
 
@@ -40,6 +52,12 @@ export default {
         accountcreateddropdown,
         celebritydropdown,
         educationdropdown,
+
+        ethnicitydropdown,
+        audienceauthenticity,
+        gendercreatordropdown,
+        incomedropdown,
+        sponsorshipindexdropdown,
     },
 
     props: {
@@ -55,6 +73,12 @@ export default {
         'account-created-options': [],
         'celebrity-options': [],
         'education-options': [],
+
+        'ethnicity-options': [],
+        'audience-authenticity-options': [],
+        'gender-options': [],
+        'sponsorship-index-options': [],
+        'income-options': [],
     },
 
     data() {

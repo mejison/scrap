@@ -17,6 +17,13 @@
                 :account-created-options="accountCreatedOptions"
                 :celebrity-options="celebrityOptions"
                 :education-options="educatinOptions"
+                
+                :ethnicity-options="ethnicityOptions"
+                :audience-authenticity-options="audienceAuthenticityOptions"
+                :gender-options="genderCreatorOptions"
+                :income-options="incomeOptions"
+                :sponsorship-index-options="sponsorshipIndexOptions"
+
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
@@ -379,7 +386,110 @@ export default {
                     label: "Master's or Higher",
                     value: "graduate_degree",
                 },    
-            ]
+            ],
+
+            ethnicityOptions: [
+                {
+                    label: 'Asian',
+                    value: 'asian',
+                },
+                {
+                    label: 'Black / African American',
+                    value: 'black',
+                },
+                {
+                    label: 'Hawaiian Native',
+                    value: 'hawaiian',
+                },
+                {
+                    label: 'Hispanic / Latino',
+                    value: 'hispanic',
+                },
+                {
+                    label: 'Native American / Alaska Native',
+                    value: 'native',
+                },
+                {
+                    label: 'Other',
+                    value: 'other',
+                },
+                {
+                    label: 'White / Caucasian',
+                    value: 'white',
+                },
+            ],
+            audienceAuthenticityOptions: [
+                {
+                    label: 'Fair (<30%)',
+                    value: '0-30',
+                },
+                {
+                    label: 'Good (30 - 70%)',
+                    value: '30-70',
+                },
+                {
+                    label: 'Great (>70%)',
+                    value: '70-0',
+                },
+            ],
+            genderCreatorOptions: [
+                {
+                    label: 'Male',
+                    value: 'male',
+                },
+                {
+                    label: 'Female',
+                    value: 'female',
+                },
+                {
+                    label: 'Not Specified',
+                    value: 'not-specified',
+                },
+            ],
+            incomeOptions: [
+                {
+                    label: 'Under $20k',
+                    value: '0-20',
+                },
+                {
+                    label: '$20 - $40k',
+                    value: '20-40',
+                },
+                {
+                    label: '$40 - $50k',
+                    value: '40-50',
+                },
+                {
+                    label: '$50 - $75k',
+                    value: '50-75',
+                },
+                {
+                    label: '$75 - $100k',
+                    value: '75-100',
+                },
+                {
+                    label: '$100 - $150k',
+                    value: '100-150',
+                },
+                {
+                    label: '$150k',
+                    value: '150-0',
+                },
+            ],
+            sponsorshipIndexOptions: [
+                {
+                    label: 'Low (<20% Sponsored)',
+                    value: 'low',
+                },
+                {
+                    label: 'Medium (20 - 50% Sponsored)',
+                    value: 'medium',
+                },
+                {
+                    label: 'High (>50% Sponsored)',
+                    value: 'high',
+                },
+            ],
         }
     },
 
@@ -414,6 +524,13 @@ export default {
                 accountcreated: null,
                 celebrity: null,
                 education: null,
+                
+                education: null,
+                education: null,
+                education: null,
+                education: null,
+                
+                
                 page: 1,
                 per_page: 10,
                 total: 0,

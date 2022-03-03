@@ -16,6 +16,13 @@ export default {
             accountcreated: null,
             celebrity: null,
             education: null,
+            
+            ethnicity: null,
+            gendercreator: null,
+            income: null,
+            sponsorshipindex: null,
+            audienceauthenticity: null,
+
             page: 1,
             per_page: 20,
             total: 0,
