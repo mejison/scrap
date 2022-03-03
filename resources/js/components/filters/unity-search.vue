@@ -14,7 +14,7 @@
                 <audienceauthenticity label="Audience Authenticity" v-model="payload.audienceauthenticity" :options="audienceAuthenticityOptions" @input="onChange" />
                 <gendercreatordropdown label="Gender (Creator)" v-model="payload.gender" :options="genderOptions" @input="onChange" />
                 <incomedropdown label="Income" v-model="payload.income" :options="incomeOptions" @input="onChange" />
-                <sponsorshipindexdropdown label="Sponsorship Index" v-model="payload.sponsorshipindex" :options="sponsorshipOptions" @input="onChange" />
+                <sponsorshipindexdropdown label="Sponsorship Index" v-model="payload.sponsorshipindex" :options="sponsorshipIndexOptions" @input="onChange" />
 
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
                     Clear filter

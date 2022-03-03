@@ -421,15 +421,15 @@ export default {
             audienceAuthenticityOptions: [
                 {
                     label: 'Fair (<30%)',
-                    value: '0-30',
+                    value: 3,
                 },
                 {
                     label: 'Good (30 - 70%)',
-                    value: '30-70',
+                    value: 2,
                 },
                 {
                     label: 'Great (>70%)',
-                    value: '70-0',
+                    value: 1,
                 },
             ],
             genderCreatorOptions: [
@@ -443,37 +443,37 @@ export default {
                 },
                 {
                     label: 'Not Specified',
-                    value: 'not-specified',
+                    value: 'not_specified',
                 },
             ],
             incomeOptions: [
                 {
                     label: 'Under $20k',
-                    value: '0-20',
+                    value: '0to20',
                 },
                 {
                     label: '$20 - $40k',
-                    value: '20-40',
+                    value: '20to40',
                 },
                 {
                     label: '$40 - $50k',
-                    value: '40-50',
+                    value: '40to50',
                 },
                 {
                     label: '$50 - $75k',
-                    value: '50-75',
+                    value: '50to75',
                 },
                 {
                     label: '$75 - $100k',
-                    value: '75-100',
+                    value: '75to100',
                 },
                 {
                     label: '$100 - $150k',
-                    value: '100-150',
+                    value: '100to150',
                 },
                 {
                     label: '$150k',
-                    value: '150-0',
+                    value: '150to0',
                 },
             ],
             sponsorshipIndexOptions: [

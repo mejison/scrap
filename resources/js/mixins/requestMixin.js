@@ -178,8 +178,8 @@ export default {
             const education = this.filter.education ? this.filter.education : null;
 
             const ethnicity = this.filter.ethnicity && this.filter.ethnicity.length ? this.filter.ethnicity : null;
-            const audienceAuthenticity = this.filter.audienceauthenticity ? this.filter.audienceauthenticity : null;
-            const gender = this.filter.gendercreator ? this.filter.gendercreator : null;
+            const audienceAuthenticity = this.filter.audienceauthenticity && this.filter.audienceauthenticity.length ? this.filter.audienceauthenticity : null;
+            const gender = this.filter.gender && this.filter.gender.length ? this.filter.gender : null;
             const income = this.filter.income ? this.filter.income : null;
             const sponsorshipIndex = this.filter.sponsorshipindex ? this.filter.sponsorshipindex : null;
 
@@ -577,8 +577,6 @@ export default {
                         ]
                     }
                 });
-
-                console.log(ethnicity)
                 
                 rules = [
                     ...rules,
@@ -592,15 +590,99 @@ export default {
             }
 
             if (audienceAuthenticity) {
-
+                let audienceAuthenticityEthnicity = [];
+                
+                audienceAuthenticity.forEach(item => {
+                    if (item) {
+                        audienceAuthenticityEthnicity = [
+                            ...audienceAuthenticityEthnicity,
+                            {
+                                "id": "fake_followers_bin",
+                                "field": "fake_followers_bin",
+                                "type": "integer",
+                                "input": "select",
+                                "operator": "equal",
+                                "value": item,
+                                "group": "Creator",
+                            },
+                        ]
+                    }
+                });
+                
+                rules = [
+                    ...rules,
+                    {
+                        "condition": "OR",
+                        "rules": [
+                            ...audienceAuthenticityEthnicity,
+                        ]
+                    }
+                ];
             }
 
             if (gender) {
-
+                let genderRules = [];
+                
+                gender.forEach(item => {
+                    if (item) {
+                        genderRules = [
+                            ...genderRules,
+                            {
+                                data: {
+                                    discovered_field: "discovered_gender",
+                                },
+                                field: "user_gender",
+                                group: "Creator",
+                                id: "user_gender",
+                                input: "select",
+                                operator: "in",
+                                type: "string",
+                                value: item,
+                            },
+                        ]
+                    }
+                });
+                
+                rules = [
+                    ...rules,
+                    {
+                        "condition": "OR",
+                        "rules": [
+                            ...genderRules,
+                        ]
+                    }
+                ];
             }
 
             if (income) {
-
+                let incomeRules = [];
+                
+                income.forEach(item => {
+                    if (item) {
+                        incomeRules = [
+                            ...incomeRules,
+                            {
+                                field: "user_income",
+                                group: "Creator",
+                                id: "user_income",
+                                input: "select",
+                                operator: "equal",
+                                type: "string",
+                                value: item
+                            },
+                        ]
+                    }
+                });
+                
+                rules = [
+                    ...rules,
+                    {
+                        "condition": "OR",
+                        "rules": [
+                            ...incomeRules,
+                        ]
+                    }
+                ];
             }
 
             if (sponsorshipIndex) {
