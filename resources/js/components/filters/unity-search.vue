@@ -16,6 +16,9 @@
                 <incomedropdown label="Income" v-model="payload.income" :options="incomeOptions" @input="onChange" />
                 <sponsorshipindexdropdown label="Sponsorship Index" v-model="payload.sponsorshipindex" :options="sponsorshipIndexOptions" @input="onChange" />
 
+                <lastlogindropdown label="Last Login" v-model="payload.lastlogin" :options="lastloginOptions" @input="onChange" />
+                <relationshipstatusdropdown label="RelationShip Status" v-model="payload.relationshipstatus" :options="relationShipStatusOptions" @input="onChange" />
+
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
                     Clear filter
                 </a>
@@ -39,6 +42,8 @@ import audienceauthenticity from '../audience-authenticity.vue';
 import gendercreatordropdown from '../gender-creator-dropdown.vue';
 import incomedropdown from '../income.vue';
 import sponsorshipindexdropdown from '../sponsorship-index.vue';
+import lastlogindropdown from '../lastlogin-dropdown.vue';
+import relationshipstatusdropdown from '../relationship-status-dropdown.vue';
 
 export default {
     name: "filter-unity-search",
@@ -58,6 +63,8 @@ export default {
         gendercreatordropdown,
         incomedropdown,
         sponsorshipindexdropdown,
+        lastlogindropdown,
+        relationshipstatusdropdown
     },
 
     props: {
@@ -79,6 +86,9 @@ export default {
         'gender-options': [],
         'sponsorship-index-options': [],
         'income-options': [],
+
+        'lastlogin-options': [],
+        'relationship-status-options': [],
     },
 
     data() {

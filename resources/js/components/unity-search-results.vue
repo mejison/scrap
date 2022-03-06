@@ -3,7 +3,7 @@
         <div 
             class="compaign-row align-items-center p-sm-4 p-3 row sp16 mx-0 mb-2"
             v-for="(item, index) in items"
-            :key="index"
+            :key="`${item.id}-${index}`"
             >
             <div class="col-lg-2 col-md-4">
                 <div class="text-center default_avatar">

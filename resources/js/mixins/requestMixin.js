@@ -186,6 +186,8 @@ export default {
             const locationRadius = this.filter.location && this.filter.location['location-radius'] ? this.filter.location['location-radius'] : false;
             const radiusSearch = this.filter.location && this.filter.location['radius-search'] ? this.filter.location['radius-search'] : false;
             const stateCountry = this.filter.location && this.filter.location['state-country'] ? this.filter.location['state-country'] : false;
+            const lastLogin = this.filter.lastLogin ? this.filter.location['last-login'] : false;
+            const relationshipStatus = this.filter.location['relationship'] ? this.filter.location['relationships'] : false;
 
             const radiusHumanFormat = {
                 5: "five",
@@ -687,6 +689,14 @@ export default {
 
             if (sponsorshipIndex) {
 
+            }
+
+            if (lastLogin) {
+               // "{\"condition\":\"AND\",\"rules\":[{\"condition\":\"OR\",\"rules\":[{\"id\":\"last_sign_in_at\",\"field\":\"last_sign_in_at\",\"type\":\"time\",\"input\":\"text\",\"group\":\"Creator\",\"optionId\":\"7to14\",\"operator\":\"between\",\"value\":[\"2022-02-18\",\"2022-02-25\"]}]}]}"
+            }
+
+            if (relationshipStatus) {
+                
             }
 
             return {

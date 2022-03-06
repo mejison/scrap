@@ -24,6 +24,9 @@
                 :income-options="incomeOptions"
                 :sponsorship-index-options="sponsorshipIndexOptions"
 
+                :lastlogin-options="lastLoginOptions"
+                :relationship-status-options="relationshipStatusOptions"
+
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
@@ -488,6 +491,52 @@ export default {
                 {
                     label: 'High (>50% Sponsored)',
                     value: 'high',
+                },
+            ],
+
+            lastLoginOptions: [
+                {
+                    label: 'Last 7 Days',
+                    value: '0to7',
+                },
+                {
+                    label: '7 to 14 Days',
+                    value: '7to14',
+                },
+                {
+                    label: '14 to 30 Days',
+                    value: '14to30',
+                },
+                {
+                    label: 'Older than 30 Days',
+                    value: '0to30',
+                },
+            ],
+
+            relationshipStatusOptions: [
+                {
+                    label: 'Single',
+                    value: 'single',
+                },
+                {
+                    label: 'In a Relationship',
+                    value: 'in_a_relationship',
+                },
+                {
+                    label: 'Newlaywed',
+                    value: 'newlaywed',
+                },
+                {
+                    label: 'Married',
+                    value: 'married',
+                },
+                {
+                    label: 'Divorced',
+                    value: 'divorced',
+                },
+                {
+                    label: 'Widowed',
+                    value: 'widowed',
                 },
             ],
         }
