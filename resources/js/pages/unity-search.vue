@@ -27,6 +27,10 @@
                 :lastlogin-options="lastLoginOptions"
                 :relationship-status-options="relationshipStatusOptions"
 
+                :insigns-options="insignsOptions"
+                :language-options="languageOptions"
+                :age-audience-options="ageAudienceOptions"
+
                 @clear="onClearFilter"
                 @input="onChangeFilter"
                 ></filter-unity-search>
@@ -539,6 +543,9 @@ export default {
                     value: 'widowed',
                 },
             ],
+            insignsOptions: [],
+            languageOptions: [],
+            ageAudienceOptions: [],
         }
     },
 

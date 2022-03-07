@@ -19,6 +19,11 @@
                 <lastlogindropdown label="Last Login" v-model="payload.lastlogin" :options="lastloginOptions" @input="onChange" />
                 <relationshipstatusdropdown label="RelationShip Status" v-model="payload.relationshipstatus" :options="relationShipStatusOptions" @input="onChange" />
 
+                <ageaudiencedropdown label="Age (Audience)" v-model="payload.ageaudience" :options="ageOptions" @input="onChange" />
+                <genderaudiencedropdown label="Insights (Audience)" v-model="payload.genderaudience" :options="insightsOptions" @input="onChange" />
+                <insightsaudiencedropdown label="Location (Audience)" v-model="payload.locationaudience" :options="locationOptions" @input="onChange" />
+                <languageaudiencedropdown label="Language (Audience)" v-model="payload.ageaudienceoptions" :options="ageAudienceOptions" @input="onChange" />
+                
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
                     Clear filter
                 </a>
@@ -45,6 +50,11 @@ import sponsorshipindexdropdown from '../sponsorship-index.vue';
 import lastlogindropdown from '../lastlogin-dropdown.vue';
 import relationshipstatusdropdown from '../relationship-status-dropdown.vue';
 
+import ageaudiencedropdown from '../age-audience-dropdown.vue'
+import genderaudiencedropdown from '../gender-audience-dropdown.vue'
+import insightsaudiencedropdown from '../insights-audience-dropdown.vue'
+import languageaudiencedropdown from '../language-audience-dropdown.vue'
+
 export default {
     name: "filter-unity-search",
 
@@ -64,7 +74,12 @@ export default {
         incomedropdown,
         sponsorshipindexdropdown,
         lastlogindropdown,
-        relationshipstatusdropdown
+        relationshipstatusdropdown,
+
+        ageaudiencedropdown,
+        genderaudiencedropdown,
+        insightsaudiencedropdown,
+        languageaudiencedropdown,
     },
 
     props: {
@@ -89,6 +104,10 @@ export default {
 
         'lastlogin-options': [],
         'relationship-status-options': [],
+
+        'insigns-options': [],
+        'language-options': [],
+        'age-audience-options': [],
     },
 
     data() {
