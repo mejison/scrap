@@ -54,7 +54,7 @@ export default {
 
     computed: {
         getLabel() {
-            return this.value && this.value.length ? (this.value.length >= 2 ? "Multiple Education Levels" : this.value.map(item => {
+            return this.value && this.value.length ? (this.value.length >= 2 ? "All Gender" : this.value.map(item => {
                 item = this.getOptionByValue(item)
                 return item ? item.label : null;
             }).join(' ')) : this.label

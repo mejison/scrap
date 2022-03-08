@@ -94,7 +94,7 @@ export default {
         overflow: auto;
     }
 
-    .accountcreated {
+    .age-audience {
         position: relative;
         display: inline-block;
 

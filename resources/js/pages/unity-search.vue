@@ -545,7 +545,36 @@ export default {
             ],
             insignsOptions: [],
             languageOptions: [],
-            ageAudienceOptions: [],
+            ageAudienceOptions: [
+                {
+                    label: '17 Under',
+                    value: '17'
+                },
+                {
+                    label: '18 to 24',
+                    value: '18to24'    
+                },
+                {
+                    label: '25 to 34',
+                    value: '25to34'
+                },
+                {
+                    label: '35 to 44',
+                    value: '35to44'
+                },
+                {
+                    label: '45 to 54',
+                    value: '45to54'    
+                },
+                {
+                    label: '55 to 64',
+                    value: '55to64'
+                },
+                {
+                    label: '65 Plus',
+                    value: '65'
+                },
+            ],
         }
     },
 

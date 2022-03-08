@@ -19,10 +19,10 @@
                 <lastlogindropdown label="Last Login" v-model="payload.lastlogin" :options="lastloginOptions" @input="onChange" />
                 <relationshipstatusdropdown label="RelationShip Status" v-model="payload.relationshipstatus" :options="relationShipStatusOptions" @input="onChange" />
 
-                <ageaudiencedropdown label="Age (Audience)" v-model="payload.ageaudience" :options="ageOptions" @input="onChange" />
-                <genderaudiencedropdown label="Insights (Audience)" v-model="payload.genderaudience" :options="insightsOptions" @input="onChange" />
-                <insightsaudiencedropdown label="Location (Audience)" v-model="payload.locationaudience" :options="locationOptions" @input="onChange" />
-                <languageaudiencedropdown label="Language (Audience)" v-model="payload.ageaudienceoptions" :options="ageAudienceOptions" @input="onChange" />
+                <ageaudiencedropdown label="Age (Audience)" v-model="payload.ageaudience" :options="ageAudienceOptions" @input="onChange" />
+                <genderaudiencedropdown label="Gender (Audience)" v-model="payload.genderaudience" :options="genderOptions" @input="onChange" />
+                <insightsaudiencedropdown label="Insights (Audience)" v-model="payload.insightsaudience" :options="locationOptions" @input="onChange" />
+                <languageaudiencedropdown label="Location (Audience)" v-model="payload.locationaudience" @input="onChange" />
                 
                 <a href="javascript:void(0);" class="btn ml-auto" @click.prevent="onClickClear">
                     Clear filter
